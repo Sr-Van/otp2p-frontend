@@ -1,0 +1,17 @@
+<div class="card">
+    <span class="text_shadow">{{ card.header }}</span>
+    <div class="card_center">
+        <img [src]="source" alt="pokemon">
+        <div [style]="{backgroundColor: card.mundo}" class="server_bg"></div>
+    </div>
+    <div class="card_infos">
+        <div>
+            <span [style]="{backgroundColor: card.mundo}" class="server text_shadow">{{ card.mundo }}</span>
+            <span class="server poppins-regular-italic">{{ card.type }}</span>
+        </div>
+        <span class="text_shadow">R$ {{ card.price }}</span>
+    </div>
+    <div class="buttons">
+        <button class="box_shadow">Comprar</button>
+    </div>
+</div>

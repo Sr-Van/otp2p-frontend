@@ -38,7 +38,7 @@
     <div class="itens_shop">
         <ul class="list">
             @for(sale of filteredSales; track $index) {
-                <li> {{ sale.header }}</li>
+                <app-card [card]="sale"></app-card>
             }
             @empty { 
                 <span>Não há items :(</span>

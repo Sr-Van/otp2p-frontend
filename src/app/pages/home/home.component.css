@@ -8,6 +8,10 @@
     margin-bottom: 20px;
     width: 100%;
 }
+
+.itens_shop .list {
+    gap: 10px;
+}
 .server_list li, .type_list li {
     display: flex;
     align-items: center;

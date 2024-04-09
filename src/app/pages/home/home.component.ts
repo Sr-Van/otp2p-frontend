@@ -1,11 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { SalesService } from '../../shared/services/sales.service';
 import { Subscription, filter } from 'rxjs';
+import { CardComponent } from '../../shared/components/card/card.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [CardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
