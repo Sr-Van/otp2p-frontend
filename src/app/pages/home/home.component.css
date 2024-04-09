@@ -51,6 +51,33 @@
     width: 100%;
 }
 
+.search {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+
+    margin-bottom: 10px;
+}
+
+.search input {
+    width: 270px;
+    height: 30px;
+
+    border: none;
+    outline: none;
+    border-radius: .2rem;
+    padding: 10px;
+
+    background-color: #232323;
+    color: #fff;
+}
+
+.search i {
+    cursor: pointer;
+}
+
 @media(min-width: 325px) {
     .list {justify-content: space-between;}
 }

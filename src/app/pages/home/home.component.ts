@@ -37,4 +37,13 @@ export class HomeComponent {
 
     this.filteredSales = this.sales.filter(sale => sale.type.toLowerCase() == value.toLowerCase())
   }
+
+  searchItens(search: any) {
+    if(search.length === 0) {return}
+
+    this.filteredSales = this.sales.filter(sale => {
+      return sale.header.toLowerCase().includes(search.toLowerCase())
+    })
+    
+  }
 }

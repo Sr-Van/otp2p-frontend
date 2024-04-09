@@ -34,6 +34,11 @@
         }
     </ul>
 
+    <div class="search">
+        <input type="text" id="search" placeholder="Busque pelo nome do item..." #search>
+        <i class="fa-solid fa-magnifying-glass" (click)="searchItens(search.value)"></i>
+    </div>
+
 
     <div class="itens_shop">
         <ul class="list">
