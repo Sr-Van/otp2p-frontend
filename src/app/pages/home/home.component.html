@@ -1,0 +1,54 @@
+
+<main class="container poppins-regular">
+    <!-- conteudo principal -->
+
+    <!-- listas com filtros -->
+    <!-- filtro de servidor -->
+    <div class="titles">
+        <h4 class="mgb">Servidor:</h4>
+    </div>
+    <ul class="server_list list">
+        @for(server of servidores; track $index) {
+            <li (click)="addFilter('server', $event)" [attr.data-filter]="server">
+                <div class="blur_layer" [style]="{
+                    backgroundColor: server
+                }">
+                </div>
+                <p > {{ server }}</p>
+            </li>
+
+        }
+    </ul>
+
+    <!-- filtro de tipo -->
+    <div class="titles">
+        <h4 class="mgb">Tipo:</h4>
+
+    </div>
+    <ul class="type_list list">
+        @for(tipo of tipos; track $index) {
+
+            <li (click)="addFilter('type', $event)" [attr.data-filter]="tipo"> 
+                {{ tipo }}
+            </li>
+        }
+    </ul>
+
+
+    <div class="itens_shop">
+        <ul class="list">
+            @for(sale of filteredSales; track $index) {
+                <li> {{ sale.header }}</li>
+            }
+            @empty { 
+                <span>Não há items :(</span>
+            }
+        </ul>
+        <!-- limite de 30 itens por pagina -->
+    </div>
+</main>
+
+
+<footer>
+    <!-- informacoes pertinentes e de copyright -->
+</footer>
