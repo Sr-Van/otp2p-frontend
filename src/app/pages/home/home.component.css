@@ -8,16 +8,20 @@
     margin-bottom: 20px;
     width: 100%;
 }
-
+.itens_shop {
+    width: 100%;
+}
 .itens_shop .list {
     gap: 10px;
+    flex-wrap: wrap;
 }
 .server_list li, .type_list li {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 80px;
-    width: 100%;
+    width: 250px;
+    font-size: 14px;
     position: relative;
     cursor: pointer;
     border: 1px solid rgb(0, 0, 0, 0.2);
@@ -83,13 +87,17 @@
 }
 
 @media(min-width: 425px) {
-    .list { justify-content: flex-start;} 
+    .list {
+        width: 350px; 
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    } 
 
     .list li { width: 110px;}
 }
 
 @media (min-width: 768px) {
-    .list { flex-wrap: nowrap;}
+    .list { width: 550px;}
 
     .list li { width: 70px;}
     
@@ -99,5 +107,13 @@
 }
 
 @media(min-width: 1024px) {
+    .list {
+        width: 850px;
+        flex-wrap: nowrap;
+    }
     .list li { width: 100%;}
+}
+
+@media(min-width: 1440px) {
+    .list { width: 1050px;}
 }
