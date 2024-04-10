@@ -3,7 +3,7 @@
     flex-direction: column;
     gap: 10px;
 
-    width: 256px;
+    width: 250px;
     height: 360px;
     background-color: #232323;
     border: .2px solid rgb(95, 13, 118, .4);
@@ -14,7 +14,7 @@
 
     transition: all 300ms ease;
 }
-
+    
 .card_center {
     width: 100%;
     height: 230px;
@@ -51,6 +51,12 @@
     font-size: 10px;
 }
 
+.card_infos div:nth-child(1) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
 .buttons button {
     width: 100%;
     height: 30px;

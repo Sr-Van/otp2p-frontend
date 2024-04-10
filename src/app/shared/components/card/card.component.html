@@ -8,10 +8,16 @@
         <div>
             <span [style]="{backgroundColor: card.mundo}" class="server text_shadow">{{ card.mundo }}</span>
             <span class="server poppins-regular-italic">{{ card.type }}</span>
+            <i class="fa-solid fa-medal" 
+            [style]="{color: card.badge, zIndex: 999}" 
+            [matTooltip]="tooltip"
+            matTooltipPosition="above"></i>
         </div>
         <span class="text_shadow">R$ {{ card.price }}</span>
     </div>
     <div class="buttons">
-        <button class="box_shadow">Comprar</button>
+        <button class="box_shadow">
+            <i class="fa-solid fa-basket-shopping" style="font-size: 18px;"></i>
+        </button>
     </div>
 </div>
