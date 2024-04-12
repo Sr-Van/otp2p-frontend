@@ -39,18 +39,25 @@
         <i class="fa-solid fa-magnifying-glass" (click)="searchItens(search.value)"></i>
     </div>
 
+    @if(isload) {
 
-    <div class="itens_shop">
-        <ul class="list">
-            @for(sale of filteredSales; track $index) {
-                <app-card [card]="sale"></app-card>
-            }
-            @empty { 
-                <span>Não há items :(</span>
-            }
-        </ul>
-        <!-- limite de 30 itens por pagina -->
-    </div>
+        <div class="itens_shop">
+            <ul class="list">
+                @for(sale of filteredSales; track $index) {
+                    <app-card [card]="sale"></app-card>
+                }
+                @empty { 
+                    <span>Não há items :(</span>
+                }
+            </ul>
+            <!-- limite de 30 itens por pagina -->
+        </div>
+    }
+
+    @else {
+        <span>loading itens...</span>
+    }
+
 </main>
 
 

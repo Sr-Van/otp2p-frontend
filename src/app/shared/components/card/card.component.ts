@@ -15,10 +15,29 @@ export class CardComponent {
   tooltip: string
 
   ngOnInit() {
-    //substituir a string pelo valor do header correto
-    this.source = `../../assets/img/1.png`
+    this.getImgSource()
 
     this.tooltip = `Esse vendedor é um vendedor nivel ${this.card.badge}`
+  }
+
+  getImgSource() {
+    if(this.card.type === "pokemon") {
+      this.source = `../../assets/img/${this.card.header}.png`
+      return
+    }
+
+    if(this.card.type === "hd") {
+      this.source = `../../assets/img/hds.png`
+      return
+    }
+
+    if(this.card.type === "tm") {
+      this.source = `../../assets/img/tm.png`
+      return
+    }
+
+    this.source = `../../assets/img/item.png`
+
   }
 
 }
