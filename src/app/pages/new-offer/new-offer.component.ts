@@ -55,7 +55,7 @@ export class NewOfferComponent {
   sendForm(form: any) {
     this.playerOffers.push(form.value)
 
-    this.offerService.addOffer(this.player, this.playerOffers)
+    this.offerService.addOffer(this.player, this.playerOffers).subscribe(response => console.log(`Resposta da api: ${response}`))
 
     this.form.reset()
   }

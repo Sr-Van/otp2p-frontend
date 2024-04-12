@@ -13,49 +13,47 @@
                 <option value="tm">TM</option>
             </select>
 
-            @if(type !== "") {
-                @if(type === "pokemon") {
-                    <label for="pokemons">Pokemon: </label>
-                    <select formControlName="header" name="pokemons" id="pokemons">
-                        @for(itens of pokes; track $index) {
-                            <option [value]="itens.poke">{{ itens.poke }}</option>
-                        }
-                    </select>
-                }
-    
-                @if(type === "hd") {
-                    <label for="hds">Quantidade: </label>
-                    <input formControlName="header" type="text" id="hds" >
-    
-                } 
-                
-                @if(type === "item") {
-                    <label for="itens">Item: </label>
-                    <input formControlName="header" type="text" id="item">
-                }
-                @if(type === "tm") {
-                    <label for="tm">TM: </label>
-                    <input formControlName="header" type="text" id="item">
-                }
-    
-    
-                <label for="servidores">Mundo: </label>
-                <select formControlName="mundo" name="servidores" id="servidores">
-    
-                    @for(server of servidores; track $index) {
-                        <option [value]="server">{{ server }}</option>
+            @if(type === "pokemon") {
+                <label for="pokemons">Pokemon: </label>
+                <select formControlName="header" name="pokemons" id="pokemons">
+                    @for(itens of pokes; track $index) {
+                        <option [value]="itens.poke">{{ itens.poke }}</option>
                     }
                 </select>
-    
-                <label for="description">Descrição: </label>
-                <textarea formControlName="description" cols="30" rows="5" type="text" placeholder="Descreve seu item em detalhes."></textarea>
-    
-                <label for="price">Preço: </label>
-                <input formControlName="price" type="text" id="price" (keyup)="filterNumber(preco.value, $event)" #preco>
-                <small>Por favor apenas numeros.</small>
-    
-                <button type="button" (click)="sendForm(form)">Anunciar</button>
             }
+
+            @if(type === "hd") {
+                <label for="hds">Quantidade: </label>
+                <input formControlName="header" type="text" id="hds" >
+
+            } 
+            
+            @if(type === "item") {
+                <label for="itens">Item: </label>
+                <input formControlName="header" type="text" id="item">
+            }
+            @if(type === "tm") {
+                <label for="tm">TM: </label>
+                <input formControlName="header" type="text" id="item">
+            }
+
+
+            <label for="servidores">Mundo: </label>
+            <select formControlName="mundo" name="servidores" id="servidores">
+
+                @for(server of servidores; track $index) {
+                    <option [value]="server">{{ server }}</option>
+                }
+            </select>
+
+            <label for="description">Descrição: </label>
+            <textarea formControlName="description" cols="30" rows="5" type="text" placeholder="Descreve seu item em detalhes."></textarea>
+
+            <label for="price">Preço: </label>
+            <input formControlName="price" type="text" id="price" (keyup)="filterNumber(preco.value, $event)" #preco>
+            <small>Por favor apenas numeros.</small>
+
+            <button type="button" (click)="sendForm(form)">Anunciar</button>
         </form>
     </div>
 </div>
