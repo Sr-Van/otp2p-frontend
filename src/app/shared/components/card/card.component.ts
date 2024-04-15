@@ -1,6 +1,5 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatTooltipModule } from '@angular/material/tooltip'
-import { Router } from 'express';
 
 @Component({
   selector: 'app-card',
@@ -11,7 +10,6 @@ import { Router } from 'express';
 })
 export class CardComponent {
 
-  route = inject(Router)
   @Input() card: any
   source: string
   tooltip: string
@@ -40,10 +38,6 @@ export class CardComponent {
 
     this.source = `../../assets/img/item.png`
 
-  }
-
-  goToItem() {
-    this.route.navigate([`/item/${this.card.player}`])
   }
 
 }
