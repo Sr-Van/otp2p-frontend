@@ -53,7 +53,9 @@ export class NewOfferComponent {
   }
 
   sendForm(form: any) {
-    this.playerOffers.push(form.value)
+    let newForm = form.value
+    newForm.itemId = this.randomId()
+    this.playerOffers.push(newForm)
 
     this.offerService.addOffer(this.player, this.playerOffers).subscribe(response => console.log(`Resposta da api: ${response}`))
 
@@ -76,4 +78,7 @@ export class NewOfferComponent {
     })
   }
 
+  randomId() {    
+    return Math.random().toString(36).substring(2) + Math.random().toString(36).substring(2)
+  }
 }
