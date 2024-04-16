@@ -1,1 +1,88 @@
-<p>item works!</p>
+<div class="container">
+
+    @if(isLoad) {
+
+        <h2>{{ item.header }}</h2>
+        
+        <div class="item">
+    
+            <div class="img">
+                <img [src]="source" [alt]="item.header">
+            </div>
+    
+            <div class="description">
+                <div class="player_info">
+                    <span>Player: {{ item.player }}</span>
+                    <i class="fa-solid fa-medal" 
+                    [style]="{color: color, zIndex: 999}" 
+                    [matTooltip]="tooltip"
+                    matTooltipPosition="above"></i>
+                </div>
+                <span>Tipo: {{ item.type }}</span>
+                <span>Mundo: {{ item.mundo }}</span>
+                <span>{{ item.description }}</span>
+                <span>{{ item.price | currency: 'BRL' }}</span>
+    
+                <div class="buttons">
+                    <div class="buttons">
+                        <button class="box_shadow">
+                            <i class="fa-solid fa-basket-shopping" style="font-size: 18px;"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="player_lists">
+            <span>Mais itens de <b class="poppins-bold">{{ item.player }}</b></span>
+    
+            <small class="poppins-regular-italic">Anuncios</small>
+    
+            <ul class="anuncios">
+                @for(anuncio of anuncios.slice(0, 5); track $index) {
+                    <li>
+                        <span>{{ anuncio.player }}</span>
+                        <app-card [card]="anuncio"></app-card>
+                    </li>
+                }
+                
+            </ul>
+            <small class="poppins-regular-italic">Vendas</small>
+            
+            <ul class="vendas">
+                @for(venda of vendas.slice(0, 5); track $index) {
+                    <li>
+                        <span>{{ venda.player }}</span>
+                        <!-- change app-card for a card with no actions -->
+                        <app-card [card]="venda"></app-card>
+                    </li>
+                }
+                @empty {
+                    <span>Este jogador não tem vendas ainda.</span>
+                }
+            </ul>
+    
+            <small class="poppins-regular-italic">Compras</small>
+            
+        
+            <ul class="compras">
+                @for(compra of compras.slice(0, 5); track $index) {
+                    <li>
+                        <span>{{ compra.player }}</span>
+                        <!-- change app-card for a card with no actions -->
+                        <app-card [card]="compra"></app-card>
+                    </li>
+                }
+                @empty {
+                    <span>Este jogador não tem compras ainda.</span>
+                }
+            </ul>
+        </div>
+    }
+
+    @else {
+        <span>Loading</span>
+    }
+    
+
+</div>

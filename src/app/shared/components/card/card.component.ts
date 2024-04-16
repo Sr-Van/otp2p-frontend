@@ -23,6 +23,7 @@ export class CardComponent {
     this.tooltip = `Esse vendedor é um vendedor nivel ${this.card.badge}`
   }
 
+  // make this a service and dont repeat
   getImgSource() {
     if(this.card.type === "pokemon") {
       this.source = `../../assets/img/${this.card.header}.png`
@@ -44,7 +45,11 @@ export class CardComponent {
   }
 
   goToItem() {
-    this.router.navigate([`item/${this.card.itemId}`])
+    this.router.navigate([''])
+    
+    setTimeout(() => {
+      this.router.navigate([`item/${this.card.itemId}`])
+    }, 100);
   }
 
 }
