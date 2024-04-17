@@ -7,6 +7,7 @@ import { SalesService } from '../../shared/services/sales.service';
 import { OfferService } from '../../shared/services/offer.service';
 import { CardComponent } from '../../shared/components/card/card.component';
 import { CurrencyPipe } from '@angular/common';
+import { InfocardComponent } from '../../shared/components/infocard/infocard.component';
 
 @Component({
   selector: 'app-item',
@@ -14,6 +15,7 @@ import { CurrencyPipe } from '@angular/common';
   imports: [
     MatTooltipModule,
     CardComponent,
+    InfocardComponent,
     CurrencyPipe
   ],
   templateUrl: './item.component.html',

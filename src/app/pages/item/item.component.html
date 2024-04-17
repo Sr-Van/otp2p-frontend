@@ -54,7 +54,7 @@
                     <li>
                         <span>{{ venda.player }}</span>
                         <!-- change app-card for a card with no actions -->
-                        <app-card [card]="venda"></app-card>
+                        <app-infocard [card]="venda"></app-infocard>
                     </li>
                 }
                 @empty {
@@ -70,7 +70,7 @@
                     <li>
                         <span>{{ compra.player }}</span>
                         <!-- change app-card for a card with no actions -->
-                        <app-card [card]="compra"></app-card>
+                        <app-infocard [card]="compra"></app-infocard>
                     </li>
                 }
                 @empty {
