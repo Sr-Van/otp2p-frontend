@@ -1,0 +1,97 @@
+<div class="container">
+
+    <!-- player info -->
+    <div class="player">
+
+        <h2>{{ playerItem.player }}</h2>
+        <span>Mundo: {{ playerItem.mundo }}</span>
+        <span>Vendedor nivel: {{ playerItem.badge }}</span>
+    
+    </div>
+
+    <!-- player items and infos -->
+    <div class="player_lists">
+
+        <small>Avaliações</small>
+        <ul>
+            @for(av of avaliacao; track av.player) {
+                <li>
+                    <!-- trocar isso por card de avaliacao -->
+                    <span>{{ av.player }}</span>
+                </li>
+            }
+        </ul>
+
+        <small>Vendas</small>
+        <ul>
+            @for(vd of vendas; track $index) {
+                <li>
+                    <span>{{ vd.player }}</span>
+                    <app-infocard [card]="vd"></app-infocard>
+                </li>
+            }
+            @empty {
+                <li>Player ainda não tem vendas.</li>
+            }
+        </ul>
+
+        <small>Compras</small>
+        <ul>
+            @for(cp of compras; track $index) {
+                <li>
+                    <span>{{ cp.player }}</span>
+                    <app-infocard [card]="cp"></app-infocard>
+                </li>
+            }
+            @empty {
+                <li>Player ainda não tem compras.</li>
+            }
+        </ul>
+
+        <small>Anuncios ativos deste vendedor:</small>
+        <ul>
+            @for(an of anuncios; track $index) {
+                <li>
+                    <span>{{ an.player }}</span>
+                    <app-card [card]="an"></app-card>
+                </li>
+            }
+            @empty {
+                <li>Player ainda não tem anúncios ativos.</li>
+            }
+        </ul>
+
+    </div>
+
+    <div class="comment">
+        <small>
+            Avalie ou denuncie este jogador:
+        </small>
+
+        <!-- form to send rating -->
+        <form [formGroup]="form">
+
+            <label for="text">Escreva aqui:</label>
+            <textarea required formControlName="text" id="text" cols="30" rows="10"></textarea>
+
+            <label for="type">Isso é uma denuncia?</label>
+
+            <div class="checkbox_inpt">
+
+                <label class="checkb_container">
+                    <input type="checkbox" formControlName="denuncia" id="denuncia" checked="checked">
+                    <span class="checkmark"></span>
+                </label>
+
+            </div>
+        </form>
+
+        <a [style]="{
+            display : form.status === 'VALID' ? 'grid' : 'none'
+        }" class="box_shadow" (click)="sendForm(form)">
+            <span class="text_shadow">Enviar</span>
+        </a>
+
+    </div>
+
+</div>

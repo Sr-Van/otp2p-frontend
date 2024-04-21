@@ -47,6 +47,11 @@ export class ItemComponent {
   ngOnInit() {
     this.itemId = this.activateRoute.snapshot.paramMap.get('item')
 
+    if(this.itemId === "") {
+      window.location.reload()
+    }
+
+
     this.subs = this.salesService.getAllSales().subscribe(data => {
 
       const arr = data.results
@@ -101,6 +106,10 @@ export class ItemComponent {
 
     this.source = `../../assets/img/item.png`
 
+  }
+
+  goToPlayer(player: string) {
+    this.router.navigate([`player/${player}`])
   }
 
   ngOnDestroy() {

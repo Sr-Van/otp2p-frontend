@@ -33,4 +33,11 @@ export class OfferService {
   
     return this.http.put<any>(`${this.apiUrl}add/offer/${player}`, obj)
   }
+
+  addComment(player: string, data: any): Observable<any> {
+
+    let obj = { avaliacao : data }
+
+    return this.http.put<any>(`${this.apiUrl}add/rating/${player}`, obj)
+  }
 }
