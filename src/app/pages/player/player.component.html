@@ -16,8 +16,9 @@
         <ul>
             @for(av of avaliacao; track av.player) {
                 <li>
-                    <!-- trocar isso por card de avaliacao -->
-                    <span>{{ av.player }}</span>
+                    
+                    <app-rating-card [item]="av"></app-rating-card>
+                    
                 </li>
             }
         </ul>

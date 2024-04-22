@@ -7,6 +7,7 @@ import { OfferService } from '../../shared/services/offer.service';
 
 import { InfocardComponent } from '../../shared/components/infocard/infocard.component';
 import { CardComponent } from '../../shared/components/card/card.component';
+import { RatingCardComponent } from '../../shared/components/rating-card/rating-card.component';
 
 @Component({
   selector: 'app-player',
@@ -14,6 +15,7 @@ import { CardComponent } from '../../shared/components/card/card.component';
   imports: [
     InfocardComponent,
     CardComponent,
+    RatingCardComponent,
     ReactiveFormsModule
   ],
   templateUrl: './player.component.html',
@@ -66,10 +68,17 @@ export class PlayerComponent {
 
     obj.denuncia = obj.denuncia == true ? true : false
     obj.player = this.player
-    obj.date = `${this.myDate.getDate()}/${this.myDate.getMonth()}/${this.myDate.getFullYear()}`
+    obj.date = `${this.myDate.getDate()}/${this.myDate.getMonth()+ 1}/${this.myDate.getFullYear()}`
 
     arr.push(obj)
 
-    this.offerServ.addComment(this.player, arr)
+    this.offerServ.addComment(this.player, arr).subscribe(
+      response => {
+        console.log(`Resposta da api: ${response}`)
+      },
+      error => {
+        console.log(`deu algo errado ${error}`)
+      }
+    )
   }
 }
