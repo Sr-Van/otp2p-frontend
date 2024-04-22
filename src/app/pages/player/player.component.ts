@@ -64,13 +64,14 @@ export class PlayerComponent {
   sendForm(form: FormGroup) {
 
     let obj = form.value
-    let arr = []
+    let arr = this.avaliacao
 
     obj.denuncia = obj.denuncia == true ? true : false
     obj.player = this.player
     obj.date = `${this.myDate.getDate()}/${this.myDate.getMonth()+ 1}/${this.myDate.getFullYear()}`
 
     arr.push(obj)
+    this.form.reset()
 
     this.offerServ.addComment(this.player, arr).subscribe(
       response => {
