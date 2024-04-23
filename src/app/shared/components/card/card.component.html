@@ -1,4 +1,15 @@
 <div class="card" (click)="goToItem()">
+    @if(card.playerType === "revendedor"){
+
+        <div
+            [style]="{ zIndex: 979}" 
+            matTooltip="Este é um revendedor verificado."
+            matTooltipPosition="above"
+            class="badge_revendedor">
+            <i class="fa-solid fa-certificate text_shadow"></i>
+        </div>
+        
+    }
     <span class="text_shadow">{{ card.header | header: card.type }}</span>
     <div class="card_center">
         <img [src]="source" alt="pokemon">
