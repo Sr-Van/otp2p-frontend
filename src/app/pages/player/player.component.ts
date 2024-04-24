@@ -8,6 +8,7 @@ import { OfferService } from '../../shared/services/offer.service';
 import { InfocardComponent } from '../../shared/components/infocard/infocard.component';
 import { CardComponent } from '../../shared/components/card/card.component';
 import { RatingCardComponent } from '../../shared/components/rating-card/rating-card.component';
+import { Anuncio, Trade } from '../../shared/interfaces/arrays';
 
 @Component({
   selector: 'app-player',
@@ -32,10 +33,10 @@ export class PlayerComponent {
   myDate = new Date()
 
   // change type any for interfaces when exists
-  anuncios: any[]
-  compras: any[]
-  vendas: any[]
-  avaliacao: any[]
+  anuncios: Anuncio[]
+  compras: Trade[]
+  vendas: Trade[]
+  avaliacao: Comment[]
   playerItem: any
 
   ngOnInit() {

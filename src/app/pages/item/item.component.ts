@@ -9,6 +9,8 @@ import { CardComponent } from '../../shared/components/card/card.component';
 import { CurrencyPipe } from '@angular/common';
 import { InfocardComponent } from '../../shared/components/infocard/infocard.component';
 
+import { Trade, Anuncio } from '../../shared/interfaces/arrays';
+
 @Component({
   selector: 'app-item',
   standalone: true,
@@ -35,10 +37,10 @@ export class ItemComponent {
   isLoad: boolean = false
 
   //type this arrays
-  anuncios: any[] = []
-  vendas: any[] = []
-  compras: any[] = []
-  avaliacao: any[] = []
+  anuncios: Anuncio[] = []
+  vendas: Trade[] = []
+  compras: Trade[] = []
+  avaliacao: Comment[] = []
   
   source: string = ``
   tooltip: string

@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { SalesService } from '../../shared/services/sales.service';
 import { Subscription, filter } from 'rxjs';
 import { CardComponent } from '../../shared/components/card/card.component';
+import { Anuncio } from '../../shared/interfaces/arrays';
 
 @Component({
   selector: 'app-home',
@@ -11,13 +12,15 @@ import { CardComponent } from '../../shared/components/card/card.component';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  
+  salesService = inject(SalesService)
 
   servidores: any [] = ['red','blue','green','yellow','orange','black','white','purple','pink']
   tipos: any [] = ['pokemon', 'hd', 'tm', 'item']
-  sales: any [] = []
-  filteredSales: any []
+  sales: Anuncio[] = []
+  filteredSales: Anuncio[]
+  
   subs: Subscription
-  salesService = inject(SalesService)
   isload: boolean = false
 
   constructor() {

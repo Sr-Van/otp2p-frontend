@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { OfferService } from '../../shared/services/offer.service';
 import { Subscription } from 'rxjs';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Anuncio } from '../../shared/interfaces/arrays';
 
 @Component({
   selector: 'app-new-offer',
@@ -13,16 +14,21 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 export class NewOfferComponent {
 
   offerService = inject(OfferService)
+
   subs: Subscription
   subsOffers: Subscription
+
   pokes: any = []
   servidores: any = []
+  playerOffers: Anuncio[]
+  
   type: string = ''
   form: FormGroup;
   player: string = 'no fingers - sz' //get player name with auth login when have it
-  playerOffers: any []
 
   ngOnInit() {
+
+
     this.subs = this.offerService.getAllPokes().subscribe(data => {
 
       Object.keys(data).forEach(key => {

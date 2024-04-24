@@ -45,6 +45,10 @@
                         <app-card [card]="anuncio"></app-card>
                     </li>
                 }
+                @empty {
+                    <span>Este jogador não tem mais anuncios.</span>
+                    
+                }
                 
             </ul>
             <small class="poppins-regular-italic">Vendas</small>
@@ -52,7 +56,6 @@
             <ul class="vendas">
                 @for(venda of vendas.slice(0, 5); track $index) {
                     <li>
-                        <span>{{ venda.player }}</span>
                         <!-- change app-card for a card with no actions -->
                         <app-infocard [card]="venda"></app-infocard>
                     </li>
@@ -68,7 +71,7 @@
             <ul class="compras">
                 @for(compra of compras.slice(0, 5); track $index) {
                     <li>
-                        <span>{{ compra.player }}</span>
+                        
                         <!-- change app-card for a card with no actions -->
                         <app-infocard [card]="compra"></app-infocard>
                     </li>

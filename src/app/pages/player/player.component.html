@@ -14,7 +14,7 @@
 
         <small>Avaliações</small>
         <ul>
-            @for(av of avaliacao; track av.player) {
+            @for(av of avaliacao; track $index) {
                 <li>
                     
                     <app-rating-card [item]="av"></app-rating-card>
@@ -27,7 +27,7 @@
         <ul>
             @for(vd of vendas; track $index) {
                 <li>
-                    <span>{{ vd.player }}</span>
+                    <span>{{ vd.trade_player }}</span>
                     <app-infocard [card]="vd"></app-infocard>
                 </li>
             }
@@ -40,7 +40,7 @@
         <ul>
             @for(cp of compras; track $index) {
                 <li>
-                    <span>{{ cp.player }}</span>
+                    <span>{{ cp.trade_player }}</span>
                     <app-infocard [card]="cp"></app-infocard>
                 </li>
             }
