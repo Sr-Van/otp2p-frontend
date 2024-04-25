@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-header',
@@ -12,9 +13,19 @@ import { RouterModule } from '@angular/router';
             <a routerLink="/" class="poppins-bold">OtP2P</a>
         </div>
     
-        <div class="login">
-            <a href="#" class="poppins-thin box_shadow">Login</a>
-        </div>
+        @if(userLogged) {
+
+          <div class="logged" (click)="toggleMenu()">
+            <div class="img">
+              
+            </div>
+          </div>
+        }
+        @else {
+          <div class="login">
+              <a href="#" class="poppins-thin box_shadow">Login</a>
+          </div>
+        }
     </div>
   </nav>
 `,
@@ -50,6 +61,16 @@ import { RouterModule } from '@angular/router';
       box-shadow: none;
   }
 
+  nav .logged .img {
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    background-color: red;
+  }
+
+  nav .logged{
+    cursor: pointer;
+  }
   a {
       text-decoration: none;
       font-size: 18px;
@@ -58,5 +79,21 @@ import { RouterModule } from '@angular/router';
   `
 })
 export class HeaderComponent {
+
+  loginService = inject(LoginService)
+
+  userLogged: boolean = false
+  isMenuOpen: boolean = false
+
+  ngOnInit() {
+    this.userLogged = this.loginService.userIsLogedIn
+
+    console.log(this.userLogged)
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen
+    this.loginService.menuLoggedEvent.emit(this.isMenuOpen)
+  }
 
 }
