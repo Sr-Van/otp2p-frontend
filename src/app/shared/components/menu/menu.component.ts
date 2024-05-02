@@ -20,4 +20,10 @@ export class MenuComponent {
     })
   }
 
+  logOut() {
+    this.loginService.cookie.delete('loginToken')
+    this.loginService.loginEvent.emit(false)
+    window.location.reload()
+  }
+
 }

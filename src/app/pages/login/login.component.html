@@ -1,1 +1,81 @@
-<p>login works!</p>
+<div class="container">
+
+    @if(!isRegister) {
+        
+        <div class="login box_shadow">
+            <form [formGroup]="formLogin">
+                <label for="email">email:</label>
+                <input class="box_shadow" formControlName="email" type="text" id="email" >
+        
+                <label for="senha">senha:</label>
+                <input class="box_shadow" formControlName="senha" type="password" id="senha" >
+    
+                @if(showLog) {
+                    <div class="error" >
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <span>{{ errorMsg }}</span>
+                    </div>
+                }
+        
+                <button class="box_shadow" (click)="sendLogin(formLogin)">Login</button>
+    
+                <label>Não tem login?</label>
+    
+                <button class="box_shadow" (click)="changeType()">Cadastre-se</button>
+            </form>
+        </div>
+    
+    }
+
+    @if(isRegister) {
+
+        <div class="register">
+            <form [formGroup]="formRegister">
+                <label for="nome">Nome:</label>
+                <input type="text" formControlName="nome">
+               
+                <label for="player">Seu Nickname:</label>
+                <input type="text" formControlName="player">
+
+                <label for="mundos">Seu mundo:</label>
+                <select formControlName="mundo">
+
+                    @for(server of servers; track $index) {
+                        <option [value]="server">{{ server }}</option>
+                    }
+
+                </select>
+
+                <label for="cpf">CPF</label>
+                <input type="text" formControlName="cpf">
+                
+
+                <label for="email">email:</label>
+                <input class="box_shadow" formControlName="email" type="text" id="email" >
+        
+                <label for="senha">senha:</label>
+                <input class="box_shadow" formControlName="senha" type="password" id="senha" >
+    
+                <label for="confirmSenha">Confirme sua senha:</label>
+                <input class="box_shadow" formControlName="confirmSenha" type="password" id="confirmSenha" >
+
+                @if(showLog) {
+
+                    <div class="errorLog" >
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <span>{{ errorMsg }}</span>
+                    </div>
+                
+                }
+    
+        
+                <button class="box_shadow" (click)="sendRegister(formRegister)">Cadastrar</button>
+    
+                <label>Já tem login?</label>
+    
+                <button class="box_shadow" (click)="changeType()">Login</button>
+            </form>
+        </div>
+
+    }
+</div>

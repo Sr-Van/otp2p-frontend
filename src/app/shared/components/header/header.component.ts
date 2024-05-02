@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LoginService } from '../../services/login.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -16,14 +17,12 @@ import { LoginService } from '../../services/login.service';
         @if(userLogged) {
 
           <div class="logged" (click)="toggleMenu()">
-            <div class="img">
-              
-            </div>
+            <i class="fa-solid fa-user"></i>
           </div>
         }
         @else {
           <div class="login">
-              <a href="#" class="poppins-thin box_shadow">Login</a>
+              <a routerLink="/login" class="poppins-thin box_shadow">Login</a>
           </div>
         }
     </div>
@@ -61,11 +60,13 @@ import { LoginService } from '../../services/login.service';
       box-shadow: none;
   }
 
-  nav .logged .img {
+  nav .logged {
+    display: grid;
+    place-items: center;
     width: 30px;
     height: 30px;
     border-radius: 3px;
-    background-color: red;
+    background-color: #232323;
   }
 
   nav .logged{
@@ -85,10 +86,19 @@ export class HeaderComponent {
   userLogged: boolean = false
   isMenuOpen: boolean = false
 
+  loginEventSubscription: Subscription
+
   ngOnInit() {
     this.userLogged = this.loginService.userIsLogedIn
 
-    console.log(this.userLogged)
+    if(!this.userLogged) {
+
+      this.loginEventSubscription = this.loginService.loginEvent.subscribe(bool => {  
+        this.userLogged = bool
+      })
+
+    }
+
   }
 
   toggleMenu() {
