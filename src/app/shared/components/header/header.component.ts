@@ -2,29 +2,41 @@ import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { Subscription } from 'rxjs';
+import { CurrencyPipe } from '@angular/common';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, CurrencyPipe, MatTooltipModule],
   template: `
   <nav>
     <div class="itens container">
         <div class="logo">
             <a routerLink="/" class="poppins-bold">OtP2P</a>
         </div>
-    
-        @if(userLogged) {
 
-          <div class="logged" (click)="toggleMenu()">
-            <i class="fa-solid fa-user"></i>
-          </div>
-        }
-        @else {
-          <div class="login">
-              <a routerLink="/login" class="poppins-thin box_shadow">Login</a>
-          </div>
-        }
+        <div class="actions">
+          <a matTooltip="Adicionar saldo">
+            <i class="fa fa-plus-square" aria-hidden="true"></i>
+          </a>
+          <span matTooltip="Seu saldo">
+            {{ userAmount | currency: 'BRL' }}
+          </span>
+          
+          @if(userLogged) {
+  
+            <div class="logged" (click)="toggleMenu()">
+              <i class="fa-solid fa-user"></i>
+            </div>
+          }
+          @else {
+            <div class="login">
+                <a routerLink="/login" class="poppins-thin box_shadow">Login</a>
+            </div>
+          }
+        </div>
+    
     </div>
   </nav>
 `,
@@ -39,13 +51,27 @@ import { Subscription } from 'rxjs';
     margin-bottom: 20px;
   }
 
-  .itens {
+  .itens, .actions {
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
   }
 
+  .actions {gap: var(--basic-gap);}
+
+  .actions a {
+    font-size: 24px;
+    color: var(--succes-color);
+    cursor: pointer;
+  }
+
+  .actions span {
+    border-radius: var(--border-radius-medium);
+    background-color: #27262e;
+    padding: 6px;
+    font-size: 14px;
+  }
   nav .login > a { 
       font-size: 12px;
       padding: 8px 16px;
@@ -65,7 +91,7 @@ import { Subscription } from 'rxjs';
     place-items: center;
     width: 30px;
     height: 30px;
-    border-radius: 3px;
+    border-radius: var(--border-radius-medium);
     background-color: #232323;
   }
 
@@ -87,6 +113,8 @@ export class HeaderComponent {
   isMenuOpen: boolean = false
 
   loginEventSubscription: Subscription
+
+  userAmount: number = 0
 
   ngOnInit() {
     this.userLogged = this.loginService.userIsLogedIn
