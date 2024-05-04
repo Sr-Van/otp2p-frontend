@@ -12,6 +12,7 @@ export class LoginService {
   http = inject(HttpClient)
 
   userIsLogedIn: boolean = false
+  playerName: string
   token: string
   private apiUrl: string = "https://otp-p2p-api.vercel.app/"
   //private apiUrl: string = "http://localhost:3000/"
@@ -24,6 +25,7 @@ export class LoginService {
 
     if (this.cookie.get('loginToken')) {
       this.userIsLogedIn = true
+      this.playerName = this.cookie.get('player')
     }
 
   }

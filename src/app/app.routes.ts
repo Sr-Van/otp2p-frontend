@@ -9,6 +9,7 @@ import { LoginComponent } from './pages/login/login.component';
 
 import { AuthGuard } from './shared/guard/auth.guard';
 import { LoginGuard } from './shared/guard/login.guard';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -16,5 +17,6 @@ export const routes: Routes = [
     {path: 'item/:item', component: ItemComponent},
     {path: 'player/:player', component: PlayerComponent},
     {path: 'not-logged', component: NotLoggedComponent, canActivate: [LoginGuard]},
-    {path: 'login', component: LoginComponent, canActivate: [LoginGuard]}
+    {path: 'login', component: LoginComponent, canActivate: [LoginGuard]},
+    {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]}
 ];

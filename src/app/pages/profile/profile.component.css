@@ -1,0 +1,23 @@
+.player, .player ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--basic-gap);
+}
+
+.player h1 b {text-transform: capitalize;}
+
+.player ul {
+    list-style: none;
+    border: 1px solid grey;
+    border-radius: var(--border-radius-big);
+}
+
+.player ul li span {
+    font-size: 12px;
+}
+
+.player ul li .fake_input {
+    padding: var(--basic-padding);
+    border: 1px solid gray;
+    border-radius: var(--border-radius-medium);
+}

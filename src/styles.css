@@ -7,6 +7,13 @@
     --silver: rgb(91, 99, 111);
     --gold: rgb(255, 217, 0);
     --diamond: rgb(0, 234, 255);
+    --succes-color: #209513;
+    --border-radius-buttons: 4px;
+    --border-radius-small: 2px;
+    --border-radius-medium: 6px;
+    --border-radius-big: 8px;
+    --basic-padding: 10px;
+    --basic-gap: 10px;
 }
 
 *, html {
@@ -68,7 +75,7 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .snack_success > div {
-    background-color: #209513 !important;
+    background-color: var(--succes-color) !important;
     color: #fff !important;
 }
 
@@ -81,6 +88,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: #fff !important;
 }
 
+.cookie_dialog .mdc-dialog__container > div {
+    background-color: #27262e;
+    padding: 10px;
+}
 
 @media(min-width: 425px) {
     .container { width: 350px;}
