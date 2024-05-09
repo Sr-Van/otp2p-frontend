@@ -1,10 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+
 import { HeaderComponent } from './shared/components/header/header.component';
 import { MenuComponent } from './shared/components/menu/menu.component';
-import { CookieService } from 'ngx-cookie-service';
 import { CookieConsentComponent } from './shared/components/cookie-consent/cookie-consent.component';
-import { MatDialog } from '@angular/material/dialog';
+
+import { CookieService } from 'ngx-cookie-service';
+import { LoginService } from './shared/services/login.service';
+
 
 @Component({
   selector: 'app-root',
@@ -21,22 +24,20 @@ import { MatDialog } from '@angular/material/dialog';
 export class AppComponent {
 
   cookieService = inject(CookieService)
-  cookieDialog = inject(MatDialog)
+  loginService = inject(LoginService)
 
   title = 'OTP2P - Trocas';
-  cookieIsConsent: boolean = false
 
-  ngOnInit() {
+  constructor() {
 
-    if(this.cookieService.get('userConsent')) {
-      this.cookieIsConsent = true
-    } else {
-      
-      this.cookieDialog.open(CookieConsentComponent, {
-        panelClass: 'cookie_dialog'
-      })
-      
-    }
+    setTimeout(() => {
+      this.getCookieConsent()
+    }, 3000);
 
+  }
+
+  getCookieConsent() {
+    const isConsented = this.cookieService.get('userConsent');
+    this.loginService.UserConsentCookieEvent.emit(!!isConsented);
   }
 }

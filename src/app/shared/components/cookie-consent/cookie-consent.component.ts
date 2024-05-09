@@ -1,23 +1,49 @@
 import { Component, inject } from '@angular/core';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogTitle,
-  MatDialogContent,
-} from '@angular/material/dialog';
+
 
 import {MatButtonModule} from '@angular/material/button';
 import { CookieService } from 'ngx-cookie-service';
+import { LoginService } from '../../services/login.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cookie-consent',
   standalone: true,
-  imports: [MatDialogTitle, MatDialogContent, MatButtonModule],
+  imports: [ MatButtonModule],
   templateUrl: './cookie-consent.component.html',
   styles: `
+    :host {
+      position: fixed;
+      top:0;
+      display: flex;
+      width: 100%;
+      height: 100%;
+    }
+
+    :host .backdrop {
+      background-color: rgba(0, 0, 0, 0.5);
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    :host .container {
+      background-color: #27262e;
+      padding: 10px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 999;
+    }
     :host div > p {
       color: #fff !important;
       font-size: 14px;
+      height: 400px;
+      overflow-y: scroll;
     }
+
+    :host [hidden] {display: none !important;}
 
     :host div > span {
       display: flex;
@@ -44,11 +70,22 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class CookieConsentComponent {
 
-  data = inject(MAT_DIALOG_DATA)
   cookie = inject(CookieService)
+  loginService = inject(LoginService)
+
+  show: boolean = false
+  cookieConsentSubscription: Subscription
+
+  constructor() {
+    this.cookieConsentSubscription = this.loginService.UserConsentCookieEvent.subscribe(bool => {
+      //esse evento vai ser emitido quando o usuario abrir o app, se ele estiver consentido os cookies o evento retorna true, se ele estiver desconsentido o evento retorna false. sendo assim o this.show preciso ser o contrario do boolean
+      this.show = !bool
+    })
+  }
 
   acceptCookies() {
     this.cookie.set('userConsent', 'true', 365)
+    this.loginService.UserConsentCookieEvent.emit(true)
   }
 
 }

@@ -88,10 +88,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: #fff !important;
 }
 
-.cookie_dialog .mdc-dialog__container > div {
-    background-color: #27262e;
-    padding: 10px;
-}
 
 @media(min-width: 425px) {
     .container { width: 350px;}

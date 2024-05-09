@@ -20,6 +20,7 @@ export class LoginService {
 
   menuLoggedEvent = new EventEmitter<boolean>()
   loginEvent = new EventEmitter<boolean>()
+  UserConsentCookieEvent = new EventEmitter<boolean>()
 
   constructor() {
 
