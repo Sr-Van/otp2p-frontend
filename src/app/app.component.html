@@ -1,4 +1,6 @@
 <app-header></app-header>
 <router-outlet></router-outlet>
 <app-menu></app-menu>
-<app-cookie-consent></app-cookie-consent>
+@if(!userConsent) {
+    <app-cookie-consent></app-cookie-consent>
+}

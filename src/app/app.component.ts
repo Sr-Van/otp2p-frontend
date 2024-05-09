@@ -27,6 +27,7 @@ export class AppComponent {
   loginService = inject(LoginService)
 
   title = 'OTP2P - Trocas';
+  userConsent: boolean = false
 
   constructor() {
 
@@ -39,5 +40,6 @@ export class AppComponent {
   getCookieConsent() {
     const isConsented = this.cookieService.get('userConsent');
     this.loginService.UserConsentCookieEvent.emit(!!isConsented);
+    this.userConsent = !!isConsented
   }
 }
