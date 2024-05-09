@@ -41,9 +41,10 @@ export class LoginService {
     return this.http.post(`${this.apiUrl}auth/login`, obj)
   }
 
-  saveLoginToken(token: any) {
+  saveLoginToken(token: any, playerName: string) {
     this.loginEvent.emit(true)
     this.cookie.set('loginToken', token, 7)
+    this.cookie.set('player', playerName, 7)
   }
 
   register(form: any): Observable<any> {

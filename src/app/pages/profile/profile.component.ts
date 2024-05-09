@@ -27,8 +27,8 @@ export class ProfileComponent {
     this.getOnePlayerSubscription = this.offerService.getPlayerOffers(this.player)
       .subscribe({
         next: data => {
+          console.log(data)
           this.playerInfo = data
-          console.log(this.playerInfo)
         }, 
 
         error: error => {

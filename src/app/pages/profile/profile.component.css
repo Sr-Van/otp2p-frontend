@@ -1,23 +1,38 @@
+.container {
+    display: flex;
+    justify-content: flex-start;
+}
 .player, .player ul {
     display: flex;
+    justify-content: flex-start;
     flex-direction: column;
     gap: var(--basic-gap);
+    width: clamp(250px, 100%, 550px);
 }
 
-.player h1 b {text-transform: capitalize;}
+.player h1 b {text-transform: capitalize; color: #7c0f9a;}
+.player h2 {font-size: 14px;}
 
 .player ul {
+    background-color: #232323;
     list-style: none;
-    border: 1px solid grey;
     border-radius: var(--border-radius-big);
+    padding: var(--basic-padding);
 }
 
 .player ul li span {
     font-size: 12px;
 }
 
+.player ul li p {text-transform: capitalize;}
+
+.player ul li p {
+    font-style: italic;
+    font-size: 10px;
+}
+
 .player ul li .fake_input {
     padding: var(--basic-padding);
-    border: 1px solid gray;
+    border: 0.5px solid rgba(128, 128, 128, 0.38);
     border-radius: var(--border-radius-medium);
 }

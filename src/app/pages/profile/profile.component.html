@@ -20,5 +20,22 @@
                 <p class="fake_input">{{ playerInfo.badge }}</p>
             </li>
         </ul>
+
+        <h2>Seus dados no site:</h2>
+
+        <ul>
+            <li>
+                <span>Seus anúncios ativos: </span>
+                <p>{{ playerInfo.anuncios.length }}</p>
+            </li>
+            <li>
+                <span>Suas vendas já feitas: </span>
+                <p>{{ playerInfo.vendas.length }}</p>
+            </li>
+            <li>
+                <span>Suas compras: </span>
+                <p>{{ playerInfo.compras.length }}</p>
+            </li>
+        </ul>
     </div>
 </div>

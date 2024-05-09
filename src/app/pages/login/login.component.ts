@@ -80,7 +80,7 @@ export class LoginComponent {
 
       this.openSnack(data.msg, 'success')
 
-      this.loginService.saveLoginToken(data.token)
+      this.loginService.saveLoginToken(data.token, data.player)
       this.loginService.userIsLogedIn = true
 
       setTimeout(() => {
