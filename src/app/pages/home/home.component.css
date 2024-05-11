@@ -1,3 +1,10 @@
+main { 
+    min-height: 100dvh; 
+    display: flex;
+    flex-direction: column;
+    gap: var(--basic-gap);
+}
+
 .list {
     list-style: none;
     display: flex;
