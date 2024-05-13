@@ -50,8 +50,17 @@
                     <span>Não há items :(</span>
                 }
             </ul>
-            <!-- limite de 30 itens por pagina -->
-        </div>
+
+            <div class="paginator container">
+
+                <mat-paginator
+                    #paginator
+                    pageSize="10"
+                    [length]="filteredSales.length"></mat-paginator>
+                <!-- limite de 30 itens por pagina -->
+            </div>
+
+            </div>
     }
 
     @else {

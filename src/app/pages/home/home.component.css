@@ -89,6 +89,19 @@ main {
     cursor: pointer;
 }
 
+mat-paginator {
+    background-color: #27262e !important;
+    border-bottom: 1px solid rgb(0, 0, 0, 0.2) !important;
+    color: #fff !important;
+    
+    width: clamp(350px, 350px, 550px) !important;
+    margin-bottom: 30px;
+    
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+}
+
 @media(min-width: 325px) {
     .list {justify-content: space-between;}
 }
