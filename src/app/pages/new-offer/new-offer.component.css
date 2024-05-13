@@ -1,6 +1,8 @@
 .offer {
-    width: 100%;
+    width: 85%;
     margin-top: 20px;
+    margin-bottom: 30px;
+    height: 100dvh;
 }
 
 form {
@@ -12,6 +14,25 @@ form {
     margin-top: 20px;
 }
 
+input, select, option, textarea {
+    background-color: #4a4a4a;
+    color: #fff;
+    border: none;
+    padding: var(--basic-padding);
+    border-radius: var(--border-radius-small);
+}
+
 small {
     font-size: 10px;
+}
+
+button {
+    background-color: blueviolet;
+    color: #fff;
+    width: clamp(225px, 225px, 250px);
+    height: 40px;
+    border-radius: var(--border-radius-buttons);
+    border: none;
+    cursor: pointer;
+    font-family: poppins;
 }

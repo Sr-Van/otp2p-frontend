@@ -1,8 +1,16 @@
 import { Component, inject } from '@angular/core';
-import { OfferService } from '../../shared/services/offer.service';
-import { Subscription } from 'rxjs';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition
+} from '@angular/material/snack-bar';
+
 import { Anuncio } from '../../shared/interfaces/arrays';
+
+import { OfferService } from '../../shared/services/offer.service';
+import { LoginService } from '../../shared/services/login.service';
 
 @Component({
   selector: 'app-new-offer',
@@ -14,6 +22,8 @@ import { Anuncio } from '../../shared/interfaces/arrays';
 export class NewOfferComponent {
 
   offerService = inject(OfferService)
+  loginService = inject(LoginService)
+  snack = inject(MatSnackBar)
 
   subs: Subscription
   subsOffers: Subscription
@@ -24,10 +34,14 @@ export class NewOfferComponent {
   
   type: string = ''
   form: FormGroup;
-  player: string = 'no fingers - sz' //get player name with auth login when have it
+  player: string 
+
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   ngOnInit() {
 
+    this.player = this.loginService.playerName
 
     this.subs = this.offerService.getAllPokes().subscribe(data => {
 
@@ -63,7 +77,9 @@ export class NewOfferComponent {
     newForm.itemId = this.randomId()
     this.playerOffers.push(newForm)
 
-    this.offerService.addOffer(this.player, this.playerOffers).subscribe(response => console.log(`Resposta da api: ${response}`))
+    this.offerService.addOffer(this.player, this.playerOffers).subscribe(response => {
+      this.openSnack(response.msg, 'success')
+    })
 
     this.form.reset()
   }
@@ -86,5 +102,14 @@ export class NewOfferComponent {
 
   randomId() {    
     return Math.random().toString(36).substring(2) + Math.random().toString(36).substring(2)
+  }
+
+  openSnack(msg: string, type: string) {
+    this.snack.open(msg, 'OK', {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition : this.verticalPosition,
+      panelClass: ['snack', `snack_${type}`],
+      duration: 3000
+    })
   }
 }
