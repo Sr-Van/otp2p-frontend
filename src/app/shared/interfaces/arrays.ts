@@ -20,6 +20,7 @@ export interface Trade {
     itemId: string;
     trade_player: string;
     date: string;
+    situation: string;
 }
 
 export interface Comment {

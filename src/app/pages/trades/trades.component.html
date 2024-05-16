@@ -1,0 +1,39 @@
+@if(isLoaded) {
+    <div class="container">
+        <div class="buys">
+            <h2>Reveja suas compras.</h2>
+    
+            <ul>
+                @for(item of playerBuys.slice(0, 10); track $index) {
+                    <li>
+                        <app-trades-card [item]="item" type="buy"></app-trades-card>
+                    </li>
+                }
+    
+                @empty {
+                    <small>Nenhuma troca encontrada.</small>
+                }
+            </ul>
+        </div>
+
+        <div class="sales">
+            <h2>Reveja suas vendas.</h2>
+    
+            <ul>
+                @for(item of playerSales.slice(0, 10); track $index) {
+                    <li>
+                        <app-trades-card [item]="item" type="sale"></app-trades-card>
+                    </li>
+                }
+    
+                @empty {
+                    <small>Nenhuma venda encontrada.</small>
+                }
+            </ul>
+        </div>
+    </div>
+
+}
+@else {
+    <app-loading-spinner></app-loading-spinner>
+}

@@ -1,0 +1,277 @@
+.card, .trade_infos {
+    display: grid !important;
+    grid-template-areas: 
+    "left right"
+    "middle middle"
+    "bottom bottom"
+    "button button";
+}
+.card {
+    width: 230px;
+
+    gap: 5px;
+    padding: var(--basic-padding);
+    
+    border-radius: var(--border-radius-big);
+    border: 1px solid rgb(95, 13, 118, .4);
+    box-shadow: 0px 0px 7px -2px blueviolet;
+
+    --transition: all 300ms ease;
+    transition: var(--transition);
+}
+
+.card:hover {
+    box-shadow: 0px 0px 13px -2px rgb(95, 13, 118, .8);
+}
+
+.card div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+    font-size: 80%;
+}
+
+/* Styles for card if situation = received */
+
+.card .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    grid-column: span 2;
+}
+
+.card .header .left, .card .header .right {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.card .header .left img {
+    width: 50px;
+    height: 50px;
+}
+
+.card .header .right {
+    align-items: center;
+}
+
+.card .players_infos {
+    border-radius: var(--border-radius-medium);
+    padding: 6px;
+    background-color: #2b2b2e;
+    grid-area: left;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.card .players_infos img {
+    width: 50px;
+    height: 50px;
+}
+.card .item_infos {
+    border-radius: var(--border-radius-medium);
+    padding: 6px;
+    background-color: #2b2b2e;
+    grid-area: right;
+}
+.card .trade_infos {
+    border-radius: var(--border-radius-medium);
+    padding: 6px;
+    background-color: #2b2b2e;
+    grid-area: middle;
+}
+.card .progress {
+    border-radius: var(--border-radius-medium);
+    padding: 6px;
+    background-color: #2b2b2e;
+    grid-area: bottom;
+}
+
+.card .item_infos span:nth-child(1) {
+    font-weight: bold;
+    border-radius: var(--border-radius-big);
+    font-size: 10px;
+    width: 40px;
+    text-align: center;
+}
+
+.card .item_infos span:nth-child(2) {
+    text-transform: uppercase;
+}
+
+.card .trade_infos span:nth-child(1) {
+    font-size: 12px;
+    border-radius: var(--border-radius-medium);
+    padding: 6px;
+    background-color: #2b2b2e;
+    grid-area: left;
+}
+
+.card .trade_infos span:nth-child(2) {
+    font-size: 12px;
+    border-radius: var(--border-radius-medium);
+    padding: 6px;
+    background-color: #2b2b2e;
+    grid-area: right;
+}
+
+.card .trade_infos span:nth-child(3) {
+    font-size: 12px;
+    border-radius: var(--border-radius-medium);
+    padding: 6px;
+    background-color: #2b2b2e;
+    grid-area: middle;
+    text-align: start;
+}
+
+small {
+    color: #969697;
+}
+
+.players_infos span, .item_infos span {
+    text-transform: capitalize;
+}
+
+i { font-size: 20px;}
+
+.trade_player, .player {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: var(--border-radius-medium);
+    background-color: #232323;
+
+    z-index: 3;
+
+    transition: all 200ms ease-in;
+}
+
+.trade_player:hover, .player:hover {
+    transform: scale(1.1);
+}
+
+.progress {
+    position: relative;
+
+    display: flex;
+    flex-direction: row !important;
+    justify-content: space-between;
+
+}
+
+.progress_bar, .progress_path {
+    position: absolute;
+    bottom: 40%;
+    left: 15px;
+    height: 4px;
+    border-radius: var(--border-radius-big);
+    padding: 0 !important;
+}
+
+.progress_path {
+    background-color: #171717;
+    width: 90%;
+    height: 5px;
+}
+
+.progress_bar {
+    background-color: #2095139d;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.buttons {
+    grid-area: button;
+    display: flex;
+    flex-direction: row !important;
+    gap: var(--basic-gap);
+    justify-content: space-between;
+}
+
+.buttons button {
+    width: 45%;
+    cursor: pointer;
+}
+
+.buttons button:nth-child(1) {  
+    background-color: blueviolet;
+    color: #fff;
+    border: 1px solid rgb(95, 13, 118, .4);
+
+    border-radius: var(--border-radius-medium);
+    padding: 5px;
+    transition: var(--transition);
+}
+
+.buttons button:nth-child(1):hover {
+    background-color: rgb(95, 13, 118, .8);
+}
+
+.buttons button:nth-child(1):active {
+    background-color: rgb(95, 13, 118, 1);
+}
+
+.buttons button:nth-child(2) {  
+    background-color: #b80b0b;
+    color: #fff;
+    border-radius: var(--border-radius-medium);
+    border: 1px solid rgb(95, 13, 118, .4);
+    padding: 5px;
+    transition: var(--transition);
+}
+
+.buttons button:nth-child(2):hover {
+
+    background-color: rgba(114, 19, 19, 0.8);
+}
+
+.ended {
+    grid-area: button;
+    display: grid;
+    place-items: center;
+    padding: 5px;
+    border-radius: var(--border-radius-medium);
+    background-color: #0b712b5b;
+    color: #969697;
+}
+
+@media screen and (min-width: 420px) {
+    .card {
+        width: 300px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .card {
+        width: 500px;
+    }
+    .card div {
+        font-size: 95%;
+    }
+
+    .card .players_infos {
+        flex-direction: row-reverse;
+        justify-content: space-between;
+    }
+
+    .card .players_infos img {
+        width: 150px;
+        height: 150px;
+    }
+
+}
+
+@media screen and (min-width: 1024px) {
+    .card {
+        width: 700px;
+    }
+
+    .progress_path {
+        width: 95%;
+        left: 10px;
+    }
+}

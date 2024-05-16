@@ -1,0 +1,180 @@
+@if(item.situation === 'received') {
+    <div class="card">
+        <div class="header">
+            <div class="left">
+                <img [src]="imgSource" [alt]="item.header">
+                <div>
+                    <span style="text-transform: capitalize;">{{ item.type }}</span>
+                    <span>{{ item.header | header: item.type }} ({{ item.price | currency: 'BRL' }})</span>
+                </div>
+            </div>
+
+            <div class="right" [style]="{color: progressColor}">
+                <i class="fa-solid fa-check"></i>
+                <span>Concluído</span>
+            </div>
+        </div>
+
+        <div class="progress">
+
+            @if(type === "buy") {
+                
+                <div class="player" matTooltip="Você (vendedor)">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+    
+                <div class="trade_player" [matTooltip]="item.trade_player + ' (comprador)'"
+                    matTooltip="Ir para o perfil do comprador"
+                    (click)="goToPlayerProfile(item.trade_player)"
+                    style="cursor: pointer;">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+        
+            } @else {
+    
+                <div class="trade_player" [matTooltip]="item.trade_player + ' (vendedor)'"
+                    matTooltip="Ir para o perfil do vendedor"
+                    (click)="goToPlayerProfile(item.trade_player)"
+                    style="cursor: pointer;">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+        
+                <div class="player" matTooltip="Você (comprador)">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+            }
+    
+            <div class="progress_path" [matTooltip]="'Situação: '+ item.situation">
+                <div class="progress_bar" 
+                [style]="{ width: progressBarWidth + '%',
+                        backgroundColor: progressColor}"></div>
+            </div>
+        </div>
+    
+        
+    </div>
+} @else {
+
+    <div class="card">
+        <div class="players_infos">
+            @if(type === "buy") {
+    
+                <div>
+                    <small>O que voce comprou: </small>
+                    <span class="text_shadow">{{ item.header | header: item.type }}</span>
+                    <small>Quem vendeu: </small>
+                    <span class="text_shadow"
+                    (click)="goToPlayerProfile(item.trade_player)"
+                    style="cursor: pointer;"
+                    >
+                    {{ item.trade_player }}</span>
+                </div>
+    
+            } @else {
+                <div>
+    
+                    <small>O que voce vendeu: </small>
+                    <span class="text_shadow">{{ item.header | header: item.type }}</span>
+                    <small>Quem comprou: </small>
+                    <span class="text_shadow"
+                    (click)="goToPlayerProfile(item.trade_player)"
+                    style="cursor: pointer;">{{ item.trade_player }}</span>
+                
+                </div>
+    
+            }
+    
+            <img [src]="imgSource" alt="">
+        </div>
+        <div class="item_infos">
+    
+            <span class="text_shadow"
+            [style]="{ backgroundColor: item.mundo }">{{ item.mundo }}</span>
+            <span class="text_shadow">{{ item.type }}</span>
+    
+        </div>
+    
+        <div class="trade_infos">
+            <span class="text_shadow">{{ item.price | currency: 'BRL' }}</span>
+            <!-- adicionar date pipe -->
+            <span class="text_shadow">{{ item.date }}</span>
+            <span>
+                <p [style]="{color: progressColor}" class="text_shadow">
+                    {{ item.situation }}
+                </p>
+                
+                @if(type == "sale") {
+                    @if(item.situation === "received") {
+                        <small>
+                            {{ quotes.sale.received }}
+                        </small>
+                    }
+                    @else if(item.situation === "sended") {
+                        <small> {{ quotes.sale.sended }} </small>
+                    } @else {
+    
+                        <small> {{ quotes.sale.ordered }} </small>
+                    }
+                }
+                @else {
+                    @if(item.situation === "received") {
+                        <small>
+                            {{ quotes.buy.received }}
+                        </small>
+                    }
+                    @else if(item.situation === "sended") {
+                        <small> {{ quotes.buy.sended }} </small>
+                    } @else {
+    
+                        <small> {{ quotes.buy.ordered }} </small>
+                    }
+                }
+            </span>
+        </div>
+    
+        <div class="progress">
+    
+            @if(type === "buy") {
+                
+                <div class="player" matTooltip="Você (vendedor)">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+    
+                <div class="trade_player" [matTooltip]="item.trade_player + ' (comprador)'">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+        
+            } @else {
+    
+                <div class="trade_player" [matTooltip]="item.trade_player + ' (vendedor)'">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+        
+                <div class="player" matTooltip="Você (comprador)">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+            }
+    
+            <div class="progress_path" [matTooltip]="'Situação: '+ item.situation">
+                <div class="progress_bar" 
+                [style]="{ width: progressBarWidth + '%',
+                        backgroundColor: progressColor}"></div>
+            </div>
+        </div>
+    
+        @if(item.situation !== "received") {
+            <div class="buttons">
+                <button>Confirmar</button>
+                <button>Cancelar</button>
+            </div>
+        }
+    
+        @else {
+            <div class="ended">
+                <span>Finalizado</span>
+            </div>
+        }
+    </div>
+
+}
+
