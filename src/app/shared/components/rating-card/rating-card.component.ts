@@ -9,16 +9,16 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     <div class="card box_shadow">
 
       <div class="title">
-          <b> {{ item.player }}</b>
+          <b> {{ item.player_rating }}</b>
       </div>
 
       <div class="body">
-          <p class="poppins-regular-italic"> {{ item.text }} </p>
+          <p class="poppins-regular-italic"> {{ item.message }} </p>
       </div>
 
       <small> {{ item.date }} </small>
 
-      @if(item.denuncia) {
+      @if(item.denuncia === 'true') {
           
           <div class="warning" 
           matTooltip="Cuidado, Isto é uma denuncia!"

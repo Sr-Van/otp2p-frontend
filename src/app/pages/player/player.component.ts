@@ -9,6 +9,7 @@ import { InfocardComponent } from '../../shared/components/infocard/infocard.com
 import { CardComponent } from '../../shared/components/card/card.component';
 import { RatingCardComponent } from '../../shared/components/rating-card/rating-card.component';
 import { Anuncio, Trade } from '../../shared/interfaces/arrays';
+import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-player',
@@ -17,7 +18,8 @@ import { Anuncio, Trade } from '../../shared/interfaces/arrays';
     InfocardComponent,
     CardComponent,
     RatingCardComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LoadingSpinnerComponent
   ],
   templateUrl: './player.component.html',
   styleUrl: './player.component.css'
@@ -38,6 +40,7 @@ export class PlayerComponent {
   vendas: Trade[]
   avaliacao: Comment[]
   playerItem: any
+  isLoaded: boolean = false
 
   ngOnInit() {
     this.player = this.activateRoute.snapshot.paramMap.get('player')
@@ -53,6 +56,7 @@ export class PlayerComponent {
       this.avaliacao = data.avaliacao
 
       this.playerItem = data
+      this.isLoaded = true
 
     })
 

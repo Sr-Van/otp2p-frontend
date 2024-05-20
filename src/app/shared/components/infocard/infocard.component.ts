@@ -21,7 +21,13 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
             <li>{{ card.price | currency: 'BRL' }}</li>
             <!-- add date pipe when date is working -->
             <li>Vendido: {{ card.date }}</li>
-            <li>vendido para: {{ card.trade_player }}</li>
+            @if(type === "compra") {
+              <li>Comprado de: {{ card.trade_player }}</li>
+              
+            } @else {
+
+              <li>Vendido para: {{ card.trade_player }}</li>
+            }
 
         </ol>
     </div>
@@ -54,6 +60,7 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 export class InfocardComponent {
 
   @Input() card: any
+  @Input() type: any
 
   ngOnInit(){
     console.log(this.card)
