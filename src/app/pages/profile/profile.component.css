@@ -2,6 +2,10 @@
     display: flex;
     justify-content: flex-start;
 }
+
+.player {
+    min-height: 100dvh;
+}
 .player, .player ul {
     display: flex;
     justify-content: flex-start;

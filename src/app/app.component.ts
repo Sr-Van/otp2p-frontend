@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { HeaderComponent } from './shared/components/header/header.component';
-import { MenuComponent } from './shared/components/menu/menu.component';
 import { CookieConsentComponent } from './shared/components/cookie-consent/cookie-consent.component';
 
 import { CookieService } from 'ngx-cookie-service';
@@ -16,7 +15,6 @@ import { FooterComponent } from './shared/components/footer/footer.component';
   imports: [
     RouterOutlet, 
     HeaderComponent, 
-    MenuComponent, 
     CookieConsentComponent,
     FooterComponent
   ],

@@ -4,11 +4,12 @@ import { LoginService } from '../../services/login.service';
 import { Subscription } from 'rxjs';
 import { CurrencyPipe } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MenuComponent } from '../menu/menu.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterModule, CurrencyPipe, MatTooltipModule],
+  imports: [RouterModule, CurrencyPipe, MatTooltipModule, MenuComponent],
   template: `
   <nav>
     <div class="itens container">
@@ -17,18 +18,20 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         </div>
 
         <div class="actions">
-          <a matTooltip="Adicionar saldo">
-            <i class="fa fa-plus-square" aria-hidden="true"></i>
-          </a>
-          <span matTooltip="Seu saldo">
-            {{ userAmount | currency: 'BRL' }}
-          </span>
           
           @if(userLogged) {
+            <a matTooltip="Adicionar saldo">
+              <i class="fa fa-plus-square" aria-hidden="true"></i>
+            </a>
+            <span matTooltip="Seu saldo">
+              {{ userAmount | currency: 'BRL' }}
+            </span>
   
             <div class="logged" (click)="toggleMenu()">
               <i class="fa-solid fa-user"></i>
             </div>
+
+            <app-menu></app-menu>
           }
           @else {
             <div class="login">
@@ -56,7 +59,17 @@ import { MatTooltipModule } from '@angular/material/tooltip';
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
+
+      position: relative;
   }
+
+  app-menu {
+    position: fixed;
+    top: 50px;
+    right: 15%;
+
+    z-index: 998;
+}
 
   .actions {gap: var(--basic-gap);}
 
