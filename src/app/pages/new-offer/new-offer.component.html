@@ -1,4 +1,5 @@
-<div class="container">
+@if(isLoaded) {
+    <div class="container">
     <div class="offer">
         <h2>Adicionar nova oferta:</h2>
 
@@ -57,3 +58,7 @@
         </form>
     </div>
 </div>
+}
+@else {
+    <app-loading-spinner></app-loading-spinner>
+}

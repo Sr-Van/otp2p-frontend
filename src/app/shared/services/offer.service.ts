@@ -29,9 +29,7 @@ export class OfferService {
   }
 
   addOffer(player: string, data: any) : Observable<any>{
-    let obj = { anuncios : data }
-  
-    return this.http.put<any>(`${this.apiUrl}add/offer/${player}`, obj)
+    return this.http.put<any>(`${this.apiUrl}add/offer/${player}`, data)
   }
 
   addComment(player: string, data: any): Observable<any> {

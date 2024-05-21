@@ -11,11 +11,12 @@ import { Anuncio } from '../../shared/interfaces/arrays';
 
 import { OfferService } from '../../shared/services/offer.service';
 import { LoginService } from '../../shared/services/login.service';
+import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-new-offer',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, LoadingSpinnerComponent],
   templateUrl: './new-offer.component.html',
   styleUrl: './new-offer.component.css'
 })
@@ -35,6 +36,7 @@ export class NewOfferComponent {
   type: string = ''
   form: FormGroup;
   player: string 
+  isLoaded: boolean = false
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -64,6 +66,7 @@ export class NewOfferComponent {
 
     this.subsOffers = this.offerService.getPlayerOffers(this.player).subscribe(data => {
       this.playerOffers = data.anuncios
+      this.isLoaded = true
     })
 
   }
@@ -75,9 +78,8 @@ export class NewOfferComponent {
   sendForm(form: any) {
     let newForm = form.value
     newForm.itemId = this.randomId()
-    this.playerOffers.push(newForm)
 
-    this.offerService.addOffer(this.player, this.playerOffers).subscribe(response => {
+    this.offerService.addOffer(this.player, newForm).subscribe(response => {
       this.openSnack(response.msg, 'success')
     })
 

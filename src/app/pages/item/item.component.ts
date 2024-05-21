@@ -10,6 +10,8 @@ import { CurrencyPipe } from '@angular/common';
 import { InfocardComponent } from '../../shared/components/infocard/infocard.component';
 
 import { Trade, Anuncio } from '../../shared/interfaces/arrays';
+import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
+import { LoginService } from '../../shared/services/login.service';
 
 @Component({
   selector: 'app-item',
@@ -18,7 +20,8 @@ import { Trade, Anuncio } from '../../shared/interfaces/arrays';
     MatTooltipModule,
     CardComponent,
     InfocardComponent,
-    CurrencyPipe
+    CurrencyPipe,
+    LoadingSpinnerComponent
   ],
   templateUrl: './item.component.html',
   styleUrl: './item.component.css'
@@ -29,6 +32,7 @@ export class ItemComponent {
   activateRoute = inject(ActivatedRoute)
   salesService = inject(SalesService)
   offerService = inject(OfferService)
+  loginService = inject(LoginService)
 
   subs: Subscription
   subsOff: Subscription
@@ -47,6 +51,9 @@ export class ItemComponent {
   color: string 
 
   ngOnInit() {
+    if(!this.loginService.userIsLogedIn) {
+      this.router.navigate(['/login'])
+    }
     this.itemId = this.activateRoute.snapshot.paramMap.get('item')
 
     if(this.itemId === "") {

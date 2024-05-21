@@ -1,4 +1,5 @@
-<div class="container">
+@if(isLoad) {
+    <div class="container">
 
     @if(isLoad) {
 
@@ -89,3 +90,7 @@
     
 
 </div>
+}
+@else {
+    <app-loading-spinner></app-loading-spinner>
+}
