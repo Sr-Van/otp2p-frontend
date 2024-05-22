@@ -10,9 +10,12 @@
         </div>
         
     }
-    <span class="text_shadow">{{ card.header | header: card.type }}</span>
+    <span class="title text_shadow">{{ card.header | header: card.type }}</span>
     <div class="card_center">
-        <img [src]="source" alt="pokemon">
+        <div style="width: 100%; display: grid; place-items: center;">
+            
+            <img [src]="source" alt="pokemon">
+        </div>
         <div [style]="{backgroundColor: card.mundo}" class="server_bg"></div>
     </div>
     <div class="card_infos">

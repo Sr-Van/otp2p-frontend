@@ -7,12 +7,14 @@
     <div class="titles">
         <h4 class="mgb">Servidor:</h4>
     </div>
-    <ul class="server_list list">
+
+    <div style="width: 100%; display: flex; align-items: start;">
+        <button class="toggle_btn" (click)="toggleFilter(server)">Mostrar servidores</button>
+    </div>
+    <ul class="hidden server_list list" #server>
         @for(server of servidores; track $index) {
             <li (click)="addFilter('server', $event)" [attr.data-filter]="server">
-                <div class="blur_layer" [style]="{
-                    backgroundColor: server
-                }">
+                <div class="blur_layer">
                 </div>
                 <p > {{ server }}</p>
             </li>
@@ -25,7 +27,12 @@
         <h4 class="mgb">Tipo:</h4>
 
     </div>
-    <ul class="type_list list">
+
+    <div style="width: 100%; display: flex; align-items: start;">
+        <button class="toggle_btn" (click)="toggleFilter(type)">Mostrar tipos</button>
+    </div>
+
+    <ul class="hidden type_list list" #type>
         @for(tipo of tipos; track $index) {
 
             <li (click)="addFilter('type', $event)" [attr.data-filter]="tipo"> 
@@ -64,7 +71,7 @@
     }
 
     @else {
-        <span>loading itens...</span>
+        <app-loading-spinner></app-loading-spinner>
     }
 
 </main>

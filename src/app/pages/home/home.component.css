@@ -14,6 +14,8 @@ main {
     align-items: center;
     margin-bottom: 20px;
     width: 100%;
+
+    transition: all 240ms ease-out;
 }
 .itens_shop {
     width: 100%;
@@ -50,7 +52,7 @@ main {
     border: 1px solid white;
 }
 
-.type_list li {
+.type_list li, .server_list li {
     background-color: #232323;
 }
 
@@ -72,7 +74,7 @@ main {
     margin-bottom: 10px;
 }
 
-.search input {
+.search input, .toggle_btn {
     width: 270px;
     height: 30px;
 
@@ -85,8 +87,23 @@ main {
     color: #fff;
 }
 
+.toggle_btn {
+    height: 50px;
+    font-size: 14px;
+    text-align: center;
+}
+
 .search i {
     cursor: pointer;
+}
+
+.hidden {
+    height: 0px;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition: all 300ms ease;
+    margin-top: 0px
 }
 
 mat-paginator {
@@ -107,23 +124,41 @@ mat-paginator {
 }
 
 @media(min-width: 425px) {
-    .list {
+    .server_list {
         width: 350px; 
-        justify-content: flex-start;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0;
+        place-items: center;
+    }
+    .server_list li, .type_list li {
+        width: 100%;
     } 
-
-    .list li { width: 110px;}
+    .type_list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        place-items: center;
+    }
 }
 
 @media (min-width: 768px) {
     .list { width: 550px;}
+    .server_list, .type_list {
+        display: flex;
+    }    
+    .type_list li { width: 100%;}
 
-    .list li { width: 70px;}
-    
-    .type_list { flex-wrap: nowrap;}
-    
-    .type_list li { width: 100% !important;}
+    .server_list li {width: 11%;}
+
+    .hidden {
+        height: auto;
+        opacity: 1;
+        visibility: visible;
+        overflow: visible;
+        margin-top: 10px
+    }
+
+    .toggle_btn { display: none;}
 }
 
 @media(min-width: 1024px) {
@@ -132,8 +167,15 @@ mat-paginator {
         flex-wrap: nowrap;
     }
     .list li { width: 100%;}
+    .itens_shop .list {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
 @media(min-width: 1440px) {
     .list { width: 1050px;}
+    .itens_shop .list {
+        grid-template-columns: repeat(5, 1fr);
+    }
 }

@@ -9,11 +9,12 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { merge, of } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CardComponent, MatPaginatorModule],
+  imports: [CardComponent, MatPaginatorModule, LoadingSpinnerComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -41,6 +42,9 @@ export class HomeComponent {
       })
   }
 
+  toggleFilter (filter: any){
+    filter.classList.toggle('hidden')
+  }
 
   addFilter(type: string, event: any) {
     const value = event.target.dataset.filter

@@ -27,7 +27,7 @@ small {
 }
 
 button {
-    background-color: blueviolet;
+    background-color: var(--secondary-color);
     color: #fff;
     width: clamp(225px, 225px, 250px);
     height: 40px;

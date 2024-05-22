@@ -22,7 +22,7 @@ import { Component } from '@angular/core';
       height: 40px;
       border-radius: 50%;
       border: 4px solid rgba(0, 0, 0, 0.1);
-      border-top-color: #5f0d76;
+      border-top-color: var(--primary-color);
       animation: spin 1s ease-in-out infinite;
     }
 

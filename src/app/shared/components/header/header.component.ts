@@ -49,7 +49,7 @@ import { MenuComponent } from '../menu/menu.component';
     height: 50px;
     padding: 10px 20px;
 
-    background-color: #5f0d76;
+    background-color: var(--primary-color);
 
     margin-bottom: 20px;
   }
