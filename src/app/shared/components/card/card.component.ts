@@ -51,7 +51,9 @@ export class CardComponent {
 
   }
 
-  goToItem() {
+  goToItem(event: any) {
+ 
+    if(event.target.tagName === 'BUTTON') return
     this.router.navigate([''])
     
     setTimeout(() => {

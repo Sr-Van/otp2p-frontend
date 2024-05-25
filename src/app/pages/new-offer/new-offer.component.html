@@ -16,11 +16,13 @@
 
             @if(type === "pokemon") {
                 <label for="pokemons">Pokemon: </label>
-                <select formControlName="header" name="pokemons" id="pokemons">
-                    @for(itens of pokes; track $index) {
-                        <option [value]="itens.poke">{{ itens.poke }}</option>
+                <input type="text" formControlName="header" [matAutocomplete]="auto" (input)="searchPokemon($event)">
+                <mat-autocomplete #auto="matAutocomplete">
+                    @for(itens of filteredPokes; track $index) {
+                        <mat-option [value]="itens.poke">{{ itens.poke }}</mat-option>
                     }
-                </select>
+                </mat-autocomplete>
+            
             }
 
             @if(type === "hd") {

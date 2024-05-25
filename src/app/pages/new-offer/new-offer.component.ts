@@ -6,6 +6,7 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition
 } from '@angular/material/snack-bar';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import { Anuncio } from '../../shared/interfaces/arrays';
 
@@ -16,7 +17,7 @@ import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner
 @Component({
   selector: 'app-new-offer',
   standalone: true,
-  imports: [ReactiveFormsModule, LoadingSpinnerComponent],
+  imports: [ReactiveFormsModule, LoadingSpinnerComponent, MatAutocompleteModule],
   templateUrl: './new-offer.component.html',
   styleUrl: './new-offer.component.css'
 })
@@ -30,6 +31,7 @@ export class NewOfferComponent {
   subsOffers: Subscription
 
   pokes: any = []
+  filteredPokes: any = []
   servidores: any = []
   playerOffers: Anuncio[]
   
@@ -51,6 +53,8 @@ export class NewOfferComponent {
         this.pokes.push({key, poke: data[key]})
       })
 
+      this.filteredPokes = this.pokes
+
       this.servidores = this.offerService.getServers()
 
     }) 
@@ -69,6 +73,11 @@ export class NewOfferComponent {
       this.isLoaded = true
     })
 
+  }
+
+  searchPokemon(event: any) {
+    const value = event.target.value
+    this.filteredPokes = this.pokes.filter((poke: any) => poke.poke.toLowerCase().includes(value.toLowerCase()))
   }
 
   changeType(tipo: any) {

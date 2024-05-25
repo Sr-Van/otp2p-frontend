@@ -26,6 +26,10 @@ export class ProfileComponent {
 
     this.player = this.loginService.playerName
 
+    if(!this.player) {
+      window.location.reload()
+    }
+
     this.getOnePlayerSubscription = this.offerService.getPlayerOffers(this.player)
       .subscribe({
         next: data => {

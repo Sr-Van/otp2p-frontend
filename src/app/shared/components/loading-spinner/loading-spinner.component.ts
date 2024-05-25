@@ -5,36 +5,31 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   template: `
-    <div class="loading-spinner">
-      <div class="spinner"></div>
+    <div class="loading">
+      <img src="../../../../assets/img/OTP2PLOGOgengar.png" alt="loading-logo">
     </div>
   `,
   styles: `
-    .loading-spinner {
+    .loading {
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100%;
     }
 
-    .spinner {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 4px solid rgba(0, 0, 0, 0.1);
-      border-top-color: var(--primary-color);
-      animation: spin 1s ease-in-out infinite;
+    img {
+      width: 100px;
+      animation: load 1s ease-in-out infinite;
     }
 
-    @keyframes spin {
+    @keyframes load {
       0% {
-        transform: rotate(0deg);
+        opacity: 0.2;
       }
       100% {
-        transform: rotate(360deg);
+        opacity: 1;
       }
     }
-
   `
 })
 export class LoadingSpinnerComponent {

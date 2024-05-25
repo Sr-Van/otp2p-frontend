@@ -13,8 +13,11 @@ import { MenuComponent } from '../menu/menu.component';
   template: `
   <nav>
     <div class="itens container">
-        <div class="logo">
-            <a routerLink="/" class="poppins-bold">OtP2P</a>
+        <div class="logo" style="height: 100;">
+            <a routerLink="/" class="poppins-bold" style="height: 100%; position: relative;">
+              <img src="./../../../../assets/img/OTP2PLOGOgengar.png" alt="Logo"
+              style="width: 90px;">
+            </a>
         </div>
 
         <div class="actions">
@@ -46,12 +49,14 @@ import { MenuComponent } from '../menu/menu.component';
   styles: `
   nav {
     width: 100%;
-    height: 50px;
+    height: 80px;
     padding: 10px 20px;
 
     background-color: var(--primary-color);
 
     margin-bottom: 20px;
+    display: flex;
+    alingn-items: center;
   }
 
   .itens, .actions {

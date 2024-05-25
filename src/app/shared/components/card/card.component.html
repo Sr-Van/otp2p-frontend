@@ -1,4 +1,4 @@
-<div class="card" (click)="goToItem()">
+<div class="card" (click)="goToItem($event)">
     @if(card.playerType === "revendedor"){
 
         <div
@@ -31,7 +31,7 @@
     </div>
     <div class="buttons">
         <button class="box_shadow">
-            <i class="fa-solid fa-basket-shopping" style="font-size: 18px;"></i>
+            <i class="fa-solid fa-basket-shopping" style="font-size: 18px; pointer-events: none;"></i>
         </button>
     </div>
 </div>

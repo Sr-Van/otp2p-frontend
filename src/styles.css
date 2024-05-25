@@ -92,6 +92,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 
+.mat-mdc-autocomplete-panel {
+    background-color: #4a4a4a !important;
+}
+
+.mat-mdc-autocomplete-panel .mat-mdc-option {
+    color: #fff !important;
+}
+
 @media(min-width: 425px) {
     .container { width: 350px;}
 }

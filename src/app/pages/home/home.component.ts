@@ -1,7 +1,7 @@
 import { Component, inject, ViewChild } from '@angular/core';
-import { SalesService } from '../../shared/services/sales.service';
 
-import { CardComponent } from '../../shared/components/card/card.component';
+import { SalesService } from '../../shared/services/sales.service';
+import { LoginService } from '../../shared/services/login.service';
 
 import { Anuncio } from '../../shared/interfaces/arrays';
 
@@ -9,6 +9,8 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { merge, of } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+
+import { CardComponent } from '../../shared/components/card/card.component';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 
 @Component({
@@ -21,6 +23,7 @@ import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner
 export class HomeComponent {
   
   salesService = inject(SalesService)
+  loginService = inject(LoginService)
 
   servidores: string [] = ['red','blue','green','yellow','orange','black','white','purple','pink']
   tipos: string [] = ['pokemon', 'hd', 'tm', 'item']
@@ -33,9 +36,11 @@ export class HomeComponent {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor() {
+    const player = this.loginService.playerName
+
     this.subs = this.salesService.getAllSales().subscribe(data =>
       {
-        this.sales = data.results
+        this.sales = player ? data.results.filter((item: Anuncio) => item.player !== player) : data.results
         this.filteredSales = this.sales
 
         this.loading(2000)

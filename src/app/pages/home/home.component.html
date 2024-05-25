@@ -58,14 +58,17 @@
                 }
             </ul>
 
-            <div class="paginator container">
-
-                <mat-paginator
-                    #paginator
-                    pageSize="10"
-                    [length]="filteredSales.length"></mat-paginator>
-                <!-- limite de 30 itens por pagina -->
-            </div>
+            @if(filteredSales.length > 10) {
+                
+                <div class="paginator container">
+    
+                    <mat-paginator
+                        #paginator
+                        pageSize="10"
+                        [length]="filteredSales.length"></mat-paginator>
+                    <!-- limite de 30 itens por pagina -->
+                </div>
+            }
 
             </div>
     }
