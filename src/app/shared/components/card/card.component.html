@@ -1,4 +1,4 @@
-<div class="card" (click)="goToItem($event)">
+<div class="card rounded_medium" (click)="goToItem($event)">
     @if(card.playerType === "revendedor"){
 
         <div
@@ -30,7 +30,7 @@
         <span class="text_shadow">{{ card.price | currency: 'BRL' }}</span>
     </div>
     <div class="buttons">
-        <button class="box_shadow">
+        <button class="box_shadow rounded_small">
             <i class="fa-solid fa-basket-shopping" style="font-size: 18px; pointer-events: none;"></i>
         </button>
     </div>

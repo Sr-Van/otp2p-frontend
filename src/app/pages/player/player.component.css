@@ -5,6 +5,16 @@
     gap: 15px;
 }
 
+.player {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    padding: 10px;
+    align-items: center;
+
+    background-color: #5656569c;
+}
+
 .container {
     display: flex;
     flex-direction: column;

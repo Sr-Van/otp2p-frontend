@@ -11,7 +11,7 @@
     <div style="width: 100%; display: flex; align-items: start;">
         <button class="toggle_btn" (click)="toggleFilter(server)">Mostrar servidores</button>
     </div>
-    <ul class="hidden server_list list" #server>
+    <ul class="hidden server_list list rounded_small" #server>
         @for(server of servidores; track $index) {
             <li (click)="addFilter('server', $event)" [attr.data-filter]="server">
                 <div class="blur_layer">
@@ -32,7 +32,7 @@
         <button class="toggle_btn" (click)="toggleFilter(type)">Mostrar tipos</button>
     </div>
 
-    <ul class="hidden type_list list" #type>
+    <ul class="hidden type_list list rounded_small" #type>
         @for(tipo of tipos; track $index) {
 
             <li (click)="addFilter('type', $event)" [attr.data-filter]="tipo"> 

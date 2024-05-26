@@ -68,10 +68,38 @@ body { background-color: #27262e; color: #fff;}
     margin: 0 auto;
 
     overflow: hidden;
+
+    transition: all 300ms ease;
 }
 
 .box_shadow {
     box-shadow: 1px 3px 3px 0px rgb(0, 0, 0, .5);
+}
+
+.transition_all {
+    transition: all 300ms ease;
+}
+.rounded_small {
+    border-radius: 0.200rem;
+}
+.rounded_medium {
+    border-radius: 0.400rem;
+}
+.rounded_big {
+    border-radius: 0.800rem;
+}
+.rounded_all {
+    border-radius: 9999px;
+}
+
+.rounded_small_bottom {
+    border-bottom-left-radius: 0.200rem;
+    border-bottom-right-radius: 0.200rem;
+}
+
+.rounded_small_top {
+    border-top-left-radius: 0.200rem;
+    border-top-right-radius: 0.200rem;
 }
 
 html, body { height: 100%; }

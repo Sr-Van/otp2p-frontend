@@ -3,30 +3,40 @@
     <div class="container">
     
         <!-- player info -->
-        <div class="player">
+        <div class="player rounded_small transition_all">
     
             <h2>{{ playerItem.player }}</h2>
-            <span>Mundo: {{ playerItem.mundo }}</span>
-            <span>Vendedor nivel: {{ playerItem.badge }}</span>
+            <div style="width: 100%; display: flex; justify-content: flex-end;">
+                <span class="rounded_all box_shadow" 
+                [style]="{
+                    backgroundColor: playerItem.mundo,
+                    width: '40px',
+                    textAlign: 'center',
+                    fontSize: '12px',
+                }">{{ playerItem.mundo }}</span>
+            </div>
+            <span>Vendedor nivel <p [style]="{color: 'var(--' + playerItem.badge + ')'}">{{ playerItem.badge }}</p></span>
         
         </div>
     
         <!-- player items and infos -->
-        <div class="player_lists">
+        <div class="player_lists rounded_small">
     
             <small>Avaliações</small>
-            <ul>
+            <ul class="rounded_small">
                 @for(av of avaliacao; track $index) {
                     <li>
                         
                         <app-rating-card [item]="av"></app-rating-card>
                         
                     </li>
+                } @empty {
+                    <li>Player ainda não recebeu avaliações.</li>
                 }
             </ul>
     
             <small>Vendas</small>
-            <ul>
+            <ul class="rounded_small">
                 @for(vd of vendas; track $index) {
                     <li>
                         <span>{{ vd.trade_player }}</span>
@@ -39,7 +49,7 @@
             </ul>
     
             <small>Compras</small>
-            <ul>
+            <ul class="rounded_small">
                 @for(cp of compras; track $index) {
                     <li>
                         <app-infocard [card]="cp" [type]="'compra'"></app-infocard>
@@ -51,7 +61,7 @@
             </ul>
     
             <small>Anuncios ativos deste vendedor:</small>
-            <ul>
+            <ul class="rounded_small">
                 @for(an of anuncios; track $index) {
                     <li>
                         <span>{{ an.player }}</span>
@@ -74,7 +84,7 @@
             <form [formGroup]="form">
     
                 <label for="text">Escreva aqui:</label>
-                <textarea required formControlName="text" id="text" cols="30" rows="10"></textarea>
+                <textarea class="rounded_small" required formControlName="text" id="text" cols="30" rows="10"></textarea>
     
                 <label for="type">Isso é uma denuncia?</label>
     

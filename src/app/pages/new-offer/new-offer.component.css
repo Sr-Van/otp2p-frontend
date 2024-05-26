@@ -36,3 +36,7 @@ button {
     cursor: pointer;
     font-family: poppins;
 }
+
+button:hover {
+    background-color: var(--terciary-color);
+}

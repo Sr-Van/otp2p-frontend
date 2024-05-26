@@ -32,23 +32,31 @@ export class HomeComponent {
   
   subs: Subscription
   isload: boolean = false
+  player: string
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor() {
-    const player = this.loginService.playerName
-
-    this.subs = this.salesService.getAllSales().subscribe(data =>
-      {
-        this.sales = player ? data.results.filter((item: Anuncio) => item.player !== player) : data.results
-        this.filteredSales = this.sales
-
-        this.loading(2000)
-      })
+    this.player = this.loginService.playerName
+    if(!this.player && this.loginService.userIsLogedIn) {
+      window.location.reload()
+    }
+    this.loadContent()    
   }
 
   toggleFilter (filter: any){
     filter.classList.toggle('hidden')
+  }
+
+  loadContent() {
+    this.player = this.loginService.playerName
+    this.subs = this.salesService.getAllSales().subscribe(data =>
+      {
+        this.sales = this.player ? data.results.filter((item: Anuncio) => item.player !== this.player) : data.results
+        this.filteredSales = this.sales
+
+        this.loading(2000)
+      })
   }
 
   addFilter(type: string, event: any) {
@@ -94,4 +102,10 @@ export class HomeComponent {
         this.filteredSales = res.slice(from, to);
     });
     }
+
+  ngAfterViewInit() {
+    if(this.player) {
+      this.loadContent()
+    }
+  }
 }

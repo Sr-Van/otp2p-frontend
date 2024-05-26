@@ -1,17 +1,17 @@
 @if(isLoad) {
-    <div class="container">
+    <div class="container transition_all">
 
     @if(isLoad) {
 
         <h2>{{ item.header }}</h2>
         
-        <div class="item">
+        <div class="item transition_all rounded_small">
     
-            <div class="img">
+            <div class="img transition_all rounded_small">
                 <img [src]="source" [alt]="item.header">
             </div>
     
-            <div class="description">
+            <div class="description rounded_small">
                 <div class="player_info">
                     <span>Player: {{ item.player }}</span>
                     <i class="fa-solid fa-medal" 
@@ -26,7 +26,7 @@
     
                 <div class="buttons">
                     <div class="buttons">
-                        <button class="box_shadow">
+                        <button class="box_shadow rounded_small">
                             <i class="fa-solid fa-basket-shopping" style="font-size: 18px;"></i>
                         </button>
                     </div>
@@ -34,12 +34,12 @@
             </div>
         </div>
     
-        <div class="player_lists">
+        <div class="player_lists rounded_small">
             <span style="cursor: pointer;" (click)="goToPlayer(item.player)">Mais itens de <b class="poppins-bold">{{ item.player }}</b></span>
     
             <small class="poppins-regular-italic">Anuncios</small>
     
-            <ul class="anuncios">
+            <ul class="anuncios rounded_small">
                 @for(anuncio of anuncios.slice(0, 5); track $index) {
                     <li>
                         <span>{{ anuncio.player }}</span>
@@ -54,7 +54,7 @@
             </ul>
             <small class="poppins-regular-italic">Vendas</small>
             
-            <ul class="vendas">
+            <ul class="vendas rounded_small">
                 @for(venda of vendas.slice(0, 5); track $index) {
                     <li>
                         <!-- change app-card for a card with no actions -->
@@ -69,7 +69,7 @@
             <small class="poppins-regular-italic">Compras</small>
             
         
-            <ul class="compras">
+            <ul class="compras rounded_small">
                 @for(compra of compras.slice(0, 5); track $index) {
                     <li>
                         

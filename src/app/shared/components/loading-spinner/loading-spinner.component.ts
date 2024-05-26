@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   imports: [],
   template: `
     <div class="loading">
-      <img src="../../../../assets/img/OTP2PLOGOgengar.png" alt="loading-logo">
+      <img src="../../../../assets/img/OTP2PLOGOVERTICAL.png" alt="loading-logo">
     </div>
   `,
   styles: `
@@ -18,7 +18,8 @@ import { Component } from '@angular/core';
     }
 
     img {
-      width: 100px;
+      width: 250px;
+      height: 150px;
       animation: load 1s ease-in-out infinite;
     }
 

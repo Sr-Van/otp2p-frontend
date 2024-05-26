@@ -8,9 +8,10 @@
 .item .img {
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
-.item .img, .item .img img {
+.item .img img {
     width: clamp(250px, 250px, 350px);
 }
 
@@ -57,7 +58,6 @@ small {
 ul {
     list-style: none;
     padding: 10px;
-    margin-right: 10px;
     display: flex;
     flex-direction: row;
     gap: 10px;

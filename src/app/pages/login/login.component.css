@@ -10,6 +10,7 @@
     width: 250px;
 
     padding: 15px;
+    border-radius: var(--border-radius-medium);
     background-color: #232323;
 }
 
@@ -21,14 +22,15 @@ form {
 
 form label {
     text-transform: capitalize;
-    font-size: 12px;
+    font-size: 14px;
 
-    color: #9a27ba; /* trocar pela mesma cor do inptu do new offer */
+    color: var(--secondary-color); /* trocar pela mesma cor do inptu do new offer */
 }
 
 form input, form select {
     outline: none;
     border: none;
+    border-radius: var(--border-radius-medium);
     padding: 7px;
 
     background-color: #444343;
@@ -43,6 +45,7 @@ form button {
     color: #fff;
     padding: 7px;
     cursor: pointer;
+    border-radius: var(--border-radius-medium);
 }
 
 .error, .errorLog {
