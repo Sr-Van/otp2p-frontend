@@ -1,0 +1,34 @@
+.container {    height: 90dvh;}
+main {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--basic-gap);
+}
+
+main .filters ul{
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: space-between;
+    gap: var(--basic-gap);
+    padding: var(--basic-padding);
+    background-color: #232323;
+}
+
+main .filters ul li {
+    padding: 5px 10px;
+    cursor: pointer;
+    color: #fff;
+    text-align: center;
+}
+
+main .filters ul li:hover {
+    background-color: var(--secondary-color);
+}
+a {text-decoration: none; color: #fff;}
+
+[actived-filter] {
+    background-color: var(--secondary-color);
+}

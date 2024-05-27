@@ -1,0 +1,35 @@
+<div class="container">
+    @if(isLoaded) {
+        <main>
+
+            <h1>{{ filterParam }}</h1>
+            <div class="filters">
+                <ul>
+                    <li>
+                        <a routerLink="filter/buysales">Compra e venda</a>
+                    </li>
+                    <li>
+                        <a routerLink="filter/geral">Geral</a>
+                    </li>
+                    <li>
+                        <a routerLink="filter/terms">Termos</a>
+                    </li>
+                    <li>
+                        <a routerLink="filter/politics">Politicas</a>
+                    </li>
+                    <li>
+                        <a routerLink="filter/contact">Contato</a>
+                    </li>
+                </ul>
+            </div>
+    
+            <div class="content">
+                <router-outlet></router-outlet>
+            </div>
+        </main>
+    }
+
+    @else {
+        <app-loading-spinner></app-loading-spinner>
+    }
+</div>

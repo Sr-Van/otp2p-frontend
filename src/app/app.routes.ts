@@ -1,3 +1,4 @@
+import { FaqContentComponent } from './shared/components/faq-content/faq-content.component';
 import { Routes } from '@angular/router';
 
 import { HomeComponent } from './pages/home/home.component';
@@ -11,6 +12,8 @@ import { AuthGuard } from './shared/guard/auth.guard';
 import { LoginGuard } from './shared/guard/login.guard';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { TradesComponent } from './pages/trades/trades.component';
+import { FaqPageComponent } from './pages/faq-page/faq-page.component';
+import path from 'path';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -20,5 +23,10 @@ export const routes: Routes = [
     {path: 'not-logged', component: NotLoggedComponent, canActivate: [LoginGuard]},
     {path: 'login', component: LoginComponent, canActivate: [LoginGuard]},
     {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
-    {path: 'trades', component: TradesComponent, canActivate: [AuthGuard]}
+    {path: 'trades', component: TradesComponent, canActivate: [AuthGuard]},
+    {path: 'faq', 
+        loadComponent: () => import('./pages/faq-page/faq-page.component').then(c => c.FaqPageComponent), children :[
+            {path: 'filter/:filterParam', loadComponent: () => import('./shared/components/faq-content/faq-content.component').then(c => c.FaqContentComponent)}
+        ]
+    }
 ];
