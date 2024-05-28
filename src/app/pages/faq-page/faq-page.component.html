@@ -1,24 +1,22 @@
 <div class="container">
     @if(isLoaded) {
         <main>
-
-            <h1>{{ filterParam }}</h1>
             <div class="filters">
-                <ul>
-                    <li>
-                        <a routerLink="filter/buysales">Compra e venda</a>
+                <ul class="box_shadow rounded_medium">
+                    <li id="buysales" (click)="addFilterByRoute('buysales')" routerLink="filter/buysales">
+                        <a>Compra e venda</a>
                     </li>
-                    <li>
-                        <a routerLink="filter/geral">Geral</a>
+                    <li id="geral" (click)="addFilterByRoute('geral')" routerLink="filter/geral">
+                        <a>Geral</a>
                     </li>
-                    <li>
-                        <a routerLink="filter/terms">Termos</a>
+                    <li id="terms" (click)="addFilterByRoute('terms')" routerLink="filter/terms">
+                        <a>Termos</a>
                     </li>
-                    <li>
-                        <a routerLink="filter/politics">Politicas</a>
+                    <li id="politics" (click)="addFilterByRoute('politics')" routerLink="filter/politics"> 
+                        <a>Politicas</a>
                     </li>
-                    <li>
-                        <a routerLink="filter/contact">Contato</a>
+                    <li id="contact" (click)="addFilterByRoute('contact')" routerLink="filter/contact">
+                        <a>Contato</a>
                     </li>
                 </ul>
             </div>

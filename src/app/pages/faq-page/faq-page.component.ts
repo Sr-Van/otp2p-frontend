@@ -1,7 +1,8 @@
-import { Component, ElementRef, ViewChild, inject, viewChild, viewChildren } from '@angular/core';
+import {  AfterViewInit, Component, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-faq-page',
@@ -10,18 +11,17 @@ import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner
   templateUrl: './faq-page.component.html',
   styleUrl: './faq-page.component.css'
 })
-export class FaqPageComponent {
+export class FaqPageComponent implements AfterViewInit {
 
   activatedRoute = inject(ActivatedRoute)
   route = inject(Router)
+  document = inject(DOCUMENT)
   
   filterParam: any
   routeSubscription: Subscription
   isLoaded: boolean = false
 
   constructor() {
-    const url = this.route.url.split('/')
-    this.filterParam = url[3]
 
     this.routeSubscription = this.activatedRoute.paramMap.subscribe({
       next: (data: any) => {
@@ -37,6 +37,23 @@ export class FaqPageComponent {
     })
   }
 
-  
+
+  ngAfterViewInit() {
+    const url = this.route.url.split('/')
+    this.filterParam = url[3]
+    setTimeout(() => {
+      this.addFilterByRoute(this.filterParam)
+    }, 1000);
+  }
+
+
+  addFilterByRoute(filter: string) {
+    this.document.querySelector('[actived-filter]')?.removeAttribute('actived-filter')
+
+    const el = this.document?.querySelector(`#${filter}`)
+    el?.setAttribute('actived-filter', '')
+
+  }
+
 
 }

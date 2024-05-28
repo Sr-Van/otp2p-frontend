@@ -13,22 +13,34 @@ main .filters ul{
     grid-template-columns: repeat(2, 1fr);
     justify-content: space-between;
     gap: var(--basic-gap);
-    padding: var(--basic-padding);
+    padding: 7px;
     background-color: #232323;
 }
 
 main .filters ul li {
     padding: 5px 10px;
     cursor: pointer;
+    border-radius: 0.300rem;
     color: #fff;
     text-align: center;
+    transition: all 300ms ease;
 }
 
 main .filters ul li:hover {
-    background-color: var(--secondary-color);
+    background-color: var(--terciary-color);
 }
 a {text-decoration: none; color: #fff;}
 
 [actived-filter] {
     background-color: var(--secondary-color);
+}
+
+@media(min-width: 768px) {
+    main .filters ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    main .filters ul li { flex: 1 1 0;}
 }
