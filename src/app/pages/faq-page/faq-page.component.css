@@ -1,6 +1,7 @@
-.container {    height: 90dvh;}
+
 main {
     width: 100%;
+    min-height: 90dvh;
 
     display: flex;
     flex-direction: column;
@@ -29,10 +30,16 @@ main .filters ul li {
 main .filters ul li:hover {
     background-color: var(--terciary-color);
 }
-a {text-decoration: none; color: #fff;}
+a {
+    text-decoration: none; 
+    color: #fff;
+    font-size: .8rem;
+    text-wrap: nowrap;
+}
 
 [actived-filter] {
     background-color: var(--secondary-color);
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 }
 
 @media(min-width: 768px) {

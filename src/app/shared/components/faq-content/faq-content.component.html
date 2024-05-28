@@ -1,8 +1,120 @@
 <div class="container">
-    <div class="faq-content">
-        <h3>{{ title }}</h3>
+    <div class="faq-content rounded_medium">
 
-        <p>{{ content }}</p>
+        @switch (title) {
+
+            @case ('buysales') {
+                <h3>Compras e Vendas</h3>
+    
+                <h4>Anúncio</h4>
+
+                <p>É importante deixar claro que o OTP2P é um MarketPlace e não uma loja. Você decido o valor que quer anúnciar seu item.</p>
+
+                <p>Para anunciar basta clicar no seu ícone (com a conta logada) e ir em "vender item".</p>
+
+                <p>Pedimos que anuncie apenas items que você possua.</p>
+
+                <p>Para cada venda realizada, o OTP2P realiza uma cobrança de 3%.</p>
+
+                <h4>Dinheiro</h4>
+
+                <p>Para conseguir comprar é necessário adicionar saldo na sua conta.</p>
+
+                <p>Para sacar o saldo após uma venda, basta ir em "saque" e selecionar sua chave PIX, em até 1 (um) dia útil, com a cobrança de taxa de 1%.</p>
+
+                <!-- adicionar topico como remover anuncios -->
+            }
+            @case('geral') {
+                <h3>Geral</h3>
+
+                <h4>Quanto OTP2P cobra de taxa?</h4>
+
+                <p>A cobrança de taxa é de 3% para vendas, 1% para saques.</p>
+
+                <h4>É possivel trocar fora do site?</h4>
+
+                <p>Nós fizemos esse site para democratizar a troca de items e melhorar a segurança ao fazer essas trocas. Caso veja um item aqui e queira comprar sem pagar as taxas do site, sita-se a vontade, mas tenha em mente os perigos que podem ocorrer.</p>
+            }
+            @case ('terms') {
+                <h3>Informacões gerais</h3>
+
+                <p>Ainda não possuimos Informacões como CNPJ e nome fantasia, por isso não podemos fornecer essas informações.</p>
+
+                <h3>Versão beta</h3>
+
+                <p>Em breve, a versão beta do OTP2P será disponível.</p>
+
+                <p>Esta é uma versão teste para que os usuários testem e passem o feedback, com um feedback positivo seguiremos em diante no que queremos fazer.</p>
+
+                <p>Por se tratar de uma versão beta, você imagina e concorda que erros inesperados desconhecidos poderão ocorrer.</p>
+
+                <h3>Aceite nossos termos</h3>
+
+                <p>Mesmo que ainda em versão de testes, você deve aceitar os termos abaixo para utilizar o site, caso não, não utilize o site. Ao fazer o cadastro você é instruido a ler os termos e aceitá-los.</p>
+
+                <h3>Serviços oferecidos</h3>
+
+                <p>O OTP2P é um Marketplace com o objetivo de viabilizar e democratizar a venda e compra de itens digitais no jogo otPokemon (OTP) entre seus usuários, não se enquadra numa loja ou comércio eletrônico.</p>
+
+                <p>No nosso site, o usuário pode comprar e vender itens digitais.</p>
+
+                <p>O OTP2P não tem qualquer vínculo com o otPokemon ou Pokemon INC.</p>
+
+                <p>Todos os items do site são anunciados pelos usuários e não pertencem a OTP2P. Não nos responsabilizamos por alterações de preços e/ou anúncio feito com dado incorreto.</p>
+
+                <h3>ao usar o Serviço, voce declara que:</h3>
+
+                <p>não teremos isto na versão BETA. Porém com o lançamento, será necessário rever esse seção.</p>
+            }
+            @case('politics') {
+                <h3>Politicas de privacidade</h3>
+
+                <p>O OTP2P, para oferecer seus serviços, trata e coleta dados de pessoas que, como você que está lendo, são usuários e visitantes do site. </p>
+
+                <p>O OTP2P usará seus dados para que você tenha acesso ao site e ninguém se passe por você. Esses dados, não são vendidos a terceiros.</p>
+
+                <h3>dados coletados:</h3>
+
+                <p>* Vale deixar claro que quando você fez o cadastro, forneceu diretamente a nós esses dados.</p>
+
+                <ul>
+                    <li>Nome</li>
+                    <li>CPF</li>
+                    <li>Nome no jogo ("nickname")</li>
+                    <li>O servidor que você joga.</li>
+                    <li>Email</li>
+                    <li>Senha</li>
+                </ul>
+
+                <h3>informacões que coletamos automaticamente:</h3>
+
+                <ul>
+                    <li>Informacões sobre transações no site (compras, vendas, pagamentos, saques, comentários).</li>
+                </ul>
+
+                <h3>porque coletamos dados</h3>
+
+                <p>A coleta de dados é feita para que o OTP2P possa prestar um excelente serviço para você, para que possa realizar suas transações com segurança e eficiencia.</p>
+
+                <h3>finalidade da coleta dos dados</h3>
+
+                <p>Utilizaremos para os seguintes fins:</p>
+
+                <ul>
+                    <li>itendificá-lo e contatá-lo.</li>
+                    <li>O registrar no sistema.</li>
+                    <li>Verificar sua identidade.</li>
+                    <li>Facilitar o envio dos items por aqui trocados.</li>
+                    <li>Contribuir com a segurança de quem utiliza o site.</li>
+                </ul>
+            }
+            @case('contact') {
+                <h3>Contato</h3>
+
+                <p>Nesta versão estamos focados no desenvolvimento, por este motivo não temos suporte mais detalhado.</p>
+            }
+        }
+
     </div>
 
 </div>
