@@ -1,3 +1,4 @@
+import { LoginService } from './../../services/login.service';
 import { CurrencyPipe } from '@angular/common';
 import { Component, Input, inject } from '@angular/core';
 import { MatTooltipModule } from '@angular/material/tooltip'
@@ -17,6 +18,7 @@ import { HeaderPipe } from '../../pipes/header.pipe';
 export class CardComponent {
 
   router = inject(Router)
+  loginService = inject(LoginService)
 
   @Input() card: any
   source: string
@@ -61,4 +63,8 @@ export class CardComponent {
     }, 100);
   }
 
+  addToCart() {
+    console.log('botao clicado')
+    this.loginService.addItem(this.card);
+  }
 }

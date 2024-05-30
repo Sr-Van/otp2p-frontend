@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, EventEmitter } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
+import { Anuncio } from '../interfaces/arrays';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +16,14 @@ export class LoginService {
   playerName: string
   token: string
   private apiUrl: string = "https://otp-p2p-api.vercel.app/"
+  cart: Anuncio[] = []
   //private apiUrl: string = "http://localhost:3000/"
 
 
   menuLoggedEvent = new EventEmitter<boolean>()
   loginEvent = new EventEmitter<boolean>()
   UserConsentCookieEvent = new EventEmitter<boolean>()
+  cartMenuEvent = new EventEmitter<boolean>()
 
   constructor() {
 
@@ -53,5 +56,25 @@ export class LoginService {
 
   getToken() {
     return this.cookie.get('loginToken')
+  }
+
+  getCart() {
+    this.cart = JSON.parse(localStorage?.getItem('cart') || '[]')
+
+    if(!this.cart) {
+      localStorage.setItem('cart', JSON.stringify([]))
+    }
+
+    return this.cart
+  }
+
+  setCart() {
+    localStorage.setItem('cart', JSON.stringify(this.cart))
+  }
+
+  addItem(item: Anuncio) {
+    this.cart.push(item)
+
+    this.setCart()
   }
 }

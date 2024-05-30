@@ -1,0 +1,16 @@
+@if(isCartOpen) {
+
+    <div class="cart rounded_small shadow">
+
+        <div class="header">
+            <span>Seu carrinho</span>
+        </div>
+
+        <div class="content">
+            @for(item of cart; track $index) {
+                <span>{{ $index }}</span>
+            }
+        </div>
+    </div>
+}
+

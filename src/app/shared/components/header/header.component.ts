@@ -5,11 +5,12 @@ import { Subscription } from 'rxjs';
 import { CurrencyPipe } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MenuComponent } from '../menu/menu.component';
+import { CartComponent } from '../cart/cart.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterModule, CurrencyPipe, MatTooltipModule, MenuComponent],
+  imports: [RouterModule, CurrencyPipe, MatTooltipModule, MenuComponent, CartComponent],
   template: `
   <nav>
     <div class="itens container">
@@ -23,8 +24,11 @@ import { MenuComponent } from '../menu/menu.component';
         <div class="actions">
           
           @if(userLogged) {
-            <a matTooltip="Adicionar saldo">
-              <i class="fa fa-plus-square" aria-hidden="true"></i>
+            <a matTooltip="Carrinho" 
+             (mouseenter)="loginService.cartMenuEvent.emit(true)"
+             (mouseleave)="loginService.cartMenuEvent.emit(false)"
+            >
+              <i class="fa-solid fa-cart-shopping"></i>
             </a>
             <span matTooltip="Seu saldo">
               {{ userAmount | currency: 'BRL' }}
@@ -35,6 +39,7 @@ import { MenuComponent } from '../menu/menu.component';
             </div>
 
             <app-menu></app-menu>
+            <app-cart></app-cart>
           }
           @else {
             <div class="login">
@@ -79,8 +84,7 @@ import { MenuComponent } from '../menu/menu.component';
   .actions {gap: var(--basic-gap);}
 
   .actions a {
-    font-size: 24px;
-    color: var(--succes-color);
+    font-size: 18px;
     cursor: pointer;
   }
 
@@ -152,4 +156,8 @@ export class HeaderComponent {
     this.loginService.menuLoggedEvent.emit(this.isMenuOpen)
   }
 
+  showCart() {
+    this.loginService.cartMenuEvent.emit(true)
+    console.log('evento')
+  }
 }

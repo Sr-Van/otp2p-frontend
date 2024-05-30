@@ -30,7 +30,7 @@
         <span class="text_shadow">{{ card.price | currency: 'BRL' }}</span>
     </div>
     <div class="buttons">
-        <button class="box_shadow rounded_small">
+        <button class="box_shadow rounded_small" (click)="addToCart()">
             <i class="fa-solid fa-basket-shopping" style="font-size: 18px; pointer-events: none;"></i>
         </button>
     </div>
