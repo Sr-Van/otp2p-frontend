@@ -3,6 +3,7 @@ import { Injectable, inject, EventEmitter } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { Anuncio } from '../interfaces/arrays';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class LoginService {
 
   cookie = inject(CookieService)
   http = inject(HttpClient)
+  document = inject(DOCUMENT)
 
   userIsLogedIn: boolean = false
   playerName: string
@@ -59,17 +61,17 @@ export class LoginService {
   }
 
   getCart() {
-    this.cart = JSON.parse(localStorage?.getItem('cart') || '[]')
+    this.cart = JSON.parse(this.document.defaultView?.localStorage?.getItem('cart') || '[]')
 
     if(!this.cart) {
-      localStorage.setItem('cart', JSON.stringify([]))
+      this.document.defaultView?.localStorage?.setItem('cart', JSON.stringify([]))
     }
 
     return this.cart
   }
 
   setCart() {
-    localStorage.setItem('cart', JSON.stringify(this.cart))
+    this.document.defaultView?.localStorage?.setItem('cart', JSON.stringify(this.cart))
   }
 
   addItem(item: Anuncio) {

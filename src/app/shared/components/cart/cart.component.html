@@ -1,16 +1,20 @@
 @if(isCartOpen) {
 
-    <div class="cart rounded_small shadow">
-
-        <div class="header">
-            <span>Seu carrinho</span>
+    <div class="overlay transition_all">
+        <div class="cart rounded_small shadow">
+    
+            <div class="header">
+                <span>Seu carrinho</span>
+                <small>{{ cart.length }} items</small>
+            </div>
+    
+            <div class="content">
+                @for(item of cart; track $index) {
+                    <app-cart-card [item]="item"></app-cart-card>
+                }
+            </div>
         </div>
 
-        <div class="content">
-            @for(item of cart; track $index) {
-                <span>{{ $index }}</span>
-            }
-        </div>
     </div>
 }
 

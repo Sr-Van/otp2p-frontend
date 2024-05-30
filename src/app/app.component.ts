@@ -7,7 +7,7 @@ import { CookieConsentComponent } from './shared/components/cookie-consent/cooki
 import { CookieService } from 'ngx-cookie-service';
 import { LoginService } from './shared/services/login.service';
 import { FooterComponent } from './shared/components/footer/footer.component';
-
+import { CartComponent } from './shared/components/cart/cart.component';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +16,8 @@ import { FooterComponent } from './shared/components/footer/footer.component';
     RouterOutlet, 
     HeaderComponent, 
     CookieConsentComponent,
-    FooterComponent
+    FooterComponent,
+    CartComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

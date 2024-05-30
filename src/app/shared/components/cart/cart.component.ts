@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 import { LoginService } from '../../services/login.service';
 import { Subscription } from 'rxjs';
 import { Anuncio } from '../../interfaces/arrays';
+import { CartCardComponent } from './cart-card/cart-card.component';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [],
+  imports: [CartCardComponent],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
@@ -23,7 +24,6 @@ export class CartComponent {
     this.renderCart()
 
     this.eventSubscription = this.loginService.cartMenuEvent.subscribe(bool => {
-      console.log(bool)
       this.renderCart()
       this.isCartOpen = bool
     })

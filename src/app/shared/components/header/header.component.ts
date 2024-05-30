@@ -25,8 +25,7 @@ import { CartComponent } from '../cart/cart.component';
           
           @if(userLogged) {
             <a matTooltip="Carrinho" 
-             (mouseenter)="loginService.cartMenuEvent.emit(true)"
-             (mouseleave)="loginService.cartMenuEvent.emit(false)"
+             (click)="showCart()"
             >
               <i class="fa-solid fa-cart-shopping"></i>
             </a>
@@ -39,7 +38,6 @@ import { CartComponent } from '../cart/cart.component';
             </div>
 
             <app-menu></app-menu>
-            <app-cart></app-cart>
           }
           @else {
             <div class="login">
@@ -133,6 +131,7 @@ export class HeaderComponent {
 
   userLogged: boolean = false
   isMenuOpen: boolean = false
+  isCartOpen: boolean = false
 
   loginEventSubscription: Subscription
 
@@ -154,10 +153,20 @@ export class HeaderComponent {
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen
     this.loginService.menuLoggedEvent.emit(this.isMenuOpen)
+
+    if(this.isCartOpen) {
+      this.isCartOpen = !this.isCartOpen
+      this.loginService.cartMenuEvent.emit(this.isCartOpen)
+    }
   }
 
   showCart() {
-    this.loginService.cartMenuEvent.emit(true)
-    console.log('evento')
+    this.isCartOpen = !this.isCartOpen
+    this.loginService.cartMenuEvent.emit(this.isCartOpen)
+
+    if(this.isMenuOpen) {
+      this.isMenuOpen = !this.isMenuOpen
+      this.loginService.menuLoggedEvent.emit(this.isMenuOpen)
+    }
   }
 }
