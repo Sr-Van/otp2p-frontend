@@ -1,1 +1,13 @@
-<p>cart-card works!</p>
+<div class="cart_card box_shadow rounded_medium">
+    <img [src]="sourceImg" [alt]="item.header">
+
+    <div class="cart_card_infos">
+        <h2 >{{ item.header }}</h2>
+        <span>{{ item.price | currency: 'BRL' }}</span>
+
+    </div>
+
+    <button matTooltip="Remover">
+        <i class="fa-solid fa-minus"></i>
+    </button>
+</div>

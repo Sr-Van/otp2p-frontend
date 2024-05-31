@@ -13,6 +13,13 @@
                     <app-cart-card [item]="item"></app-cart-card>
                 }
             </div>
+
+            <div class="footer">
+                <span>
+                    <p>Total:</p> 
+                    <b>{{ total | currency: 'BRL' }}</b></span>
+                <button class="box_shadow rounded_small">Finalizar</button>
+            </div>
         </div>
 
     </div>

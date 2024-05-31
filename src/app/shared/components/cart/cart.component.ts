@@ -3,11 +3,12 @@ import { LoginService } from '../../services/login.service';
 import { Subscription } from 'rxjs';
 import { Anuncio } from '../../interfaces/arrays';
 import { CartCardComponent } from './cart-card/cart-card.component';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CartCardComponent],
+  imports: [CartCardComponent, CurrencyPipe],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
@@ -19,9 +20,9 @@ export class CartComponent {
   isCartOpen: boolean = false
   cart: Anuncio[] = []
 
-  constructor() {
+  total: any
 
-    this.renderCart()
+  constructor() {
 
     this.eventSubscription = this.loginService.cartMenuEvent.subscribe(bool => {
       this.renderCart()
@@ -29,8 +30,16 @@ export class CartComponent {
     })
   }
 
-  renderCart() {
-    this.cart = this.loginService.getCart()
+  ngOnInit() {
+    this.renderCart()
   }
 
+  renderCart() {
+    this.cart = this.loginService.getCart()
+    this.getTotalCartPrice()
+  }
+
+  getTotalCartPrice() {
+    this.total = this.cart.reduce((accumulator, {price}) => accumulator + Number(price), 0) || 0
+  }
 }

@@ -39,6 +39,34 @@
     z-index: 999;
     backdrop-filter: blur(2px);
 }
+
+.cart .content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.cart .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart .footer span > p {
+    font-size: .8rem;
+    margin: 0;
+    color: #b6b6b6;
+}
+
+.cart .footer button {
+    background-color: var(--terciary-color);
+    border: none;
+    color: #fff;
+    font-size: .7rem;
+    padding: 10px;
+    cursor: pointer;
+}
+
 @media(min-width: 425px) {
     .cart {
         right: 3rem;

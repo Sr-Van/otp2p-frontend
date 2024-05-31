@@ -64,7 +64,6 @@ export class CardComponent {
   }
 
   addToCart() {
-    console.log('botao clicado')
     this.loginService.addItem(this.card);
   }
 }
