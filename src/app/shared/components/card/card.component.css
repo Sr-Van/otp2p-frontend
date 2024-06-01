@@ -91,6 +91,10 @@
     color: #fff;
 }
 
+.buttons button:has([oncart]) {
+    background-color: #e02b2b;
+}
+
 
 
 .text_shadow {

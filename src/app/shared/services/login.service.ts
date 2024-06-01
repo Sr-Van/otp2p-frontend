@@ -26,6 +26,7 @@ export class LoginService {
   loginEvent = new EventEmitter<boolean>()
   UserConsentCookieEvent = new EventEmitter<boolean>()
   cartMenuEvent = new EventEmitter<boolean>()
+  cartItemEvent = new EventEmitter<any>()
 
   constructor() {
 
@@ -78,5 +79,25 @@ export class LoginService {
     this.cart.push(item)
 
     this.setCart()
+  }
+
+  removeItem(item: Anuncio) {
+    try {
+      if (!this.cart) {
+        throw new Error('Cart is null or undefined');
+      }
+      const itemId = item.itemId;
+
+      const index = this.cart.map((anuncio: Anuncio) => anuncio.itemId).indexOf(itemId);
+
+      if (index === -1) {
+        throw new Error('Item not found in cart');
+      }
+
+      this.cart.splice(index, 1);
+      this.setCart();
+    } catch (error) {
+      console.error('Error removing item from cart:', error);
+    }
   }
 }

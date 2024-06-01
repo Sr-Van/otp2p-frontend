@@ -2,23 +2,33 @@
 
     <div class="overlay transition_all">
         <div class="cart rounded_small shadow">
-    
-            <div class="header">
-                <span>Seu carrinho</span>
-                <small>{{ cart.length }} items</small>
-            </div>
-    
-            <div class="content">
-                @for(item of cart; track $index) {
-                    <app-cart-card [item]="item"></app-cart-card>
-                }
-            </div>
+
+            @if(!isLoaded && cart.length > 0) {
+                <app-loading-spinner></app-loading-spinner>
+            }
+            @else {
+                
+                <div class="header">
+                    <span>Seu carrinho</span>
+                    <small>{{ cart.length }} items</small>
+                </div>
+        
+                <div class="content">
+                    @for(item of cart; track $index) {
+                        <app-cart-card [item]="item"></app-cart-card>
+                    }
+                </div>
+            }
 
             <div class="footer">
                 <span>
                     <p>Total:</p> 
                     <b>{{ total | currency: 'BRL' }}</b></span>
-                <button class="box_shadow rounded_small">Finalizar</button>
+                <!-- add button and logic to verify player amount and change de DOM -->
+                @if(cart.length > 0) {
+
+                    <button class="box_shadow rounded_small">Finalizar</button>
+                }
             </div>
         </div>
 
