@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Anuncio } from '../../../interfaces/arrays';
 import { CurrencyPipe } from '@angular/common';
 import { MatTooltip } from '@angular/material/tooltip';
+import { UtilService } from '../../../services/util.service';
 
 @Component({
   selector: 'app-cart-card',
@@ -12,12 +13,14 @@ import { MatTooltip } from '@angular/material/tooltip';
 })
 export class CartCardComponent {
 
+  utilService = inject(UtilService)
+
   @Input() item: Anuncio
 
   sourceImg: string = ''
 
   ngOnInit() {
     console.log(this.item)
-    this.sourceImg = `../../assets/img/${this.item.header}.png`
+    this.sourceImg = this.utilService.getImgSource(this.item)
   }
 }

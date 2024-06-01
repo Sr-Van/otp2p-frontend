@@ -4,6 +4,7 @@ import { Component, Input, inject } from '@angular/core';
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { Router } from '@angular/router';
 import { HeaderPipe } from '../../pipes/header.pipe';
+import { UtilService } from '../../services/util.service';
 
 @Component({
   selector: 'app-card',
@@ -19,6 +20,7 @@ export class CardComponent {
 
   router = inject(Router)
   loginService = inject(LoginService)
+  utilService = inject(UtilService)
 
   @Input() card: any
   source: string
@@ -26,31 +28,10 @@ export class CardComponent {
   color: string
 
   ngOnInit() {
-    this.getImgSource()
+    this.source = this.utilService.getImgSource(this.card)
 
     this.tooltip = `Esse vendedor é um vendedor nivel ${this.card.badge}`
     this.color = `var(--${this.card.badge})`
-  }
-
-  // make this a service and dont repeat
-  getImgSource() {
-    if(this.card.type === "pokemon") {
-      this.source = `../../assets/img/${this.card.header}.png`
-      return
-    }
-
-    if(this.card.type === "hd") {
-      this.source = `../../assets/img/hds.png`
-      return
-    }
-
-    if(this.card.type === "tm") {
-      this.source = `../../assets/img/tm.png`
-      return
-    }
-
-    this.source = `../../assets/img/item.png`
-
   }
 
   goToItem(event: any) {

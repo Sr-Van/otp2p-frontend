@@ -3,6 +3,7 @@ import { Component, Input, inject } from '@angular/core';
 import { HeaderPipe } from '../../pipes/header.pipe';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
+import { UtilService } from '../../services/util.service';
 
 
 @Component({
@@ -15,6 +16,7 @@ import { Router } from '@angular/router';
 export class TradesCardComponent {
 
   route = inject(Router)
+  utilService = inject(UtilService)
 
   @Input('item') item: any
   @Input('type') type: string
@@ -38,8 +40,7 @@ export class TradesCardComponent {
 
   ngOnInit() {
 
-    this.imgSource = `../../../../assets/img/${this.item.header}.png`
-    console.log(this.type)
+    this.imgSource = this.utilService.getImgSource(this.item)
 
     this.getProgressBarInfos()
 
