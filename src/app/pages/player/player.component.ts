@@ -10,6 +10,7 @@ import { CardComponent } from '../../shared/components/card/card.component';
 import { RatingCardComponent } from '../../shared/components/rating-card/rating-card.component';
 import { Anuncio, Trade } from '../../shared/interfaces/arrays';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
+import { LoginService } from '../../shared/services/login.service';
 
 @Component({
   selector: 'app-player',
@@ -28,6 +29,7 @@ export class PlayerComponent {
 
   activateRoute = inject(ActivatedRoute)
   offerServ = inject(OfferService)
+  loginService = inject(LoginService)
 
   player: any
   subs: Subscription
@@ -53,6 +55,7 @@ export class PlayerComponent {
       this.anuncios = data.anuncios
       this.vendas = data.vendas
       this.compras = data.compras
+      console.log(data)
       this.avaliacao = data.avaliacao
 
       this.playerItem = data
@@ -61,7 +64,7 @@ export class PlayerComponent {
     })
 
     this.form = new FormGroup({
-      text: new FormControl,
+      message: new FormControl,
       denuncia: new FormControl
     })
   }
@@ -69,21 +72,24 @@ export class PlayerComponent {
   sendForm(form: FormGroup) {
 
     let obj = form.value
-    let arr = this.avaliacao
 
     obj.denuncia = obj.denuncia == true ? true : false
-    obj.player = this.player
+    obj.player_rating = this.loginService.playerName
     obj.date = `${this.myDate.getDate()}/${this.myDate.getMonth()+ 1}/${this.myDate.getFullYear()}`
 
-    arr.push(obj)
     this.form.reset()
 
-    this.offerServ.addComment(this.player, arr).subscribe(
-      response => {
-        console.log(`Resposta da api: ${response}`)
-      },
-      error => {
-        console.log(`deu algo errado ${error}`)
+    console.log(obj)
+    console.log(this.player)
+    console.log(this.loginService.playerName)
+    this.offerServ.addComment(this.player, obj).subscribe(
+      {
+        next: (data) => {
+          console.log(data.msg)
+        },
+        error: (err) => {
+          console.log(err)
+        }
       }
     )
   }

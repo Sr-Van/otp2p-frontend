@@ -11,6 +11,7 @@ export class OfferService {
   http = inject(HttpClient)
 
   private apiUrl: string = "https://otp-p2p-api.vercel.app/"
+  //private apiUrl: string = "http://localhost:3000/"
   servidores: any [] = ['red','blue','green','yellow','orange','black','white','purple','pink']
 
   constructor() {
@@ -36,9 +37,6 @@ export class OfferService {
   }
 
   addComment(player: string, data: any): Observable<any> {
-
-    let obj = { avaliacao : data }
-
-    return this.http.put<any>(`${this.apiUrl}add/rating/${player}`, obj)
+    return this.http.put<any>(`${this.apiUrl}add/rating/${player}`, data)
   }
 }

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { Comment } from '../../interfaces/arrays';
 
 @Component({
   selector: 'app-rating-card',
@@ -18,7 +19,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
       <small> {{ item.date }} </small>
 
-      @if(item.denuncia === 'true') {
+      @if(item.denuncia) {
           
           <div class="warning" 
           matTooltip="Cuidado, Isto é uma denuncia!"

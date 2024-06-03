@@ -24,8 +24,8 @@ export interface Trade {
 }
 
 export interface Comment {
-    text: string;
+    message: string;
     denuncia: boolean;
-    player: string;
+    player_rating: string;
     date: string;
 }
