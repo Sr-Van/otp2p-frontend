@@ -76,6 +76,10 @@ ul > span {
     gap: 10px;
 }
 
+.buttons button:has([oncart]) {
+    background-color: #e02b2b !important;
+}
+
 @media(min-width: 1024px) {
     .item {
         flex-direction: row;

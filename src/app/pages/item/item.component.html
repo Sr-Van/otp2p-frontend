@@ -26,8 +26,14 @@
     
                 <div class="buttons">
                     <div class="buttons">
-                        <button class="box_shadow rounded_small">
-                            <i class="fa-solid fa-basket-shopping" style="font-size: 18px;"></i>
+                        <button class="box_shadow rounded_small" (click)="addToCart()">
+                            @if(!isOnCart) {
+
+                                <i class="fa-solid fa-basket-shopping" style="font-size: 18px; pointer-events: none;"></i>
+                            } @else {
+
+                                <i oncart class="fa-solid fa-x" style="font-size: 18px; pointer-events: none;"></i>
+                            }
                         </button>
                     </div>
                 </div>

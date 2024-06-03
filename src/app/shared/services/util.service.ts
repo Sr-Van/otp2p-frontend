@@ -1,10 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Anuncio } from '../interfaces/arrays';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilService {
+
+  loginService = inject(LoginService)
 
   constructor() { }
 
@@ -23,5 +26,12 @@ export class UtilService {
 
     return `../../assets/img/item.png`
 
+  }
+
+  verifyItemOnCart(item: Anuncio): boolean {
+    const arr = this.loginService.getCart();
+    return arr?.filter((i: Anuncio) => i.itemId === item.itemId).length > 0 
+      ? true 
+      : false
   }
 }

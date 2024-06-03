@@ -17,6 +17,9 @@ export class OfferService {
   }
 
   getPlayerOffers(player: string): Observable<any> {
+    if(!player) {
+      window.location.reload()
+    }
     return this.http.get(`${this.apiUrl}register/${player}`)
   }
 

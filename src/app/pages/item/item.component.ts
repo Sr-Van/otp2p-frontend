@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -12,6 +12,7 @@ import { InfocardComponent } from '../../shared/components/infocard/infocard.com
 import { Trade, Anuncio } from '../../shared/interfaces/arrays';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 import { LoginService } from '../../shared/services/login.service';
+import { UtilService } from '../../shared/services/util.service';
 
 @Component({
   selector: 'app-item',
@@ -26,19 +27,22 @@ import { LoginService } from '../../shared/services/login.service';
   templateUrl: './item.component.html',
   styleUrl: './item.component.css'
 })
-export class ItemComponent {
+export class ItemComponent implements AfterViewInit, OnDestroy {
 
   router = inject(Router)
   activateRoute = inject(ActivatedRoute)
   salesService = inject(SalesService)
   offerService = inject(OfferService)
   loginService = inject(LoginService)
+  utilService = inject(UtilService)
 
   subs: Subscription
   subsOff: Subscription
+  subsItemCart: Subscription
   itemId: any
   item: any
   isLoad: boolean = false
+  isOnCart: boolean = false
 
   //type this arrays
   anuncios: Anuncio[] = []
@@ -50,7 +54,8 @@ export class ItemComponent {
   tooltip: string
   color: string 
 
-  ngOnInit() {
+
+  ngAfterViewInit() {
     if(!this.loginService.userIsLogedIn) {
       this.router.navigate(['/login'])
     }
@@ -67,11 +72,16 @@ export class ItemComponent {
       
       this.item = arr.filter((item: any) => item.itemId === this.itemId)[0]
 
-      this.getImgSource()
+      this.source = this.utilService.getImgSource(this.item)
+      this.isOnCart = this.utilService.verifyItemOnCart(this.item)
       
       this.tooltip = `Esse vendedor é um vendedor nivel ${this.item.badge}`
 
       this.color = `var(--${this.item.badge})`
+    })
+
+    this.subsItemCart = this.loginService.cartItemEvent.subscribe(() => {
+      this.isOnCart = this.utilService.verifyItemOnCart(this.item)
     })
 
     setTimeout(() => {
@@ -96,25 +106,15 @@ export class ItemComponent {
 
   }
 
-  //make this a service and dont repeat
-  getImgSource() {
-    if(this.item.type === "pokemon") {
-      this.source = `../../assets/img/${this.item.header}.png`
+  addToCart() {
+    
+    if(this.isOnCart) {
+      this.loginService.removeItem(this.item)
+      this.loginService.cartItemEvent.emit()
       return
     }
-
-    if(this.item.type === "hd") {
-      this.source = `../../assets/img/hds.png`
-      return
-    }
-
-    if(this.item.type === "tm") {
-      this.source = `../../assets/img/tm.png`
-      return
-    }
-
-    this.source = `../../assets/img/item.png`
-
+    this.loginService.addItem(this.item);
+    this.loginService.cartItemEvent.emit()
   }
 
   goToPlayer(player: string) {
@@ -123,6 +123,8 @@ export class ItemComponent {
 
   ngOnDestroy() {
     this.subs.unsubscribe()
+    this.subsOff.unsubscribe()
+    this.subsItemCart.unsubscribe()
   }
 
 }

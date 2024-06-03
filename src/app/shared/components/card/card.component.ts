@@ -37,9 +37,9 @@ export class CardComponent implements OnInit, OnDestroy{
     this.tooltip = `Esse vendedor é um vendedor nivel ${this.card.badge}`
     this.color = `var(--${this.card.badge})`
 
-    this.verifyItemOnCart()
+    this.isOnCart = this.utilService.verifyItemOnCart(this.card)
     this.cartItemSubscription = this.loginService.cartItemEvent.subscribe(() => {
-      this.verifyItemOnCart()
+      this.isOnCart = this.utilService.verifyItemOnCart(this.card)
     })
   }
 
