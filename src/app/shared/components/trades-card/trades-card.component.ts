@@ -4,7 +4,28 @@ import { HeaderPipe } from '../../pipes/header.pipe';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import { UtilService } from '../../services/util.service';
+import { TradeService } from '../../services/trade.service';
+import { LoginService } from '../../services/login.service';
 
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition
+} from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
+
+
+
+interface ItemTrading {
+  header: string;
+  description: string;
+  type: string;
+  price: number;
+  mundo: string;
+  itemId: string;
+  situation: string;
+  trade_player: string
+}
 
 @Component({
   selector: 'app-trades-card',
@@ -17,13 +38,18 @@ export class TradesCardComponent {
 
   route = inject(Router)
   utilService = inject(UtilService)
+  tradeService = inject(TradeService)
+  loginService = inject(LoginService)
+  snack = inject(MatSnackBar)
 
-  @Input('item') item: any
+  @Input('item') item: ItemTrading
   @Input('type') type: string
 
   progressBarWidth: number = 0
   progressColor: string = ""
   imgSource: string = ""
+  sendedSubscription: Subscription
+  receivedSubscription: Subscription
 
   quotes: any = {
     buy: {
@@ -37,6 +63,9 @@ export class TradesCardComponent {
       received: "Seu item foi vendido, parabéns!"
     }
   }
+
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   ngOnInit() {
 
@@ -66,6 +95,55 @@ export class TradesCardComponent {
 
     this.route.navigate([`player/${player}`])
 
+  }
+
+  confirmSended() {
+    const body = {
+      buyer: this.item.trade_player,
+      seller: this.loginService.playerName,
+      itemId: this.item.itemId
+    }
+
+    this.sendedSubscription = this.tradeService.confirmSended(body).subscribe({
+      next: (data) => {
+        this.openSnack(data.msg, 'success')
+        setTimeout(() => {
+          window.location.reload()
+        }, 400);
+      }, error: (err) => {
+        throw new Error(err)
+      }
+    })
+  }
+
+  confirmReceived() {
+
+    const body = {
+      seller: this.item.trade_player,
+      buyer: this.loginService.playerName,
+      itemId: this.item.itemId
+    }
+
+    this.receivedSubscription = this.tradeService.confirmReceived(body).subscribe({
+      next: (data) => {
+        this.openSnack(data.msg, 'success')
+        setTimeout(() => {
+          window.location.reload()
+        }, 400);
+      }, error: (err) => {
+        throw new Error(err)
+      }
+    })
+    
+  }
+
+  openSnack(msg: string, type: string) {
+    this.snack.open(msg, 'OK', {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition : this.verticalPosition,
+      panelClass: ['snack', `snack_${type}`],
+      duration: 3000
+    })
   }
 
 }

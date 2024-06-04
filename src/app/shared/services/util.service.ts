@@ -11,7 +11,7 @@ export class UtilService {
 
   constructor() { }
 
-  getImgSource(card: Anuncio): string {
+  getImgSource(card: any): string {
     if(card.type === "pokemon") {
       return `../../assets/img/${card.header}.png`
     }

@@ -52,7 +52,9 @@
                         backgroundColor: progressColor}"></div>
             </div>
         </div>
-    
+        <div class="ended">
+            <span>Finalizado</span>
+        </div>
         
     </div>
 } @else {
@@ -99,7 +101,6 @@
         <div class="trade_infos">
             <span class="text_shadow">{{ item.price | currency: 'BRL' }}</span>
             <!-- adicionar date pipe -->
-            <span class="text_shadow">{{ item.date }}</span>
             <span>
                 <p [style]="{color: progressColor}" class="text_shadow">
                     {{ item.situation }}
@@ -165,18 +166,26 @@
             </div>
         </div>
     
-        @if(item.situation !== "received") {
-            <div class="buttons">
-                <button>Confirmar</button>
-                <button>Cancelar</button>
-            </div>
-        }
+        <div class="buttons">
+            @if(item.situation === "ordered" && type === "sale") {
+                
+                <button (click)="confirmSended()">Confirmar</button>
+                
+            }
+
+            @else if(item.situation === "sended" && type === "sale") {
+                <button disabled style="cursor: not-allowed;">Confirmado</button>
+            }
+
+            @else if(item.situation === "sended" && type === "buy") {
+                <button (click)="confirmReceived()">Confirmar</button>
+            }@else {
+
+                <button disabled style="cursor: not-allowed;">Confirmar</button>
+            }
+            <button>Cancelar</button>
+        </div>
     
-        @else {
-            <div class="ended">
-                <span>Finalizado</span>
-            </div>
-        }
     </div>
 
 }
