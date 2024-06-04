@@ -22,9 +22,15 @@
         <!-- player items and infos -->
         <div class="player_lists rounded_small">
     
-            <small>Avaliações</small>
+            <small>Avaliações (
+                {{ avaliacao.length > 1 
+                    ? avaliacao.length + ' mais recentes.' 
+                    : avaliacao.length + ' mais recente.'
+                }}
+                    )
+            </small>
             <ul class="rounded_small">
-                @for(av of avaliacao; track $index) {
+                @for(av of avaliacao.reverse().slice(0, 7); track $index) {
                     <li>
                         
                         <app-rating-card [item]="av"></app-rating-card>
@@ -35,11 +41,15 @@
                 }
             </ul>
     
-            <small>Vendas</small>
+            <small>Vendas (
+                {{ vendas.length > 1 
+                    ? vendas.length + ' mais recentes.' 
+                    : vendas.length + ' mais recente.'
+                }}
+                    )</small>
             <ul class="rounded_small">
-                @for(vd of vendas; track $index) {
+                @for(vd of vendas.reverse().slice(0, 7); track $index) {
                     <li>
-                        <span>{{ vd.trade_player }}</span>
                         <app-infocard [card]="vd"></app-infocard>
                     </li>
                 }
@@ -48,9 +58,14 @@
                 }
             </ul>
     
-            <small>Compras</small>
+            <small>Compras (
+                {{ compras.length > 1 
+                    ? compras.length + ' mais recentes.' 
+                    : compras.length + ' mais recente.'
+                }}
+                    )</small>
             <ul class="rounded_small">
-                @for(cp of compras; track $index) {
+                @for(cp of compras.reverse().slice(0, 7); track $index) {
                     <li>
                         <app-infocard [card]="cp" [type]="'compra'"></app-infocard>
                     </li>
@@ -60,11 +75,15 @@
                 }
             </ul>
     
-            <small>Anuncios ativos deste vendedor:</small>
+            <small>Anuncios ativos deste vendedor: (
+                {{ anuncios.length > 1 
+                    ? anuncios.length + ' ativos.' 
+                    : anuncios.length + ' ativo.'
+                }}
+                    )</small>
             <ul class="rounded_small">
-                @for(an of anuncios; track $index) {
+                @for(an of anuncios.reverse().slice(0, 7); track $index) {
                     <li>
-                        <span>{{ an.player }}</span>
                         <app-card [card]="an"></app-card>
                     </li>
                 }

@@ -7,7 +7,7 @@ import { Comment } from '../../interfaces/arrays';
   standalone: true,
   imports: [MatTooltipModule],
   template: `
-    <div class="card box_shadow">
+    <div class="card box_shadow rounded_medium">
 
       <div class="title">
           <b> {{ item.player_rating }}</b>

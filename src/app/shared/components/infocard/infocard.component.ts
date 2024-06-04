@@ -10,7 +10,7 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
     DatePipe
   ],
   template: `
-  <div class="card box_shadow">
+  <div class="card box_shadow rounded_medium">
     <span class="title_card">Item: {{ card.header | header: card.type}}</span>
 
     <div class="infos_card">

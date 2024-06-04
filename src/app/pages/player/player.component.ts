@@ -55,7 +55,6 @@ export class PlayerComponent {
       this.anuncios = data.anuncios
       this.vendas = data.vendas
       this.compras = data.compras
-      console.log(data)
       this.avaliacao = data.avaliacao
 
       this.playerItem = data

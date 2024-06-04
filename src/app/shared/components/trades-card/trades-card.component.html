@@ -1,5 +1,5 @@
 @if(item.situation === 'received') {
-    <div class="card">
+    <div class="card rounded_medium">
         <div class="header">
             <div class="left">
                 <img [src]="imgSource" [alt]="item.header">
@@ -31,17 +31,19 @@
                 </div>
         
             } @else {
+
+                <div class="player" matTooltip="Você (vendedor)">
+                    <i class="fa-solid fa-user"></i>
+                </div>
     
-                <div class="trade_player" [matTooltip]="item.trade_player + ' (vendedor)'"
+                <div class="trade_player" [matTooltip]="item.trade_player + ' (comprador)'"
                     matTooltip="Ir para o perfil do vendedor"
                     (click)="goToPlayerProfile(item.trade_player)"
                     style="cursor: pointer;">
                     <i class="fa-solid fa-user"></i>
                 </div>
         
-                <div class="player" matTooltip="Você (comprador)">
-                    <i class="fa-solid fa-user"></i>
-                </div>
+                
             }
     
             <div class="progress_path" [matTooltip]="'Situação: '+ item.situation">
@@ -135,24 +137,25 @@
         <div class="progress">
     
             @if(type === "buy") {
+                <div class="trade_player" [matTooltip]="item.trade_player + ' (vendedor)'">
+                    <i class="fa-solid fa-user"></i>
+                </div>
                 
-                <div class="player" matTooltip="Você (vendedor)">
+                <div class="player" matTooltip="Você (comprador)">
                     <i class="fa-solid fa-user"></i>
                 </div>
     
+        
+            } @else {
+    
+                <div class="player" matTooltip="Você (vendedor)">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
                 <div class="trade_player" [matTooltip]="item.trade_player + ' (comprador)'">
                     <i class="fa-solid fa-user"></i>
                 </div>
         
-            } @else {
-    
-                <div class="trade_player" [matTooltip]="item.trade_player + ' (vendedor)'">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-        
-                <div class="player" matTooltip="Você (comprador)">
-                    <i class="fa-solid fa-user"></i>
-                </div>
             }
     
             <div class="progress_path" [matTooltip]="'Situação: '+ item.situation">
