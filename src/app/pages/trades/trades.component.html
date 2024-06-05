@@ -1,36 +1,55 @@
 @if(isLoaded) {
     <div class="container">
-        <div class="buys">
-            <h2>Reveja suas compras.</h2>
-    
-            <ul>
-                @for(item of playerBuys.slice(0, 10); track $index) {
-                    <li>
-                        <app-trades-card [item]="item" type="buy"></app-trades-card>
-                    </li>
-                }
-    
-                @empty {
-                    <small>Nenhuma troca encontrada.</small>
-                }
+        <div class="filters">
+            <ul class="box_shadow rounded_medium">
+                <li id="buys" (click)="switchFilter('buys')">
+                    <a>Compras</a>
+                </li>
+                <li id="sales" (click)="switchFilter('sales')">
+                    <a>Vendas</a>
+                </li>
+                
             </ul>
         </div>
+        @if(filterType === 'buys' && isLoadedFilter) {
+            <div class="buys">
+                <h2>Reveja suas compras.</h2>
+        
+                <ul>
+                    @for(item of playerBuys.slice(0, 10); track $index) {
+                        <li>
+                            <app-trades-card [item]="item" type="buy"></app-trades-card>
+                        </li>
+                    }
+        
+                    @empty {
+                        <small>Nenhuma troca encontrada.</small>
+                    }
+                </ul>
+            </div>
 
-        <div class="sales">
-            <h2>Reveja suas vendas.</h2>
-    
-            <ul>
-                @for(item of playerSales.slice(0, 10); track $index) {
-                    <li>
-                        <app-trades-card [item]="item" type="sale"></app-trades-card>
-                    </li>
-                }
-    
-                @empty {
-                    <small>Nenhuma venda encontrada.</small>
-                }
-            </ul>
-        </div>
+        } 
+        @else if(filterType === 'sales' && isLoadedFilter) {
+            <div class="sales">
+                <h2>Reveja suas vendas.</h2>
+        
+                <ul>
+                    @for(item of playerSales.slice(0, 10); track $index) {
+                        <li>
+                            <app-trades-card [item]="item" type="sale"></app-trades-card>
+                        </li>
+                    }
+        
+                    @empty {
+                        <small>Nenhuma venda encontrada.</small>
+                    }
+                </ul>
+            </div>
+
+        }@else {
+            <app-loading-spinner></app-loading-spinner>
+        }
+
     </div>
 
 }
