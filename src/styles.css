@@ -27,6 +27,7 @@
 
 body { background-color: #27262e; color: #fff;}
 
+.page_padding { padding-top: 90px !important;}
 .poppins-thin {
     font-family: "Poppins", sans-serif;
     font-weight: 100;
