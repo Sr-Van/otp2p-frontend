@@ -5,6 +5,9 @@ import { Anuncio } from '../../interfaces/arrays';
 import { CartCardComponent } from './cart-card/cart-card.component';
 import { CurrencyPipe } from '@angular/common';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
+import { TradeService } from '../../services/trade.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-cart',
@@ -16,6 +19,8 @@ import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.comp
 export class CartComponent {
 
   loginService = inject(LoginService)
+  tradeService = inject(TradeService)
+  router = inject(Router)
 
   eventSubscription: Subscription
   cartEventSubscription: Subscription
@@ -58,5 +63,29 @@ export class CartComponent {
 
   getTotalCartPrice() {
     this.total = this.cart.reduce((accumulator, {price}) => accumulator + Number(price), 0) || 0
+  }
+
+  addTrade() {
+    
+    for (const item of this.cart) {
+      const tradeBody = {
+        itemId: item.itemId,
+        player: item.player,
+        trade_player: this.loginService.playerName
+      }
+
+      this.tradeService.addTrade(tradeBody).subscribe(
+        {
+          next: (data) => {
+            console.log(data.msg)
+          }, error: (err) => {
+            console.log(err)
+          }, complete: () => {
+            this.loginService.removeItem(item)
+            this.loadCart()
+            this.router.navigate(['/trades'])
+          }
+        })
+    }
   }
 }
