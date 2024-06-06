@@ -53,8 +53,8 @@ export class PlayerComponent {
 
     this.subs = this.offerServ.getPlayerOffers(this.player).subscribe(data => {
       this.anuncios = data.anuncios
-      this.vendas = data.vendas
-      this.compras = data.compras
+      this.vendas = data.vendas.filter((anuncio: any) => anuncio.situation === 'received')
+      this.compras = data.compras.filter((anuncio: any) => anuncio.situation === 'received')
       this.avaliacao = data.avaliacao
 
       this.playerItem = data
@@ -78,9 +78,6 @@ export class PlayerComponent {
 
     this.form.reset()
 
-    console.log(obj)
-    console.log(this.player)
-    console.log(this.loginService.playerName)
     this.offerServ.addComment(this.player, obj).subscribe(
       {
         next: (data) => {

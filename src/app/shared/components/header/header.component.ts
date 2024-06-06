@@ -60,6 +60,8 @@ import { CartComponent } from '../cart/cart.component';
     margin-bottom: 20px;
     display: flex;
     alingn-items: center;
+    position: fixed;
+    z-index: 999;
   }
 
   .itens, .actions {
@@ -73,7 +75,7 @@ import { CartComponent } from '../cart/cart.component';
 
   app-menu {
     position: fixed;
-    top: 50px;
+    top: 80px;
     right: 15%;
 
     z-index: 998;
