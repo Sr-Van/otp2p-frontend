@@ -39,6 +39,7 @@ export class NewOfferComponent {
   form: FormGroup;
   player: string 
   isLoaded: boolean = false
+  newItemFormPriceString: string = ''
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -96,19 +97,24 @@ export class NewOfferComponent {
   }
 
   filterNumber(number: any, event: any) {
-    const pattern = '0123456789'
-    let previousValue = ""
-    let actualValue = event.key
+    const isNumber = /^[0-9]$/i.test(event.key)
 
-    pattern.split("").forEach(num => {
-      if(num === actualValue) {
-        previousValue = number
-      }
+    if(event.key === '.' && number.length > 1 && !this.newItemFormPriceString.includes('.')) {
+      this.newItemFormPriceString = number
+      return
+    }
 
-      else {
-        event.target.value = previousValue
-      }
-    })
+    if(event.key === 'Backspace') {
+      this.newItemFormPriceString = number
+      return
+    }
+    if(!isNumber) {
+      event.target.value = this.newItemFormPriceString
+      return
+    }
+
+    this.newItemFormPriceString = number
+
   }
 
   randomId() {    
