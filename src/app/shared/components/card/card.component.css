@@ -85,7 +85,6 @@
     border: none;
     cursor: pointer;
 
-    z-index: 999;
 
     background-color: var(--terciary-color);
     color: #fff;
@@ -114,6 +113,7 @@
 }
 
 .card:hover .server_bg {
+    pointer-events: none;
     opacity: 0.2;
 }
 

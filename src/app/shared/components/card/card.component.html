@@ -2,7 +2,7 @@
     @if(card.playerType === "revendedor"){
 
         <div
-            [style]="{ zIndex: 979}" 
+             
             matTooltip="Este é um revendedor verificado."
             matTooltipPosition="above"
             class="badge_revendedor">
@@ -23,7 +23,7 @@
             <span [style]="{backgroundColor: card.mundo}" class="server text_shadow">{{ card.mundo }}</span>
             <span class="server poppins-regular-italic">{{ card.type }}</span>
             <i class="fa-solid fa-medal" 
-            [style]="{color: color, zIndex: 999}" 
+            [style]="{color: color}" 
             [matTooltip]="tooltip"
             matTooltipPosition="above"></i>
         </div>

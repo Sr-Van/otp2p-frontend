@@ -13,6 +13,7 @@ import { Trade, Anuncio } from '../../shared/interfaces/arrays';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 import { LoginService } from '../../shared/services/login.service';
 import { UtilService } from '../../shared/services/util.service';
+import { HeaderPipe } from '../../shared/pipes/header.pipe';
 
 @Component({
   selector: 'app-item',
@@ -22,6 +23,7 @@ import { UtilService } from '../../shared/services/util.service';
     CardComponent,
     InfocardComponent,
     CurrencyPipe,
+    HeaderPipe,
     LoadingSpinnerComponent
   ],
   templateUrl: './item.component.html',

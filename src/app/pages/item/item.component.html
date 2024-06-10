@@ -3,7 +3,7 @@
 
     @if(isLoad) {
 
-        <h2>{{ item.header }}</h2>
+        <h2>{{ item.header | header: item.type }}</h2>
         
         <div class="item transition_all rounded_small">
     
