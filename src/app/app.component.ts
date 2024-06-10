@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, HostListener, inject } from '@angular/core';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 
 import { HeaderComponent } from './shared/components/header/header.component';
 import { CookieConsentComponent } from './shared/components/cookie-consent/cookie-consent.component';
@@ -24,11 +24,22 @@ import { CartComponent } from './shared/components/cart/cart.component';
 })
 export class AppComponent {
 
+  @HostListener('window:scroll', ['$event'])
+  onMove(event: any) {
+    if(event) {
+      this.canFooterShow = true
+    } else {
+      this.canFooterShow = false
+    }
+  }
+
   cookieService = inject(CookieService)
   loginService = inject(LoginService)
+  router = inject(Router)
 
   title = 'OTP2P - Trocas';
   userConsent: boolean = false
+  canFooterShow: boolean = false
 
   constructor() {
 
@@ -36,6 +47,9 @@ export class AppComponent {
       this.getCookieConsent()
     }, 3000);
 
+    this.router.events.subscribe(() => {
+      this.canFooterShow = false
+    })
   }
 
   getCookieConsent() {
