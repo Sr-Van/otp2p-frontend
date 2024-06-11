@@ -1,0 +1,17 @@
+<main class="container" style="min-height: 100dvh;">
+    <h1>Fazer depósito</h1>
+
+    <div class="dep_alert">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <span>Pelo site estar na versão beta, o depósito é FALSO e não envolve dinheiro real.</span>
+    </div>
+
+    <div class="dep_form">
+
+        <form [formGroup]="formDeposit">
+            <label for="deposit">Valor:</label>
+            <input type="number" id="deposit" formControlName="deposit">
+            <button class="box_shadow" (click)="sendDeposit()">Depositar</button>
+        </form>
+    </div>
+</main>

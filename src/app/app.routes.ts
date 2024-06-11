@@ -37,5 +37,9 @@ export const routes: Routes = [
             {path: 'filter/:filterParam', loadComponent: () => import('./shared/components/faq-content/faq-content.component')
             .then(c => c.FaqContentComponent)}
         ]
+    },
+    {path: 'deposit',
+        loadComponent: () => import('./pages/deposit/deposit.component')
+        .then(c => c.DepositComponent), canActivate: [AuthGuard]
     }
 ];
