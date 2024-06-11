@@ -41,5 +41,9 @@ export const routes: Routes = [
     {path: 'deposit',
         loadComponent: () => import('./pages/deposit/deposit.component')
         .then(c => c.DepositComponent), canActivate: [AuthGuard]
+    },
+    {path: 'cashout',
+        loadComponent: () => import('./pages/cashout/cashout.component')
+        .then(c => c.CashoutComponent), canActivate: [AuthGuard]
     }
 ];
