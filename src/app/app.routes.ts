@@ -45,5 +45,10 @@ export const routes: Routes = [
     {path: 'cashout',
         loadComponent: () => import('./pages/cashout/cashout.component')
         .then(c => c.CashoutComponent), canActivate: [AuthGuard]
+    },
+    {
+        path:'your-offers',
+        loadComponent: () => import('./pages/your-offers/your-offers.component')
+        .then(c => c.YourOffersComponent), canActivate: [AuthGuard]
     }
 ];
