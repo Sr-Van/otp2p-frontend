@@ -1,17 +1,21 @@
-<main class="container" style="min-height: 100dvh;">
-    <h1>Fazer depósito</h1>
-
-    <div class="dep_alert">
-        <i class="fa-solid fa-circle-exclamation"></i>
-        <span>Pelo site estar na versão beta, o depósito é FALSO e não envolve dinheiro real.</span>
-    </div>
-
-    <div class="dep_form">
-
-        <form [formGroup]="formDeposit">
-            <label for="deposit">Valor:</label>
-            <input type="number" id="deposit" formControlName="deposit">
-            <button class="box_shadow" (click)="sendDeposit()">Depositar</button>
-        </form>
-    </div>
-</main>
+@if(isLoaded) {
+    <main class="container page_padding">
+        <h1>Fazer depósito</h1>
+    
+        <div class="dep_alert rounded_small box_shadow">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span>Pelo site estar na versão beta, o depósito é FALSO e não envolve dinheiro real.</span>
+        </div>
+    
+        <div class="dep_form">
+    
+            <form [formGroup]="formDeposit">
+                <label for="deposit">Valor:</label>
+                <input type="text" id="deposit" formControlName="deposit" (keyup)="filterNumber(deposit.value, $event)" #deposit>
+                <button class="box_shadow transition_all" (click)="sendDeposit()">Depositar</button>
+            </form>
+        </div>
+    </main>
+}@else {
+    <app-loading-spinner></app-loading-spinner>
+}
