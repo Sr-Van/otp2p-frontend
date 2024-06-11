@@ -1,6 +1,20 @@
 @if(isLoaded) {
     <main class="container page_padding">
-        <p>cashout works!</p>
+        <h1>Fazer Saque</h1>
+    
+        <div class="dep_alert rounded_small box_shadow">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span>Pelo site estar na versão beta, o saque é FALSO e não envolve dinheiro real.</span>
+        </div>
+    
+        <div class="dep_form">
+    
+            <form [formGroup]="cashoutForm">
+                <label for="price">Valor:</label>
+                <input type="text" id="price" formControlName="price" (keyup)="filterNumber(deposit.value, $event)" #deposit>
+                <button class="box_shadow transition_all" (click)="cashout()">Sacar</button>
+            </form>
+        </div>
     </main>
 }@else {
     <app-loading-spinner></app-loading-spinner>
