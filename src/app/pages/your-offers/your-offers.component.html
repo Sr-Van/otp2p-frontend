@@ -1,6 +1,13 @@
 @if(isLoaded) {
     <main class="container page_padding">
-        <p>your-offers works!</p>
+        <h1>Seus items com anúncio ativo.</h1>
+        <ul>
+            @for(item of yourSalesArr; track $index) {
+                <li>
+                    <app-card [isYours]="true" [card]="item"></app-card>
+                </li>
+            }
+        </ul>
     </main>
 }@else {
     <app-loading-spinner></app-loading-spinner>

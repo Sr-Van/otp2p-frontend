@@ -1,0 +1,41 @@
+.container {
+    min-height: 100dvh;
+    margin-bottom: 10.5rem;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--basic-gap);
+    list-style: none;
+
+    margin-top: 20px;
+    transition: all 300ms ease;
+}
+
+h1 {color: #5656569c;}
+
+@media(min-width: 768px) {
+    .container {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+    }
+    ul {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(min-width: 1024px) {
+    ul {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media(min-width: 1440px) {
+    ul {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}

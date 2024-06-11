@@ -85,16 +85,13 @@
     border: none;
     cursor: pointer;
 
-
     background-color: var(--terciary-color);
     color: #fff;
 }
 
-.buttons button:has([oncart]) {
-    background-color: #e02b2b;
+.buttons button:has([oncart]), .is_yours {
+    background-color: #e02b2b !important;
 }
-
-
 
 .text_shadow {
     text-shadow: 1px 1px 3px #000;
@@ -115,6 +112,11 @@
 .card:hover .server_bg {
     pointer-events: none;
     opacity: 0.2;
+    z-index: 0;
+}
+
+.card:hover .buttons button {
+    z-index: 10;
 }
 
 @media(min-width: 1024px) {

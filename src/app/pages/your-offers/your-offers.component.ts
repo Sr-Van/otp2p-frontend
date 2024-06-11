@@ -4,11 +4,12 @@ import { SalesService } from '../../shared/services/sales.service';
 import { Subscription } from 'rxjs';
 import { LoginService } from '../../shared/services/login.service';
 import { Anuncio } from '../../shared/interfaces/arrays';
+import { CardComponent } from '../../shared/components/card/card.component';
 
 @Component({
   selector: 'app-your-offers',
   standalone: true,
-  imports: [LoadingSpinnerComponent],
+  imports: [LoadingSpinnerComponent, CardComponent],
   templateUrl: './your-offers.component.html',
   styleUrl: './your-offers.component.css'
 })
@@ -27,7 +28,7 @@ export class YourOffersComponent {
 
         this.yourSalesArr = data.results.filter((item: any) => item.player === this.loginService.playerName) 
         this.loadContent(1000)
-        
+
       }, error: (err) => {
         console.log(err)
       }

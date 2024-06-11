@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { HeaderPipe } from '../../pipes/header.pipe';
 import { UtilService } from '../../services/util.service';
 import { Subscription } from 'rxjs';
+import { Anuncio } from '../../interfaces/arrays';
 
 @Component({
   selector: 'app-card',
@@ -23,7 +24,8 @@ export class CardComponent implements OnInit, OnDestroy{
   loginService = inject(LoginService)
   utilService = inject(UtilService)
 
-  @Input() card: any
+  @Input() card: Anuncio
+  @Input() isYours: boolean
   source: string
   tooltip: string
   color: string
@@ -53,7 +55,12 @@ export class CardComponent implements OnInit, OnDestroy{
     }, 100);
   }
 
-  addToCart() {
+  handleButton() {
+
+    if(this.isYours) {
+      this.removeSale()
+      return
+    }
     
     if(this.isOnCart) {
       this.loginService.removeItem(this.card)
@@ -70,6 +77,12 @@ export class CardComponent implements OnInit, OnDestroy{
     arr?.filter((item: any) => item.itemId === this.card.itemId).length > 0 
     ? this.isOnCart = true 
     : this.isOnCart = false
+  }
+
+  removeSale() {
+    if (!this.isYours) return
+
+    console.log('removendo item '+ this.card.itemId)
   }
 
   ngOnDestroy(): void {

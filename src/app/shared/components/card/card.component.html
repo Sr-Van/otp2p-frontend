@@ -30,9 +30,15 @@
         <span class="text_shadow">{{ card.price | currency: 'BRL' }}</span>
     </div>
     <div class="buttons">
-        <button class="box_shadow rounded_small" (click)="addToCart()">
-            @if(isOnCart) {
+        <button
+        class="box_shadow transition_all"
+        [class.is_yours]="isYours" 
+        (click)="handleButton()">
+            @if(isOnCart && !isYours) {
                 <i oncart class="fa-solid fa-x" style="font-size: 18px; pointer-events: none;"></i>
+            }@else if (isYours) {
+
+                <span style="font-size: 12px; pointer-events: none;">Remover</span>
             }
             @else {
                 <i class="fa-solid fa-basket-shopping" style="font-size: 18px; pointer-events: none;"></i>
