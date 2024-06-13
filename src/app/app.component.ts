@@ -54,7 +54,7 @@ export class AppComponent {
 
   getCookieConsent() {
     const isConsented = this.cookieService.get('userConsent');
-    this.loginService.UserConsentCookieEvent.emit(!!isConsented);
+    this.loginService.userConsent.update(() => !!isConsented)
     this.userConsent = !!isConsented
   }
 }

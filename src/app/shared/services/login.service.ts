@@ -15,6 +15,7 @@ export class LoginService {
   document = inject(DOCUMENT)
 
   userIsLoggedIn = signal<boolean>(false)
+  userConsent = signal<boolean>(false)
 
   playerName: string
   token: string
@@ -23,11 +24,14 @@ export class LoginService {
   //private apiUrl: string = "http://localhost:3000/"
 
 
-  UserConsentCookieEvent = new EventEmitter<boolean>()
   cartMenuEvent = new EventEmitter<boolean>()
   cartItemEvent = new EventEmitter<any>()
 
   constructor() {
+
+    if(this.cookie.get('userConsent')) {
+      this.userConsent.update(() => true)
+    }
 
     if (this.cookie.get('loginToken')) {
       this.userIsLoggedIn.update(() => true)

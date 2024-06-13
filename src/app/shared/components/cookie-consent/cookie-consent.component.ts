@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, HostBinding, effect, inject } from '@angular/core';
 
 
 import {MatButtonModule} from '@angular/material/button';
@@ -77,15 +77,15 @@ export class CookieConsentComponent {
   cookieConsentSubscription: Subscription
 
   constructor() {
-    this.cookieConsentSubscription = this.loginService.UserConsentCookieEvent.subscribe(bool => {
-      //esse evento vai ser emitido quando o usuario abrir o app, se ele estiver consentido os cookies o evento retorna true, se ele estiver desconsentido o evento retorna false. sendo assim o this.show preciso ser o contrario do boolean
-      this.show = !bool
+    
+    effect(() => {
+      this.show = !this.loginService.userConsent()
     })
+
   }
 
   acceptCookies() {
     this.cookie.set('userConsent', 'true', 365)
-    this.loginService.UserConsentCookieEvent.emit(true)
-  }
+    this.loginService.userConsent.update(() => true)  }
 
 }
