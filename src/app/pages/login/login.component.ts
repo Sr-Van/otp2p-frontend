@@ -76,23 +76,24 @@ export class LoginComponent {
 
     this.formLogin.reset()
     
-    this.loginService.login(email, senha).subscribe((data: any) => {
+    this.loginService.login(email, senha).subscribe({
 
-      this.openSnack(data.msg, 'success')
+      next: (data) => {
+        this.openSnack(data.msg, 'success')
 
-      this.loginService.saveLoginToken(data.token, data.player)
-      this.loginService.userIsLogedIn = true
+        this.loginService.saveLoginToken(data.token, data.player)
+        this.loginService.userIsLoggedIn.update(() => true)
 
-      setTimeout(() => {
-        this.router.navigate(["/"])
-      }, 1500);
-      
-    }, (error) => {
-      
-      this.errorMsg = error.error.msg
-      this.showLog = true
-
-    }) 
+        setTimeout(() => {
+          this.router.navigate(["/"])
+        }, 1500);
+        
+        }, error: (err) => {
+          this.showLog = true
+          this.errorMsg = err.error.msg
+        }
+          
+      })
   }
 
   sendRegister(form: any) {

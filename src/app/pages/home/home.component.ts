@@ -38,7 +38,7 @@ export class HomeComponent {
 
   constructor() {
     this.player = this.loginService.playerName
-    if(!this.player && this.loginService.userIsLogedIn) {
+    if(!this.player && this.loginService.userIsLoggedIn()) {
       window.location.reload()
     }
     this.loadContent()    

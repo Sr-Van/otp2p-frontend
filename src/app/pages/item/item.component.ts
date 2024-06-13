@@ -58,7 +58,7 @@ export class ItemComponent implements AfterViewInit, OnDestroy {
 
 
   ngAfterViewInit() {
-    if(!this.loginService.userIsLogedIn) {
+    if(!this.loginService.userIsLoggedIn()) {
       this.router.navigate(['/login'])
     }
     this.itemId = this.activateRoute.snapshot.paramMap.get('item')

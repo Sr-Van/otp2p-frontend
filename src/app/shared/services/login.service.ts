@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject, EventEmitter } from '@angular/core';
+import { Injectable, inject, EventEmitter, signal } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { Anuncio } from '../interfaces/arrays';
@@ -14,7 +14,8 @@ export class LoginService {
   http = inject(HttpClient)
   document = inject(DOCUMENT)
 
-  userIsLogedIn: boolean = false
+  userIsLoggedIn = signal<boolean>(false)
+
   playerName: string
   token: string
   private apiUrl: string = "https://otp-p2p-api.vercel.app/"
@@ -22,7 +23,6 @@ export class LoginService {
   //private apiUrl: string = "http://localhost:3000/"
 
 
-  loginEvent = new EventEmitter<boolean>()
   UserConsentCookieEvent = new EventEmitter<boolean>()
   cartMenuEvent = new EventEmitter<boolean>()
   cartItemEvent = new EventEmitter<any>()
@@ -30,7 +30,7 @@ export class LoginService {
   constructor() {
 
     if (this.cookie.get('loginToken')) {
-      this.userIsLogedIn = true
+      this.userIsLoggedIn.update(() => true)
       this.playerName = this.cookie.get('player')
     }
 
@@ -47,7 +47,7 @@ export class LoginService {
   }
 
   saveLoginToken(token: any, playerName: string) {
-    this.loginEvent.emit(true)
+    this.userIsLoggedIn.update(() => true)
     this.cookie.set('loginToken', token, 7)
     this.cookie.set('player', playerName, 7)
   }

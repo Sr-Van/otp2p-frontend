@@ -30,7 +30,7 @@ export class MenuComponent {
 
   logOut() {
     this.loginService.cookie.delete('loginToken')
-    this.loginService.loginEvent.emit(false)
+    this.loginService.userIsLoggedIn.update(() => false)
     window.location.reload()
   }
 

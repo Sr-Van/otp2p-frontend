@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { Subscription } from 'rxjs';
@@ -137,22 +137,15 @@ export class HeaderComponent {
   isMenuOpen: boolean = false
   isCartOpen: boolean = false
 
-  loginEventSubscription: Subscription
 
   userAmount: number = 0
 
-  ngOnInit() {
-    this.userLogged = this.loginService.userIsLogedIn
-
-    if(!this.userLogged) {
-
-      this.loginEventSubscription = this.loginService.loginEvent.subscribe(bool => {  
-        this.userLogged = bool
-      })
-
-    }
-
+  constructor() {
+    effect(() => {
+      this.userLogged = this.loginService.userIsLoggedIn()
+    })
   }
+
 
   toggleMenu() {
     this.utilService.toggleMenu()
