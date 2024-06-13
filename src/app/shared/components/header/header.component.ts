@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { Subscription } from 'rxjs';
@@ -6,6 +6,7 @@ import { CurrencyPipe } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MenuComponent } from '../menu/menu.component';
 import { CartComponent } from '../cart/cart.component';
+import { UtilService } from '../../services/util.service';
 
 @Component({
   selector: 'app-header',
@@ -130,6 +131,7 @@ import { CartComponent } from '../cart/cart.component';
 export class HeaderComponent {
 
   loginService = inject(LoginService)
+  utilService = inject(UtilService)
 
   userLogged: boolean = false
   isMenuOpen: boolean = false
@@ -153,8 +155,7 @@ export class HeaderComponent {
   }
 
   toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen
-    this.loginService.menuLoggedEvent.emit(this.isMenuOpen)
+    this.utilService.toggleMenu()
 
     if(this.isCartOpen) {
       this.isCartOpen = !this.isCartOpen
@@ -166,9 +167,8 @@ export class HeaderComponent {
     this.isCartOpen = !this.isCartOpen
     this.loginService.cartMenuEvent.emit(this.isCartOpen)
 
-    if(this.isMenuOpen) {
-      this.isMenuOpen = !this.isMenuOpen
-      this.loginService.menuLoggedEvent.emit(this.isMenuOpen)
+    if(this.utilService.menu()) {
+      this.utilService.toggleMenu()
     }
   }
 }

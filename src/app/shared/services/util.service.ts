@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { Anuncio } from '../interfaces/arrays';
 import { LoginService } from './login.service';
 
@@ -8,8 +8,13 @@ import { LoginService } from './login.service';
 export class UtilService {
 
   loginService = inject(LoginService)
+  menu = signal<boolean>(false)
 
   constructor() { }
+
+  toggleMenu() {
+    this.menu.update(bool => !bool)
+  }
 
   getImgSource(card: any): string {
     if(card.type === "pokemon") {

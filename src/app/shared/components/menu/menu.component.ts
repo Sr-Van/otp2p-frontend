@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router';
+import { UtilService } from '../../services/util.service';
 
 @Component({
   selector: 'app-menu',
@@ -12,15 +13,19 @@ import { Router } from '@angular/router';
 export class MenuComponent {
 
   loginService = inject(LoginService)
+  utilService = inject(UtilService)
   router = inject(Router)
 
   isMenuOpen: boolean = false
   lastMenuRouteVisited: string
 
-  ngOnInit() {
-    this.loginService.menuLoggedEvent.subscribe(bool => {
-      this.isMenuOpen = bool
+  constructor() {
+    effect(() => {
+      this.isMenuOpen = this.utilService.menu()
     })
+  }
+  ngOnInit() {
+
   }
 
   logOut() {
@@ -36,9 +41,8 @@ export class MenuComponent {
     }
 
     this.router.navigate([route])
-    .then(bool => {
-      //esse metodo retorna um boolean, se conseguir navegar ate a rota ele retorna true, se for o caso o menu tem que ser fechado, emitindo "false" no evento
-      this.loginService.menuLoggedEvent.emit(!bool)
+    .then(() => {
+      this.utilService.toggleMenu()
 
       this.lastMenuRouteVisited = route
     })

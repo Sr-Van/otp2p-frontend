@@ -22,7 +22,6 @@ export class LoginService {
   //private apiUrl: string = "http://localhost:3000/"
 
 
-  menuLoggedEvent = new EventEmitter<boolean>()
   loginEvent = new EventEmitter<boolean>()
   UserConsentCookieEvent = new EventEmitter<boolean>()
   cartMenuEvent = new EventEmitter<boolean>()
