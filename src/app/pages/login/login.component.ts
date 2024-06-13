@@ -108,15 +108,23 @@ export class LoginComponent {
     register.compras = []
     register.vendas = []
 
-    this.loginService.register(register).subscribe((response) => {
+    this.loginService.register(register).subscribe({
 
-      this.openSnack(response.msg, 'success')
-
-    }, (error) => {
-
-      this.showLog = true
-      this.errorMsg = error.error.msg
-
+      next: (data) => {
+        this.openSnack(data.msg, 'success')
+        this.loginService.login(register.email, register.senha).subscribe({
+          next: (data) => {
+            this.loginService.saveLoginToken(data.token, data.player)
+            this.loginService.userIsLoggedIn.update(() => true)
+            setTimeout(() => {
+              this.router.navigate(["/"])
+            }, 1500);
+          }
+        })
+      }, error: (err) => {
+        this.showLog = true
+        this.errorMsg = err.error.msg
+      }
     })
   }
 
