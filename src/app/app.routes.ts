@@ -50,5 +50,10 @@ export const routes: Routes = [
         path:'your-offers',
         loadComponent: () => import('./pages/your-offers/your-offers.component')
         .then(c => c.YourOffersComponent), canActivate: [AuthGuard]
+    },
+    {
+        path: 'confirm/acc/verification/:email/:token',
+        loadComponent: () => import('./pages/email-verification/email-verification.component')
+        .then(c => c.EmailVerificationComponent)
     }
 ];

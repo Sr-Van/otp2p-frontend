@@ -60,6 +60,16 @@ export class LoginService {
     return this.http.post(`${this.apiUrl}add-register`, form)
   }
 
+  sendConfirmation(email: string, token: string): Observable<any> {
+
+    const obj = {
+      email,
+      token
+    }
+
+    return this.http.put(`${this.apiUrl}confirm/acc/verification/`, obj)
+  }
+
   getToken() {
     return this.cookie.get('loginToken')
   }

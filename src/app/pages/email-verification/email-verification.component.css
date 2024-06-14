@@ -1,0 +1,20 @@
+.container {
+    min-height: 100dvh;
+    margin-bottom: 10.5rem;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--basic-gap);
+}
+
+.content h1 {
+    color: var(--terciary-color);
+}
+
+.log {
+    background-color: #4a4a4a;
+    padding: 20px;
+    border: 1px solid var(--terciary-color);
+}

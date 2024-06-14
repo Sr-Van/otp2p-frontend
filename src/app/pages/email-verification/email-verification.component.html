@@ -1,0 +1,16 @@
+<div class="container page_padding">
+    <div class="content">
+    @if(isLoaded) {
+        <h1>Verificação completa!</h1>
+    }
+    @else {
+        <h1>Estamos verificando seu e-mail!</h1>
+        <app-loading-spinner></app-loading-spinner>
+    }
+    @if(logMsg.length > 0) {
+        <div class="log rounded_medium box_shadow">
+            <p>{{ logMsg }}</p>
+        </div>
+    }
+    </div>
+</div>
