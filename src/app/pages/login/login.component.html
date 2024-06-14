@@ -21,7 +21,7 @@
     
                 <label>Não tem login?</label>
     
-                <button class="box_shadow" (click)="changeType()">Cadastre-se</button>
+                <button class="box_shadow switch_btn" (click)="changeType()">Cadastre-se</button>
             </form>
         </div>
     
@@ -30,50 +30,68 @@
     @if(isRegister) {
 
         <div class="register">
-            <form [formGroup]="formRegister">
-                <label for="nome">Nome:</label>
-                <input type="text" formControlName="nome">
+            <form class="form_register" [formGroup]="formRegister">
+                <div>
+                    <label for="nome">Nome:</label>
+                    <input required type="text" formControlName="nome">
+
+                </div>
                
-                <label for="player">Seu Nickname:</label>
-                <input type="text" formControlName="player">
+                <div>
+                    <label for="player">Seu Nickname:</label>
+                    <input type="text" formControlName="player">
 
-                <label for="mundos">Seu mundo:</label>
-                <select formControlName="mundo">
+                </div>
 
-                    @for(server of servers; track $index) {
-                        <option [value]="server">{{ server }}</option>
+                <div>
+                    <label for="mundos">Seu mundo:</label>
+                    <select formControlName="mundo">
+    
+                        @for(server of servers; track $index) {
+                            <option [value]="server">{{ server }}</option>
+                        }
+    
+                    </select>
+                    
+                </div>
+
+                <div>
+                    <label for="cpf">CPF</label>
+                    <input type="text" formControlName="cpf">
+
+                </div>
+                <div>
+
+                    <label for="email">email:</label>
+                    <input class="box_shadow" formControlName="email" type="text" id="email" >
+                </div>
+
+                <div>
+
+                    <label for="senha">senha:</label>
+                    <input class="box_shadow" formControlName="senha" type="password" id="senha" >
+                </div>
+                <div>
+
+                    <label for="confirmSenha">Confirme sua senha:</label>
+                    <input class="box_shadow" formControlName="confirmSenha" type="password" id="confirmSenha" >
+                </div>
+    
+                <div>
+                    <label>Já tem login?</label>
+                    
+                    <button class="box_shadow switch_btn" (click)="changeType()">Login</button>
+                </div>
+                    
+                    <button class="box_shadow register_btn" (click)="sendRegister(formRegister)">Cadastrar</button>
+                    @if(showLog) {
+    
+                        <div class="errorLog" >
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                            <span>{{ errorMsg }}</span>
+                        </div>
+                    
                     }
-
-                </select>
-
-                <label for="cpf">CPF</label>
-                <input type="text" formControlName="cpf">
-                
-
-                <label for="email">email:</label>
-                <input class="box_shadow" formControlName="email" type="text" id="email" >
-        
-                <label for="senha">senha:</label>
-                <input class="box_shadow" formControlName="senha" type="password" id="senha" >
-    
-                <label for="confirmSenha">Confirme sua senha:</label>
-                <input class="box_shadow" formControlName="confirmSenha" type="password" id="confirmSenha" >
-
-                @if(showLog) {
-
-                    <div class="errorLog" >
-                        <i class="fa-solid fa-circle-exclamation"></i>
-                        <span>{{ errorMsg }}</span>
-                    </div>
-                
-                }
-    
-        
-                <button class="box_shadow" (click)="sendRegister(formRegister)">Cadastrar</button>
-    
-                <label>Já tem login?</label>
-    
-                <button class="box_shadow" (click)="changeType()">Login</button>
             </form>
         </div>
 

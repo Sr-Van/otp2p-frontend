@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { 
-  FormControl, 
+  FormBuilder,
   FormGroup, 
-  ReactiveFormsModule } from '@angular/forms';
+  ReactiveFormsModule, 
+  Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 
 import {
@@ -31,6 +32,7 @@ export class LoginComponent {
   offerService = inject(OfferService)
   router = inject(Router)
   snack = inject(MatSnackBar)
+  formBuilder = inject(FormBuilder)
 
   //forms
   formLogin: FormGroup
@@ -50,27 +52,27 @@ export class LoginComponent {
 
   ngOnInit() {
     //formulario de login
-    this.formLogin = new FormGroup({
-      email: new FormControl,
-      senha: new FormControl
+    this.formLogin = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      senha: ['', [Validators.required, Validators.minLength(6)]]
     })
 
     //formulario de registro
-    this.formRegister = new FormGroup({
-      nome: new FormControl,
-      player: new FormControl,
-      email: new FormControl,
-      senha: new FormControl,
-      confirmSenha: new FormControl,
-      mundo: new FormControl,
-      cpf: new FormControl
+    this.formRegister = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      senha: ['', [Validators.required, Validators.minLength(6)]],
+      confirmSenha: ['', [Validators.required, Validators.minLength(6)]],
+      nome: ['', [Validators.required, Validators.minLength(3)]],
+      cpf: ['', [Validators.required, Validators.minLength(9)]],
+      player: ['', [Validators.required, Validators.minLength(3)]],
+      mundo: ['', [Validators.required]]
     })
 
     this.servers = this.offerService.getServers()
 
   }
 
-  sendLogin(form: any) {
+  sendLogin(form: FormGroup) {
 
     const {email, senha} = form.value
 
@@ -96,7 +98,7 @@ export class LoginComponent {
       })
   }
 
-  sendRegister(form: any) {
+  sendRegister(form: FormGroup) {
 
     let register = form.value
 
