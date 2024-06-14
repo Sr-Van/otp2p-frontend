@@ -6,6 +6,8 @@ export interface Register {
     nome: string;
     mundo: string;
     badge: string;
+    ammount: number;
+    verified: boolean;
     anuncios: Anuncio[];
     vendas: Trade[];    
     compras: Trade[];

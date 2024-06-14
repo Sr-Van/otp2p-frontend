@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Register } from '../interfaces/register';
 
 
 @Injectable({
@@ -17,11 +18,11 @@ export class OfferService {
   constructor() {
   }
 
-  getPlayerOffers(player: string): Observable<any> {
+  getPlayerOffers(player: string): Observable<Register> {
     if(!player) {
       window.location.reload()
     }
-    return this.http.get(`${this.apiUrl}register/${player}`)
+    return this.http.get<Register>(`${this.apiUrl}register/${player}`)
   }
 
   getAllPokes(): Observable<any> {
