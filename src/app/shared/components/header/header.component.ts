@@ -152,13 +152,13 @@ export class HeaderComponent {
 
     if(this.isCartOpen) {
       this.isCartOpen = !this.isCartOpen
-      this.loginService.cartMenuEvent.emit(this.isCartOpen)
+      this.loginService.cartMenu.update(() => this.isCartOpen)
     }
   }
 
   showCart() {
     this.isCartOpen = !this.isCartOpen
-    this.loginService.cartMenuEvent.emit(this.isCartOpen)
+    this.loginService.cartMenu.update(() => this.isCartOpen)
 
     if(this.utilService.menu()) {
       this.utilService.toggleMenu()

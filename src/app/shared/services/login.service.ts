@@ -16,6 +16,8 @@ export class LoginService {
 
   userIsLoggedIn = signal<boolean>(false)
   userConsent = signal<boolean>(false)
+  cartMenu = signal<boolean>(false)
+  cartItem = signal<number>(0)
 
   playerName: string
   token: string
@@ -24,8 +26,6 @@ export class LoginService {
   //private apiUrl: string = "http://localhost:3000/"
 
 
-  cartMenuEvent = new EventEmitter<boolean>()
-  cartItemEvent = new EventEmitter<any>()
 
   constructor() {
 
@@ -112,5 +112,9 @@ export class LoginService {
     } catch (error) {
       console.error('Error removing item from cart:', error);
     }
+  }
+
+  updateCartItem() {
+    this.cartItem.update(value => value + 1)
   }
 }

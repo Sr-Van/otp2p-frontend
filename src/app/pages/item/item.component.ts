@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, inject } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, effect, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -40,7 +40,6 @@ export class ItemComponent implements AfterViewInit, OnDestroy {
 
   subs: Subscription
   subsOff: Subscription
-  subsItemCart: Subscription
   itemId: any
   item: any
   isLoad: boolean = false
@@ -56,6 +55,11 @@ export class ItemComponent implements AfterViewInit, OnDestroy {
   tooltip: string
   color: string 
 
+  constructor() { 
+    effect(() => {
+      this.isOnCart = this.utilService.verifyItemOnCart(this.item)
+    })
+  }
 
   ngAfterViewInit() {
     if(!this.loginService.userIsLoggedIn()) {
@@ -80,10 +84,6 @@ export class ItemComponent implements AfterViewInit, OnDestroy {
       this.tooltip = `Esse vendedor é um vendedor nivel ${this.item.badge}`
 
       this.color = `var(--${this.item.badge})`
-    })
-
-    this.subsItemCart = this.loginService.cartItemEvent.subscribe(() => {
-      this.isOnCart = this.utilService.verifyItemOnCart(this.item)
     })
 
     setTimeout(() => {
@@ -112,11 +112,13 @@ export class ItemComponent implements AfterViewInit, OnDestroy {
     
     if(this.isOnCart) {
       this.loginService.removeItem(this.item)
-      this.loginService.cartItemEvent.emit()
+      this.loginService.updateCartItem()
+
       return
     }
     this.loginService.addItem(this.item);
-    this.loginService.cartItemEvent.emit()
+    this.loginService.updateCartItem()
+
   }
 
   goToPlayer(player: string) {
@@ -126,7 +128,6 @@ export class ItemComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy() {
     this.subs.unsubscribe()
     this.subsOff.unsubscribe()
-    this.subsItemCart.unsubscribe()
   }
 
 }

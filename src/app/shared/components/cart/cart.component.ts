@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { LoginService } from '../../services/login.service';
 import { Subscription } from 'rxjs';
 import { Anuncio } from '../../interfaces/arrays';
@@ -32,17 +32,15 @@ export class CartComponent {
 
   constructor() {
 
-    this.eventSubscription = this.loginService.cartMenuEvent.subscribe(bool => {
-      this.renderCart()
-      this.isCartOpen = bool
-      this.loadCart()
+    effect(() => {
+      this.isCartOpen = this.loginService.cartMenu()
+      if(this.loginService.cartItem() > 0) {
+        this.renderCart()
+        this.loadCart()
+        this.getTotalCartPrice()
+      }
     })
 
-    this.cartEventSubscription = this.loginService.cartItemEvent.subscribe(() => {
-      this.loadCart()
-      this.renderCart()
-      this.getTotalCartPrice()
-    })
   }
 
   ngOnInit() {

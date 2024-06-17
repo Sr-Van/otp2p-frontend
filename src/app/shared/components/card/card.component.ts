@@ -1,6 +1,6 @@
 import { LoginService } from './../../services/login.service';
 import { CurrencyPipe } from '@angular/common';
-import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, effect, inject } from '@angular/core';
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { Router } from '@angular/router';
 import { HeaderPipe } from '../../pipes/header.pipe';
@@ -18,7 +18,7 @@ import { Anuncio } from '../../interfaces/arrays';
   templateUrl: './card.component.html',
   styleUrl: './card.component.css'
 })
-export class CardComponent implements OnInit, OnDestroy{
+export class CardComponent implements OnInit{
 
   router = inject(Router)
   loginService = inject(LoginService)
@@ -33,6 +33,16 @@ export class CardComponent implements OnInit, OnDestroy{
 
   cartItemSubscription: Subscription
 
+  constructor() {
+    effect(() => {
+      this.isOnCart = this.utilService.verifyItemOnCart(this.card)
+      if(this.loginService.cartItem() > 0) {
+        this.isOnCart = this.utilService.verifyItemOnCart(this.card)
+        
+      }
+    })
+  }
+
   ngOnInit() {
     this.source = this.utilService.getImgSource(this.card)
 
@@ -40,9 +50,6 @@ export class CardComponent implements OnInit, OnDestroy{
     this.color = `var(--${this.card.badge})`
 
     this.isOnCart = this.utilService.verifyItemOnCart(this.card)
-    this.cartItemSubscription = this.loginService.cartItemEvent.subscribe(() => {
-      this.isOnCart = this.utilService.verifyItemOnCart(this.card)
-    })
   }
 
   goToItem(event: any) {
@@ -64,11 +71,11 @@ export class CardComponent implements OnInit, OnDestroy{
     
     if(this.isOnCart) {
       this.loginService.removeItem(this.card)
-      this.loginService.cartItemEvent.emit()
+      this.loginService.updateCartItem()
       return
     }
     this.loginService.addItem(this.card);
-    this.loginService.cartItemEvent.emit()
+    this.loginService.updateCartItem()
   }
 
   verifyItemOnCart() {
@@ -85,7 +92,4 @@ export class CardComponent implements OnInit, OnDestroy{
     console.log('removendo item '+ this.card.itemId)
   }
 
-  ngOnDestroy(): void {
-    this.cartItemSubscription.unsubscribe()
-  }
 }

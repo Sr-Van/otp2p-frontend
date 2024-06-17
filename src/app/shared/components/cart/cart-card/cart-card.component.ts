@@ -36,7 +36,7 @@ export class CartCardComponent {
 
         if (filteredArr.length <= 0) {
           this.loginService.removeItem(this.item)
-          this.loginService.cartItemEvent.emit()
+          this.loginService.updateCartItem()
         }
       },
       error: (error) => {
@@ -47,6 +47,6 @@ export class CartCardComponent {
 
   removeItem(item: Anuncio) {
     this.loginService.removeItem(item)
-    this.loginService.cartItemEvent.emit()
+    this.loginService.updateCartItem()
   }
 }
