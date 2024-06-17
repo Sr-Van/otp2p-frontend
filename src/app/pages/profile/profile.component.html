@@ -1,44 +1,59 @@
 @if(isContentLoaded) {
 
-    <div class="container page_padding">
-        <div class="player">
-            <h1>Olá, <b>{{ playerInfo.nome }}</b></h1>
+    <div class="container page_padding poppins-regular">
+        <div class="player rounded_medium box_shadow">
+            <div class="header">
+                <div class="left">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="right">
+                    <h1>{{ playerInfo.player }}</h1>
+                    <div class="tags">
+                        <span [hidden]="!playerInfo.verified"
+                        class="rounded_all box_shadow">verificado</span>
+                    </div>
+                </div>
+            </div>
     
-            <h2>Reveja algumas informações:</h2>
-    
-            <ul>
-                <li>
-                    <span>Seu nickname: </span>
-                    <p class="fake_input">{{ playerInfo.player }}</p>
-                </li>
-                
-                <li>
-                    <span>Seu mundo: </span>
-                    <p class="fake_input">{{ playerInfo.mundo }}</p>
-                </li>
-                
-                <li>
-                    <span>Sua badge: </span>
-                    <p class="fake_input">{{ playerInfo.badge }}</p>
-                </li>
-            </ul>
-    
-            <h2>Seus dados no site:</h2>
-    
-            <ul>
-                <li>
-                    <span>Seus anúncios ativos: </span>
-                    <p>{{ playerInfo.anuncios.length }}</p>
-                </li>
-                <li>
-                    <span>Suas vendas já feitas: </span>
-                    <p>{{ playerInfo.vendas.length }}</p>
-                </li>
-                <li>
-                    <span>Suas compras: </span>
-                    <p>{{ playerInfo.compras.length }}</p>
-                </li>
-            </ul>
+            <div class="content">
+                <article class="earnings rounded_medium">
+                    <h4>Ganhos</h4>
+                    <ol>
+                        <li>
+                            <span>Vendas</span>
+                            <span>{{ calcTotal(playerInfo.vendas) | currency: 'BRL' }}</span>
+                        </li>
+                        <li>
+                            <span>Compras</span>
+                            <span>{{ calcTotal(playerInfo.compras) | currency: 'BRL' }}</span>
+                        </li>
+                        <li>
+                            <span>Total</span>
+                            <span>{{ calcTotal(playerInfo.vendas) - calcTotal(playerInfo.compras) | currency: 'BRL' }}</span>
+                        </li>
+                    </ol>
+                </article>
+            </div>
+        </div>
+
+        <div class="infos rounded_medium box_shadow">
+            <div class="filter_info">
+                <ul>
+                    <li class="rounded_small" (click)="changeFilter($event, 0)">
+                        <span activated>Informações Pessoais</span>
+                    </li>
+                    <li class="rounded_small" (click)="changeFilter($event, 1)">
+                        <span>Trocas</span>
+                    </li>
+                    <li class="rounded_small" (click)="changeFilter($event, 2)">
+                        <span>Ofertas</span>
+                    </li>
+                </ul>
+            </div>
+            <!-- add content based on response of api -->
+            <div class="filter_content">
+
+            </div>
         </div>
     </div>
 }
