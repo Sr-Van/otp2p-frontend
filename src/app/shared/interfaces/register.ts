@@ -4,6 +4,7 @@ export interface Register {
     _id: string;
     player: string;
     nome: string;
+    email: string;
     mundo: string;
     badge: string;
     ammount: number;

@@ -6,6 +6,7 @@ import { Register } from '../../shared/interfaces/register';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 import { Anuncio, Trade } from '../../shared/interfaces/arrays';
 import { CurrencyPipe } from '@angular/common';
+import { TradeListComponent } from './trade-list.component';
 
 
 const filtrosProfile: {[index: number]: any} = {
@@ -17,7 +18,7 @@ const filtrosProfile: {[index: number]: any} = {
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [LoadingSpinnerComponent, CurrencyPipe],
+  imports: [LoadingSpinnerComponent, CurrencyPipe, TradeListComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -31,6 +32,8 @@ export class ProfileComponent {
   playerInfo: Register
   isContentLoaded: boolean = false
   actualFilter: string = filtrosProfile[0]
+  emailVisible: boolean = false
+  allTrades: Trade[] = []
 
   ngOnInit() {
 
@@ -43,9 +46,9 @@ export class ProfileComponent {
     this.getOnePlayerSubscription = this.offerService.getPlayerOffers(this.player)
       .subscribe({
         next: data => {
-          console.log(data)
           this.playerInfo = data
           this.isContentLoaded = true
+          this.allTrades = data.compras.concat(data.vendas)
         }, 
 
         error: error => {
@@ -73,6 +76,13 @@ export class ProfileComponent {
     target?.setAttribute('activated', '')
 
     this.actualFilter = filtrosProfile[filter]
-    console.log(this.actualFilter, event.target)
+  }
+
+  changeVisibility(event: any) {
+    const target = event.target
+    target.classList.toggle('fa-eye-slash')
+    target.classList.toggle('fa-eye')
+
+    this.emailVisible = !this.emailVisible
   }
 }

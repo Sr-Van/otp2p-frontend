@@ -52,7 +52,52 @@
             </div>
             <!-- add content based on response of api -->
             <div class="filter_content">
+                @if(actualFilter === 'infos') {
+                    <ul class="rounded_small personal_info">
+                        <li>
+                            <label for="nome">Nome: </label>
+                            <input class="box_shadow poppins-regular" disabled type="text" name="nome" id="nome" [value]="playerInfo.nome">
+                        </li>
+                        <li>
+                            <label for="email">Email: </label>
+                            <div>
+                                <input class="box_shadow poppins-regular" disabled [type]="emailVisible ? 'text' : 'password'" name="email" id="email" [value]="playerInfo.email">
+                                <i (click)="changeVisibility($event)" class="fa-solid fa-eye-slash"></i>
+                            </div>
+                        </li>
+                    </ul>
+                }
 
+                @if(actualFilter === 'trades') {
+                    <div class="rounded_small trades">
+                        @for(item of allTrades; track $index) {
+                            <app-trade-list 
+                            [imgSource]="item.header" 
+                            [itemType]="item.type" 
+                            [itemName]="item.header" 
+                            [mundo]="item.mundo" 
+                            [situation]="item.situation"
+                            ></app-trade-list>
+                        }@empty {
+                            <span style="font-size: 12px; padding: 10px;">Nenhuma troca</span>
+                        }
+                    </div>
+                }
+
+                @if(actualFilter === 'offers') {
+                    <div class="rounded_small offers">
+                        @for(item of playerInfo.anuncios; track $index) {
+                            <app-trade-list 
+                            [imgSource]="item.header" 
+                            [itemType]="item.type" 
+                            [itemName]="item.header" 
+                            [mundo]="item.mundo" ></app-trade-list>
+                        }
+                        @empty {
+                            <span style="font-size: 12px; padding: 10px;">Nenhum anúncio</span>
+                        }
+                    </div>
+                }
             </div>
         </div>
     </div>

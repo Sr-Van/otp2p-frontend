@@ -28,6 +28,7 @@ import { UtilService } from "../../shared/services/util.service";
         {
             padding: '5px',
             color: situation === 'received' ? 'green' : '#fff',
+            fontSize: '12px'
         }">
             {{ situation }}
         </span>
