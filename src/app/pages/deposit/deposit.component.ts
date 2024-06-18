@@ -1,6 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
+import { OfferService } from '../../shared/services/offer.service';
+
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-deposit',
@@ -11,14 +18,21 @@ import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner
 })
 export class DepositComponent {
 
+  offerService = inject(OfferService)
+  snack = inject(MatSnackBar)
+  
   formDeposit: FormGroup
   depositPrice: string = ''
   isLoaded: boolean = false
 
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+
   constructor() {
 
     this.formDeposit = new FormGroup({
-      deposit: new FormControl
+      ammount: new FormControl,
+      password: new FormControl
     })
 
     this.loadContent(1000)
@@ -26,9 +40,31 @@ export class DepositComponent {
 
   sendDeposit() {
 
-    //add here logic to insert deposit and deal with the response
-    console.log(this.formDeposit.value)
+    if(!this.formDeposit.valid) return
+
+    this.offerService.addAmmount(this.formDeposit.value).subscribe(
+      {
+        next: (data) => {
+
+          this.openSnack(data.msg, 'success')
+          this.offerService.updateAmmount()
+          
+        },
+        error: ({error}) => {
+          this.openSnack(error.msg, 'fail')
+        }
+      }
+    )
     this.formDeposit.reset()
+  }
+
+  openSnack(msg: string, type: string) {
+    this.snack.open(msg, 'OK', {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition : this.verticalPosition,
+      panelClass: ['snack', `snack_${type}`],
+      duration: 3000
+    })
   }
 
   filterNumber(number: any, event: any) {

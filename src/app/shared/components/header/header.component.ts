@@ -7,6 +7,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MenuComponent } from '../menu/menu.component';
 import { CartComponent } from '../cart/cart.component';
 import { UtilService } from '../../services/util.service';
+import { OfferService } from '../../services/offer.service';
 
 @Component({
   selector: 'app-header',
@@ -132,6 +133,7 @@ export class HeaderComponent {
 
   loginService = inject(LoginService)
   utilService = inject(UtilService)
+  offerService = inject(OfferService)
 
   userLogged: boolean = false
   isMenuOpen: boolean = false
@@ -143,6 +145,7 @@ export class HeaderComponent {
   constructor() {
     effect(() => {
       this.userLogged = this.loginService.userIsLoggedIn()
+      this.userAmount = this.offerService.userAmmount()
     })
   }
 

@@ -1,5 +1,5 @@
 @if(isLoaded) {
-    <main class="container page_padding">
+    <main class="container page_padding poppins-regular">
         <h1>Fazer depósito</h1>
     
         <div class="dep_alert rounded_small box_shadow">
@@ -11,8 +11,17 @@
     
             <form [formGroup]="formDeposit">
                 <label for="deposit">Valor:</label>
-                <input type="text" id="deposit" formControlName="deposit" (keyup)="filterNumber(deposit.value, $event)" #deposit>
-                <button class="box_shadow transition_all" (click)="sendDeposit()">Depositar</button>
+                <input type="text" id="deposit" formControlName="ammount" (keyup)="filterNumber(deposit.value, $event)" #deposit required="required">
+                
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" formControlName="password" required="required">
+                
+                <button 
+                    [style]="{
+                    opacity: formDeposit.valid ? '1' : '0'
+                    }" 
+                    [disabled]="!formDeposit.valid"
+                    class="box_shadow transition_all" (click)="sendDeposit()">Depositar</button>
             </form>
         </div>
     </main>
