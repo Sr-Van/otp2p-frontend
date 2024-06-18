@@ -44,7 +44,7 @@ export class CardComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.source = this.utilService.getImgSource(this.card)
+    this.source = this.utilService.getImgSource(this.card.type, this.card.header)
 
     this.tooltip = `Esse vendedor é um vendedor nivel ${this.card.badge}`
     this.color = `var(--${this.card.badge})`

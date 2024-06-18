@@ -16,21 +16,9 @@ export class UtilService {
     this.menu.update(bool => !bool)
   }
 
-  getImgSource(card: any): string {
-    if(card.type === "pokemon") {
-      return `../../assets/img/${card.header}.png`
-    }
-
-    if(card.type === "hd") {
-      return `../../assets/img/hds.png`
-    }
-
-    if(card.type === "tm") {
-      return `../../assets/img/tm.png`
-    }
-
-    return `../../assets/img/item.png`
-
+  getImgSource(type: string, image: string): string {
+    const imagePath = `../../assets/img/${type === 'pokemon' ? image : type}.png`;
+    return imagePath;
   }
 
   verifyItemOnCart(item: Anuncio): boolean {

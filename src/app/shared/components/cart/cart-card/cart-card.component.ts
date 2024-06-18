@@ -26,7 +26,7 @@ export class CartCardComponent {
   sourceImg: string = ''
   saleSubscription: Subscription
   ngOnInit() {
-    this.sourceImg = this.utilService.getImgSource(this.item)
+    this.sourceImg = this.utilService.getImgSource(this.item.type, this.item.header)
 
     this.saleSubscription = this.salesService.getAllSales().subscribe({
       next: (data) => {

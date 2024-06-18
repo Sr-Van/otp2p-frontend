@@ -78,7 +78,7 @@ export class ItemComponent implements AfterViewInit, OnDestroy {
       
       this.item = arr.filter((item: any) => item.itemId === this.itemId)[0]
 
-      this.source = this.utilService.getImgSource(this.item)
+      this.source = this.utilService.getImgSource(this.item.type, this.item.header)
       this.isOnCart = this.utilService.verifyItemOnCart(this.item)
       
       this.tooltip = `Esse vendedor é um vendedor nivel ${this.item.badge}`

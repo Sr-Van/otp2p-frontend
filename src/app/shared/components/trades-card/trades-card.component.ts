@@ -69,7 +69,7 @@ export class TradesCardComponent {
 
   ngOnInit() {
 
-    this.imgSource = this.utilService.getImgSource(this.item)
+    this.imgSource = this.utilService.getImgSource(this.item.type, this.item.header)
 
     this.getProgressBarInfos()
 

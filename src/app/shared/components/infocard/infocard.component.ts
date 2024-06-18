@@ -98,6 +98,6 @@ export class InfocardComponent {
   }
 
   getImgSource(): string {
-    return this.utilService.getImgSource(this.card)
+    return this.utilService.getImgSource(this.card.type, this.card.header)
   }
 }
