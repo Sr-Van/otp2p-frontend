@@ -1,3 +1,4 @@
+import { resolve } from 'node:path';
 import { Component, inject, ViewChild } from '@angular/core';
 
 import { SalesService } from '../../shared/services/sales.service';
@@ -12,11 +13,12 @@ import { Subscription } from 'rxjs';
 
 import { CardComponent } from '../../shared/components/card/card.component';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CardComponent, MatPaginatorModule, LoadingSpinnerComponent],
+  imports: [CardComponent, MatPaginatorModule, LoadingSpinnerComponent, RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -44,7 +46,20 @@ export class HomeComponent {
     this.loadContent()    
   }
 
-  toggleFilter (filter: any){
+  toggleFilter (event: any, filter: any){
+
+    const targetStr = event.target.textContent
+    let newStr = ""
+
+    if(targetStr.includes('Esconder')) {
+      newStr = targetStr.replace('Esconder', 'Mostrar')
+      event.target.removeAttribute('using-filter', '')
+    } else {
+      event.target.setAttribute('using-filter', '')
+      newStr = targetStr.replace('Mostrar', 'Esconder')
+    }
+    
+    event.target.textContent = newStr
     filter.classList.toggle('hidden')
   }
 

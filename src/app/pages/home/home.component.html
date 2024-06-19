@@ -9,7 +9,8 @@
     </div>
 
     <div style="width: 100%; display: flex; align-items: start;">
-        <button class="toggle_btn" (click)="toggleFilter(server)">Mostrar servidores</button>
+        <button class="toggle_btn" (click)="toggleFilter($event, server)">Mostrar servidores
+        </button>
     </div>
     <ul class="hidden server_list list rounded_small" #server>
         @for(server of servidores; track $index) {
@@ -29,7 +30,7 @@
     </div>
 
     <div style="width: 100%; display: flex; align-items: start;">
-        <button class="toggle_btn" (click)="toggleFilter(type)">Mostrar tipos</button>
+        <button class="toggle_btn" (click)="toggleFilter($event, type)">Mostrar tipos</button>
     </div>
 
     <ul class="hidden type_list list rounded_small" #type>
@@ -54,7 +55,15 @@
                     <app-card [card]="sale"></app-card>
                 }
                 @empty { 
-                    <span>Não há items :(</span>
+                    <span>
+                        Nenhum anuncio encontrado...
+                    </span>
+                    <span>
+                        Seja o primeiro a vender seu item <a routerLink="/add/offer">aqui!</a>
+                    </span>
+                    <span>
+                        Seus anúncios aparecerão para outros players, caso queira ver seus anuncios <a routerLink="/your-offers">clique aqui!</a>
+                    </span>
                 }
             </ul>
 
