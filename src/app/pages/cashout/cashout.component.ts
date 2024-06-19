@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { OfferService } from '../../shared/services/offer.service';
+import { UtilService } from '../../shared/services/util.service';
 
 @Component({
   selector: 'app-cashout',
@@ -11,13 +13,17 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 })
 export class CashoutComponent {
 
+  ofService = inject(OfferService)
+  utService = inject(UtilService)
+
   cashoutForm: FormGroup
   isLoaded: boolean = false
   cashoutPrice: string = ''
   constructor() {
     
     this.cashoutForm = new FormGroup({
-      price: new FormControl
+      ammount: new FormControl,
+      password: new FormControl
     })
     this.loadContent(1000)
   }
@@ -53,6 +59,16 @@ export class CashoutComponent {
 
   cashout() {
 
-    console.log(this.cashoutForm.value)
+    this.ofService.removeAmmount(this.cashoutForm.value).subscribe({
+      next: (data) => {
+        this.utService.openSnack(data.msg, 'success')
+        this.ofService.updateAmmount()
+      },
+      error: ({error}) => {
+        this.utService.openSnack(error.msg, 'fail')
+      }
+    })
+
+    this.cashoutForm.reset()
   }
 }

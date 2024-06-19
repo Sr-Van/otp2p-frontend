@@ -10,9 +10,18 @@
         <div class="dep_form">
     
             <form [formGroup]="cashoutForm">
-                <label for="price">Valor:</label>
-                <input type="text" id="price" formControlName="price" (keyup)="filterNumber(deposit.value, $event)" #deposit>
-                <button class="box_shadow transition_all" (click)="cashout()">Sacar</button>
+                <label for="ammount">Valor:</label>
+
+                <input type="text" id="ammount" required formControlName="ammount" (keyup)="filterNumber(deposit.value, $event)" #deposit>
+
+                <label for="password">Senha:</label>
+                <input type="password" id="password" required formControlName="password" >
+
+                <button [style]="{
+                    opacity: cashoutForm.valid ? '1' : '0'
+                }" 
+                [disabled]="!cashoutForm.valid"
+                class="box_shadow transition_all" (click)="cashout()">Sacar</button>
             </form>
         </div>
     </main>

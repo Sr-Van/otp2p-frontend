@@ -42,6 +42,10 @@ export class OfferService {
     return this.http.put<any>(`${this.apiUrl}add/ammount/${this.loginService.playerName}`, body)
   }
 
+  removeAmmount(body: object): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}remove/ammount/${this.loginService.playerName}`, body)
+  }
+
   updateAmmount() {
     this.getPlayerOffers(this.loginService.playerName).subscribe({
       next: (data) => {
