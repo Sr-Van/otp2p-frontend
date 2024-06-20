@@ -6,7 +6,7 @@ import { LoginService } from '../../shared/services/login.service';
 
 import { Anuncio } from '../../shared/interfaces/arrays';
 
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { merge, of } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -31,10 +31,12 @@ export class HomeComponent {
   tipos: string [] = ['pokemon', 'hd', 'tm', 'item']
   sales: Anuncio[] = []
   filteredSales: Anuncio[]
+  paginatorSales: Anuncio[]
   
   subs: Subscription
   isload: boolean = false
   player: string
+  currentPage: number = 0
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -69,6 +71,7 @@ export class HomeComponent {
       {
         this.sales = this.player ? data.results.filter((item: Anuncio) => item.player !== this.player) : data.results
         this.filteredSales = this.sales
+        this.paginatorSales = this.filteredSales
 
         this.loading(2000)
       })
@@ -78,11 +81,15 @@ export class HomeComponent {
     const value = event.target.dataset.filter
     if (type === 'server') {
       this.filteredSales = this.sales.filter(sale => sale.mundo == value)
+      this.paginatorSales = this.filteredSales
+      this.currentPage = 0
       this.loading(1500)
       return
     }
 
     this.filteredSales = this.sales.filter(sale => sale.type.toLowerCase() == value.toLowerCase())
+    this.paginatorSales = this.filteredSales
+    this.currentPage = 0
   
     this.loading(2000)
   }
@@ -93,6 +100,8 @@ export class HomeComponent {
     this.filteredSales = this.sales.filter(sale => {
       return sale.header.toLowerCase().includes(search.toLowerCase())
     })
+    this.paginatorSales = this.filteredSales
+    this.currentPage = 0
 
     this.loading(1500)
     
@@ -116,7 +125,16 @@ export class HomeComponent {
         const to = from + 10;
         this.filteredSales = res.slice(from, to);
     });
-    }
+  }
+
+  handlePagation(event: PageEvent) {
+    console.log(event)
+    const from = event.pageIndex * 10;
+    const to = from + 10;
+    this.loading(1500)
+    this.paginatorSales = this.filteredSales.slice(from, to)
+    this.currentPage = event.pageIndex
+  }
 
   ngAfterViewInit() {
     if(this.player) {

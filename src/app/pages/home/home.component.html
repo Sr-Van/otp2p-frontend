@@ -51,7 +51,7 @@
 
         <div class="itens_shop">
             <ul class="list">
-                @for(sale of filteredSales; track $index) {
+                @for(sale of paginatorSales.slice(0, 10); track $index) {
                     <app-card [card]="sale"></app-card>
                 }
                 @empty { 
@@ -74,7 +74,9 @@
                     <mat-paginator
                         #paginator
                         pageSize="10"
-                        [length]="filteredSales.length"></mat-paginator>
+                        [length]="filteredSales.length"
+                        [pageIndex]="currentPage"
+                        (page)="handlePagation($event)"></mat-paginator>
                     <!-- limite de 30 itens por pagina -->
                 </div>
             }
