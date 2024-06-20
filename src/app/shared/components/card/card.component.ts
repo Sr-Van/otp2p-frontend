@@ -53,6 +53,8 @@ export class CardComponent implements OnInit{
   }
 
   goToItem(event: any) {
+
+    if(this.isYours) return
  
     if(event.target.tagName === 'BUTTON') return
     this.router.navigate([''])

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, effect, inject } from '@angular/core';
+import { AfterViewInit, Component, effect, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -29,7 +29,7 @@ import { HeaderPipe } from '../../shared/pipes/header.pipe';
   templateUrl: './item.component.html',
   styleUrl: './item.component.css'
 })
-export class ItemComponent implements AfterViewInit, OnDestroy {
+export class ItemComponent implements AfterViewInit {
 
   router = inject(Router)
   activateRoute = inject(ActivatedRoute)
@@ -78,6 +78,8 @@ export class ItemComponent implements AfterViewInit, OnDestroy {
       
       this.item = arr.filter((item: any) => item.itemId === this.itemId)[0]
 
+      this.verifyItemIsYours(this.item.player, this.loginService.playerName)
+
       this.source = this.utilService.getImgSource(this.item.type, this.item.header)
       this.isOnCart = this.utilService.verifyItemOnCart(this.item)
       
@@ -125,9 +127,11 @@ export class ItemComponent implements AfterViewInit, OnDestroy {
     this.router.navigate([`player/${player}`])
   }
 
-  ngOnDestroy() {
-    this.subs.unsubscribe()
-    this.subsOff.unsubscribe()
+  verifyItemIsYours(player: string, itemPlayer: string){
+    if(player === itemPlayer) {
+      this.router.navigate(['/'])
+      return
+    }
   }
 
 }
