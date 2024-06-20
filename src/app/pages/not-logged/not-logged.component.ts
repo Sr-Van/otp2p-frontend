@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { UtilService } from '../../shared/services/util.service';
 
 @Component({
   selector: 'app-not-logged',
@@ -9,5 +10,11 @@ import { RouterModule } from '@angular/router';
   styleUrl: './not-logged.component.css'
 })
 export class NotLoggedComponent {
+
+  $uS = inject(UtilService)
+
+  constructor() {
+    this.$uS.setPageName('Not Logged')
+  }
 
 }

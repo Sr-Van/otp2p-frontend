@@ -7,6 +7,7 @@ import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner
 import { Anuncio, Trade } from '../../shared/interfaces/arrays';
 import { CurrencyPipe } from '@angular/common';
 import { TradeListComponent } from './trade-list.component';
+import { UtilService } from '../../shared/services/util.service';
 
 
 const filtrosProfile: {[index: number]: any} = {
@@ -25,7 +26,7 @@ const filtrosProfile: {[index: number]: any} = {
 export class ProfileComponent {
   offerService = inject(OfferService)
   loginService = inject(LoginService)
-
+  utSerivce = inject(UtilService)
 
   getOnePlayerSubscription: Subscription
   player: string
@@ -37,7 +38,9 @@ export class ProfileComponent {
 
   ngOnInit() {
 
+    
     this.player = this.loginService.playerName
+    this.utSerivce.setPageName(`${this.player} - OTP2P`)
 
     if(!this.player) {
       window.location.reload()

@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { Trade } from '../../shared/interfaces/arrays';
 import { TradesCardComponent } from '../../shared/components/trades-card/trades-card.component';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
+import { UtilService } from '../../shared/services/util.service';
 
 @Component({
   selector: 'app-trades',
@@ -20,6 +21,7 @@ export class TradesComponent implements AfterViewInit {
 
   loginService = inject(LoginService)
   offerService = inject(OfferService)
+  $uS = inject(UtilService)
 
   player: string
   isLoaded: boolean = false
@@ -30,6 +32,8 @@ export class TradesComponent implements AfterViewInit {
   playerBuys: Trade[] = []
 
   ngOnInit() {
+
+    this.$uS.setPageName('Trocas - OTP2P')
 
     this.player = this.loginService.playerName
     this.getPlayerTrades()

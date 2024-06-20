@@ -13,6 +13,7 @@ import { Anuncio } from '../../shared/interfaces/arrays';
 import { OfferService } from '../../shared/services/offer.service';
 import { LoginService } from '../../shared/services/login.service';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
+import { UtilService } from '../../shared/services/util.service';
 
 @Component({
   selector: 'app-new-offer',
@@ -25,6 +26,7 @@ export class NewOfferComponent {
 
   offerService = inject(OfferService)
   loginService = inject(LoginService)
+  $uS = inject(UtilService)
   snack = inject(MatSnackBar)
 
   subs: Subscription
@@ -45,6 +47,8 @@ export class NewOfferComponent {
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   ngOnInit() {
+
+    this.$uS.setPageName('Novo Anúncio - OTP2P')
 
     this.player = this.loginService.playerName
 

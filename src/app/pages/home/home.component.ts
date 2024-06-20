@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs';
 import { CardComponent } from '../../shared/components/card/card.component';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 import { RouterModule } from '@angular/router';
+import { UtilService } from '../../shared/services/util.service';
 
 @Component({
   selector: 'app-home',
@@ -26,6 +27,7 @@ export class HomeComponent {
   
   salesService = inject(SalesService)
   loginService = inject(LoginService)
+  $uS = inject(UtilService)
 
   servidores: string [] = ['red','blue','green','yellow','orange','black','white','purple','pink']
   tipos: string [] = ['pokemon', 'hd', 'tm', 'item']
@@ -41,6 +43,8 @@ export class HomeComponent {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor() {
+    this.$uS.setPageName('OTP2P - Compra & Venda')
+    
     this.player = this.loginService.playerName
     if(!this.player && this.loginService.userIsLoggedIn()) {
       window.location.reload()

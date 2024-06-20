@@ -15,6 +15,7 @@ import {
 
 import { LoginService } from '../../shared/services/login.service';
 import { OfferService } from '../../shared/services/offer.service';
+import { UtilService } from '../../shared/services/util.service';
 
 @Component({
   selector: 'app-login',
@@ -30,6 +31,7 @@ export class LoginComponent {
   //dependency injection
   loginService = inject(LoginService)
   offerService = inject(OfferService)
+  $uS = inject(UtilService)
   router = inject(Router)
   snack = inject(MatSnackBar)
   formBuilder = inject(FormBuilder)
@@ -51,6 +53,7 @@ export class LoginComponent {
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   ngOnInit() {
+    this.$uS.setPageName('Login - OTP2P')
     //formulario de login
     this.formLogin = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],

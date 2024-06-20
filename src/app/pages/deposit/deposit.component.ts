@@ -8,6 +8,7 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition
 } from '@angular/material/snack-bar';
+import { UtilService } from '../../shared/services/util.service';
 
 @Component({
   selector: 'app-deposit',
@@ -20,6 +21,7 @@ export class DepositComponent {
 
   offerService = inject(OfferService)
   snack = inject(MatSnackBar)
+  $uS = inject(UtilService)
   
   formDeposit: FormGroup
   depositPrice: string = ''
@@ -29,6 +31,8 @@ export class DepositComponent {
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   constructor() {
+
+    this.$uS.setPageName('Deposito - OTP2P')
 
     this.formDeposit = new FormGroup({
       ammount: new FormControl,

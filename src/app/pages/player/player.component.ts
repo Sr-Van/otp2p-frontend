@@ -11,6 +11,7 @@ import { RatingCardComponent } from '../../shared/components/rating-card/rating-
 import { Anuncio, Trade } from '../../shared/interfaces/arrays';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 import { LoginService } from '../../shared/services/login.service';
+import { UtilService } from '../../shared/services/util.service';
 
 @Component({
   selector: 'app-player',
@@ -30,6 +31,7 @@ export class PlayerComponent {
   activateRoute = inject(ActivatedRoute)
   offerServ = inject(OfferService)
   loginService = inject(LoginService)
+  $uS = inject(UtilService)
 
   player: any
   subs: Subscription
@@ -46,10 +48,11 @@ export class PlayerComponent {
 
   ngOnInit() {
     this.player = this.activateRoute.snapshot.paramMap.get('player')
-
+    
     if(this.player === "") {
       window.location.reload()
     }
+    this.$uS.setPageName(`${this.player} - OTP2P`)
 
     this.subs = this.offerServ.getPlayerOffers(this.player).subscribe(data => {
       this.anuncios = data.anuncios

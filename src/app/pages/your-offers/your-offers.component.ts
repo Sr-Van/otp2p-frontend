@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { LoginService } from '../../shared/services/login.service';
 import { Anuncio } from '../../shared/interfaces/arrays';
 import { CardComponent } from '../../shared/components/card/card.component';
+import { UtilService } from '../../shared/services/util.service';
 
 @Component({
   selector: 'app-your-offers',
@@ -17,12 +18,15 @@ export class YourOffersComponent {
 
   salesService = inject(SalesService)
   loginService = inject(LoginService)
+  $uS = inject(UtilService)
 
   isLoaded: boolean = false
   salesSub: Subscription
   yourSalesArr: Anuncio[] = []
 
   constructor() {
+    this.$uS.setPageName('Suas Ofertas - OTP2P')
+    
     this.salesSub = this.salesService.getAllSales().subscribe({
       next: (data) => {
 

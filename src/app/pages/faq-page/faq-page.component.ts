@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 import { DOCUMENT } from '@angular/common';
+import { UtilService } from '../../shared/services/util.service';
 
 @Component({
   selector: 'app-faq-page',
@@ -15,6 +16,7 @@ export class FaqPageComponent implements AfterViewInit {
 
   activatedRoute = inject(ActivatedRoute)
   route = inject(Router)
+  $uS = inject(UtilService)
   document = inject(DOCUMENT)
   
   filterParam: any
@@ -22,6 +24,8 @@ export class FaqPageComponent implements AfterViewInit {
   isLoaded: boolean = false
 
   constructor() {
+
+    this.$uS.setPageName('FAQ - OTP2P')
 
     this.routeSubscription = this.activatedRoute.paramMap.subscribe({
       next: (data: any) => {

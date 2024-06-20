@@ -36,7 +36,7 @@ export class ItemComponent implements AfterViewInit {
   salesService = inject(SalesService)
   offerService = inject(OfferService)
   loginService = inject(LoginService)
-  utilService = inject(UtilService)
+  $uS = inject(UtilService)
 
   subs: Subscription
   subsOff: Subscription
@@ -57,7 +57,7 @@ export class ItemComponent implements AfterViewInit {
 
   constructor() { 
     effect(() => {
-      this.isOnCart = this.utilService.verifyItemOnCart(this.item)
+      this.isOnCart = this.$uS.verifyItemOnCart(this.item)
     })
   }
 
@@ -80,12 +80,16 @@ export class ItemComponent implements AfterViewInit {
 
       this.verifyItemIsYours(this.item.player, this.loginService.playerName)
 
-      this.source = this.utilService.getImgSource(this.item.type, this.item.header)
-      this.isOnCart = this.utilService.verifyItemOnCart(this.item)
+      this.source = this.$uS.getImgSource(this.item.type, this.item.header)
+      
+      this.isOnCart = this.$uS.verifyItemOnCart(this.item)
       
       this.tooltip = `Esse vendedor é um vendedor nivel ${this.item.badge}`
 
       this.color = `var(--${this.item.badge})`
+
+      this.$uS.setPageName(`${this.item.header} - OTP2P`)
+
     })
 
     setTimeout(() => {

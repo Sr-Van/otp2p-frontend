@@ -7,6 +7,7 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition
 } from '@angular/material/snack-bar';
+import { Title } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class UtilService {
 
   loginService = inject(LoginService)
   menu = signal<boolean>(false)
+  title = inject(Title)
 
   snackBar = inject(MatSnackBar)
   horizontalPosition: MatSnackBarHorizontalPosition = 'right'
@@ -45,5 +47,9 @@ export class UtilService {
       panelClass: ['snack', `snack_${type}`],
       duration: 3000
     })
+  }
+
+  setPageName(pageName: string) {
+    this.title.setTitle(pageName)
   }
 }

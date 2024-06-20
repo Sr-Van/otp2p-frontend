@@ -20,6 +20,8 @@ export class CashoutComponent {
   isLoaded: boolean = false
   cashoutPrice: string = ''
   constructor() {
+
+    this.utService.setPageName('Saque - OTP2P')
     
     this.cashoutForm = new FormGroup({
       ammount: new FormControl,
