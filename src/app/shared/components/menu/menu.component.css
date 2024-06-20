@@ -10,6 +10,21 @@
 
     width: 150px;
     border-radius: var(--border-radius-medium);
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-20%);
+}
+
+.overlay {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    z-index: 999;
+    backdrop-filter: blur(2px);
 }
 
 .menu li {
@@ -61,4 +76,41 @@
 
 .menu li .fa-right-from-bracket, .menu li:nth-child(7) p {
     color: #d20e0e;
+}
+
+@media(width >= 425px) {
+    .menu {
+        left: 70%;
+        transform: translateX(-55%);
+    }
+}
+@media(width >= 768px) {
+    .menu {
+        transform: translateX(-20%);
+    }
+}
+@media(width >= 1024px) {
+    .menu {
+        left: 80%;
+        transform: translateX(-20%);
+    }
+}
+@media(width >= 1280px) {
+    .menu {
+        left: 72%;
+        transform: translateX(-10%);
+    }
+}
+@media(width >= 1440px) {
+    .menu {
+        left: 80%;
+        transform: translateX(-40%);
+    }
+}
+
+@media(width > 1980px) {
+    .menu {
+        left: 70%;
+        transform: translateX(-90%);
+    }
 }

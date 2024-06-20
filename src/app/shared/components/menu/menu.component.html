@@ -1,34 +1,37 @@
 @if(isMenuOpen){
 
-    <ul class="menu rounded_small">
-        <li (click)="goToRoute('profile')">
-            <i class="fa-solid fa-user"></i>
-            <p>Perfil</p>
-        </li>
-        <li (click)="goToRoute('deposit')">
-            <i class="fa-solid fa-arrow-up"></i>
-            <p>Deposito</p>
-        </li>
-        <li (click)="goToRoute('cashout')">
-            <i class="fa-solid fa-arrow-down"></i>
-            <p>Saque</p>
-        </li>
-        <li (click)="goToRoute('trades')">
-            <i class="fa-solid fa-arrows-rotate"></i>
-            <p>Trocas</p>
-        </li>
-        <li (click)="goToRoute('add/offer')">
-            <i class="fa-solid fa-tag"></i>
-            <p>Vender item</p>
-        </li>
-        <li (click)="goToRoute('/your-offers')">
-            <i class="fa-solid fa-store"></i>
-            <p>Suas vendas</p>
-        </li>
-        <li (click)="logOut()">
-            <i class="fa-solid fa-right-from-bracket"></i>
-            <p>Sair</p>
-        </li>
-    </ul>
+    <div class="overlay transition_all">
+        <ul class="menu rounded_small">
+            <li (click)="goToRoute('profile')">
+                <i class="fa-solid fa-user"></i>
+                <p>Perfil</p>
+            </li>
+            <li (click)="goToRoute('deposit')">
+                <i class="fa-solid fa-arrow-up"></i>
+                <p>Deposito</p>
+            </li>
+            <li (click)="goToRoute('cashout')">
+                <i class="fa-solid fa-arrow-down"></i>
+                <p>Saque</p>
+            </li>
+            <li (click)="goToRoute('trades')">
+                <i class="fa-solid fa-arrows-rotate"></i>
+                <p>Trocas</p>
+            </li>
+            <li (click)="goToRoute('add/offer')">
+                <i class="fa-solid fa-tag"></i>
+                <p>Vender item</p>
+            </li>
+            <li (click)="goToRoute('/your-offers')">
+                <i class="fa-solid fa-store"></i>
+                <p>Suas vendas</p>
+            </li>
+            <li (click)="logOut()">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <p>Sair</p>
+            </li>
+        </ul>
+
+    </div>
 
 }

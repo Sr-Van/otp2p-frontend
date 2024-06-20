@@ -1,7 +1,6 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LoginService } from '../../services/login.service';
-import { Subscription } from 'rxjs';
 import { CurrencyPipe } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MenuComponent } from '../menu/menu.component';
@@ -19,7 +18,7 @@ import { OfferService } from '../../services/offer.service';
         <div class="logo" style="height: 100;">
             <a routerLink="/" class="poppins-bold" style="height: 100%; position: relative;">
               <img src="./../../../../assets/img/OTP2PLOGOgengar.png" alt="Logo"
-              style="width: 90px;">
+              >
             </a>
         </div>
 
@@ -66,6 +65,11 @@ import { OfferService } from '../../services/offer.service';
     z-index: 999;
   }
 
+  nav img {
+    width: calc(50% + 5vw);
+    max-width: 90px;
+  }
+
   .itens, .actions {
       display: flex;
       flex-direction: row;
@@ -78,7 +82,6 @@ import { OfferService } from '../../services/offer.service';
   app-menu {
     position: fixed;
     top: 80px;
-    right: 15%;
 
     z-index: 998;
 }
