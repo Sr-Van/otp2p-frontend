@@ -82,19 +82,18 @@ export class HomeComponent {
   }
 
   addFilter(type: string, event: any) {
+
     const value = event.target.dataset.filter
+    this.handleFilterBtn(event.target)
+    
     if (type === 'server') {
       this.filteredSales = this.sales.filter(sale => sale.mundo == value)
-      this.paginatorSales = this.filteredSales
-      this.currentPage = 0
-      this.loading(1500)
-      return
+    } else {
+      this.filteredSales = this.sales.filter(sale => sale.type.toLowerCase() == value.toLowerCase())
     }
 
-    this.filteredSales = this.sales.filter(sale => sale.type.toLowerCase() == value.toLowerCase())
     this.paginatorSales = this.filteredSales
     this.currentPage = 0
-  
     this.loading(2000)
   }
 
@@ -118,21 +117,16 @@ export class HomeComponent {
     }, time);
   }
 
-  linkListToPaginator() {
-    merge(this.paginator.page).pipe(
-        startWith({}),
-        switchMap(() => {
-           return of(this.sales);
-    }))
-    .subscribe(res => {
-        const from = this.paginator.pageIndex * 10;
-        const to = from + 10;
-        this.filteredSales = res.slice(from, to);
-    });
+  handleFilterBtn(target: HTMLElement) {
+    
+    const actualBtn = document.querySelector('[using-filter-serv]')
+    
+    actualBtn?.removeAttribute('using-filter-serv')
+    target.setAttribute('using-filter-serv', '')
+
   }
 
   handlePagation(event: PageEvent) {
-    console.log(event)
     const from = event.pageIndex * 10;
     const to = from + 10;
     this.loading(1500)

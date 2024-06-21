@@ -14,8 +14,14 @@
     </div>
     <ul class="hidden server_list list rounded_small" #server>
         @for(server of servidores; track $index) {
-            <li (click)="addFilter('server', $event)" [attr.data-filter]="server">
-                <div class="blur_layer">
+            <li (click)="addFilter('server', $event)">
+                <div [attr.data-filter]="server" [style]="{
+                    background: 'linear-gradient(0deg, ' + server + ' 0%, rgba(0,212,255,0) 90%)',
+                    position: 'absolute',
+                    width: '100%',
+                    height: '100%',
+                    transition: 'all 300ms ease',
+                    }" class="blur_layer">
                 </div>
                 <p > {{ server }}</p>
             </li>
@@ -36,7 +42,7 @@
     <ul class="hidden type_list list rounded_small" #type>
         @for(tipo of tipos; track $index) {
 
-            <li (click)="addFilter('type', $event)" [attr.data-filter]="tipo"> 
+            <li (click)="addFilter('type', $event)" [attr.data-filter]="tipo" class="type_filter"> 
                 {{ tipo }}
             </li>
         }
