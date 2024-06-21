@@ -68,6 +68,10 @@ export class OfferService {
     return this.http.put<any>(`${this.apiUrl}add/offer/${player}`, data)
   }
 
+  removeOffer(data: any) : Observable<any>{
+    return this.http.put<any>(`${this.apiUrl}remove/offer`, data)
+  }
+
   addComment(player: string, data: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}add/rating/${player}`, data)
   }

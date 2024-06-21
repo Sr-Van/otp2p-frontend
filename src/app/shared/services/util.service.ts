@@ -15,8 +15,10 @@ import { Title } from '@angular/platform-browser';
 export class UtilService {
 
   loginService = inject(LoginService)
-  menu = signal<boolean>(false)
   title = inject(Title)
+  
+  menu = signal<boolean>(false)
+  isOffersUpdated = signal<boolean>(false)
 
   snackBar = inject(MatSnackBar)
   horizontalPosition: MatSnackBarHorizontalPosition = 'right'

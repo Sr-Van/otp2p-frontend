@@ -7,6 +7,7 @@ import { HeaderPipe } from '../../pipes/header.pipe';
 import { UtilService } from '../../services/util.service';
 import { Subscription } from 'rxjs';
 import { Anuncio } from '../../interfaces/arrays';
+import { OfferService } from '../../services/offer.service';
 
 @Component({
   selector: 'app-card',
@@ -23,6 +24,7 @@ export class CardComponent implements OnInit{
   router = inject(Router)
   loginService = inject(LoginService)
   utilService = inject(UtilService)
+  ofS$ = inject(OfferService)
 
   @Input() card: Anuncio
   @Input() isYours: boolean
@@ -91,7 +93,21 @@ export class CardComponent implements OnInit{
   removeSale() {
     if (!this.isYours) return
 
-    console.log('removendo item '+ this.card.itemId)
+    const obj = {
+      itemId: this.card.itemId,
+      player: this.loginService.playerName
+    }
+
+    this.ofS$.removeOffer(obj).subscribe({
+      next: () => {
+        this.utilService.isOffersUpdated.update(bool => !bool)
+        this.utilService.openSnack(`${this.card.header} removido dos seus anuncios`, 'success')
+      }, error: (err) => {
+        console.log(err)
+      }, complete: () => {
+        console.log('item removido')
+      }
+    })
   }
 
 }

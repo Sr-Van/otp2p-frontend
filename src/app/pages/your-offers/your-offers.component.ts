@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 import { SalesService } from '../../shared/services/sales.service';
 import { Subscription } from 'rxjs';
@@ -25,8 +25,23 @@ export class YourOffersComponent {
   yourSalesArr: Anuncio[] = []
 
   constructor() {
+    effect(() => {
+      if(!!this.$uS.isOffersUpdated()) {
+        this.loadSales()
+      }
+    })
     this.$uS.setPageName('Suas Ofertas - OTP2P')
-    
+    this.loadSales()
+  }
+  
+  loadContent(time: number) {
+    this.isLoaded = false
+    setTimeout(() => {
+      this.isLoaded = true
+    }, time);
+  }
+
+  loadSales() {
     this.salesSub = this.salesService.getAllSales().subscribe({
       next: (data) => {
 
@@ -37,12 +52,5 @@ export class YourOffersComponent {
         console.log(err)
       }
     })
-  }
-  
-  loadContent(time: number) {
-    this.isLoaded = false
-    setTimeout(() => {
-      this.isLoaded = true
-    }, time);
   }
 }
