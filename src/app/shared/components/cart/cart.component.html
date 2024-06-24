@@ -43,10 +43,10 @@
                     color: #fff;
                     border: none;
                     padding: var(--basic-padding);
-                    border-radius: var(--border-radius-small);">
+                    border-radius: var(--border-radius-small);" #password>
 
                     <!-- hidding if the player dont have enough money -->
-                    <button [hidden]="!verifyPlayerAmount()" class="box_shadow rounded_small" (click)="addTrade()">Finalizar</button>
+                    <button [hidden]="!verifyPlayerAmount()" class="box_shadow rounded_small" (click)="addTrade(password.value)">Finalizar</button>
                     <small style="font-size: 12px; margin-top: 5px; color: #b6b6b6;">Pelo site estar no beta, talvez você precise repetir a operação várias vezes para finalizar todo seu carrinho.</small>
                 }
 

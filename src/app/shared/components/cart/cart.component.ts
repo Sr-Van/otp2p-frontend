@@ -7,6 +7,8 @@ import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.comp
 import { TradeService } from '../../services/trade.service';
 import { Router } from '@angular/router';
 import { OfferService } from '../../services/offer.service';
+import { UtilService } from '../../services/util.service';
+import { filter, switchMap } from 'rxjs';
 
 
 @Component({
@@ -21,6 +23,7 @@ export class CartComponent {
   loginService = inject(LoginService)
   tradeService = inject(TradeService)
   ofS$ = inject(OfferService)
+  utS$ = inject(UtilService)
   router = inject(Router)
 
   isCartOpen: boolean = false
@@ -63,34 +66,47 @@ export class CartComponent {
     this.total = this.cart.reduce((accumulator, {price}) => accumulator + Number(price), 0) || 0
   }
 
-  addTrade() {
+  addTrade(pass: string) {
+    console.log('addTrade method called')
 
     if(!this.verifyPlayerAmount()) {
+      console.log('Player amount is not sufficient')
       return
     }
     
+    // TODO: trocar para metodos separados que enviam para um endpoint quando for apenas um ou para um endpoint quando for muitos
+    
     for (const item of this.cart) {
+      console.log('Processing item:', item)
       const tradeBody = {
         itemId: item.itemId,
         player: item.player,
         trade_player: this.loginService.playerName
       }
 
-      this.tradeService.addTrade(tradeBody).subscribe(
-        {
-          next: (data) => {
-            console.log(data.msg)
-          }, error: (err) => {
-            console.log(err)
-          }, complete: () => {
-            this.loginService.removeItem(item)
-            this.loadCart()
-            this.router.navigate(['/trades'])
-          }
-        })
+      this.ofS$.removeAmmount({
+        ammount: item.price,
+        password: pass
+      }).pipe(
+        filter(({msg}) => msg === 'Retirada feita com sucesso!'),
+        switchMap(() => this.tradeService.addTrade(tradeBody))
+      ).subscribe({
+        next: (data) => {
+          console.log('Trade added successfully:', data.msg)
+        }, error: (err) => {
+          console.log('Error adding trade:', err)
+        }, complete: () => {
+          console.log('Trade addition process completed')
+          this.ofS$.updateAmmount()
+          this.loginService.removeItem(item)
+          this.loadCart()
+          this.router.navigate(['/trades'])
+        }
+      })
+
     }
   }
-  
+
   verifyPlayerAmount(): boolean {
     return this.playerAmmount >= this.total
   }
@@ -98,4 +114,5 @@ export class CartComponent {
   goToRoute(route: string) {
     this.router.navigate(['/' + route])
   }
+
 }
