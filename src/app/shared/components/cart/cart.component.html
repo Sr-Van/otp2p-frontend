@@ -1,6 +1,6 @@
 @if(isCartOpen) {
 
-    <div class="overlay transition_all">
+    <div class="overlay transition_all poppins-regular">
         <div class="cart rounded_small shadow">
 
             @if(!isLoaded && cart.length > 0) {
@@ -27,8 +27,27 @@
                 <!-- add button and logic to verify player amount and change de DOM -->
                 @if(cart.length > 0) {
 
-                    <button class="box_shadow rounded_small" (click)="addTrade()">Finalizar</button>
-                    <small style="font-size: 10px; margin-top: 5px; color: #5656569c;">Pelo site estar no beta, talvez você precise repetir a operação várias vezes para finalizar todo seu carrinho.</small>
+                    <span [hidden]="verifyPlayerAmount()">
+                        você precisa depositar {{ total - playerAmmount | currency: 'BRL' }}
+                    </span>
+
+                    <a
+                    style="cursor: pointer; color: var(--terciary-color); text-decoration: underline;" 
+                    [hidden]="verifyPlayerAmount()"
+                    (click)="goToRoute('deposit')">Fazer depósito</a>
+
+                    <small [hidden]="!verifyPlayerAmount()" style="font-size: 12px; margin-top: 5px; color: #b6b6b6;">Precisamos da sua senha para finalizar a compra.</small>
+
+                    <input [hidden]="!verifyPlayerAmount()" type="password" placeholder="Senha" class="box_shadow rounded_small"
+                    style="background-color: #4a4a4a;
+                    color: #fff;
+                    border: none;
+                    padding: var(--basic-padding);
+                    border-radius: var(--border-radius-small);">
+
+                    <!-- hidding if the player dont have enough money -->
+                    <button [hidden]="!verifyPlayerAmount()" class="box_shadow rounded_small" (click)="addTrade()">Finalizar</button>
+                    <small style="font-size: 12px; margin-top: 5px; color: #b6b6b6;">Pelo site estar no beta, talvez você precise repetir a operação várias vezes para finalizar todo seu carrinho.</small>
                 }
 
             </div>

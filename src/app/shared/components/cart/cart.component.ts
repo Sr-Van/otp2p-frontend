@@ -1,12 +1,12 @@
 import { Component, effect, inject } from '@angular/core';
 import { LoginService } from '../../services/login.service';
-import { Subscription } from 'rxjs';
 import { Anuncio } from '../../interfaces/arrays';
 import { CartCardComponent } from './cart-card/cart-card.component';
 import { CurrencyPipe } from '@angular/common';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 import { TradeService } from '../../services/trade.service';
 import { Router } from '@angular/router';
+import { OfferService } from '../../services/offer.service';
 
 
 @Component({
@@ -20,21 +20,24 @@ export class CartComponent {
 
   loginService = inject(LoginService)
   tradeService = inject(TradeService)
+  ofS$ = inject(OfferService)
   router = inject(Router)
 
-  eventSubscription: Subscription
-  cartEventSubscription: Subscription
   isCartOpen: boolean = false
   isLoaded: boolean = false
   cart: Anuncio[] = []
 
   total: any
+  playerAmmount: number = 0
 
   constructor() {
 
+    this.renderCart()
+
     effect(() => {
+      this.playerAmmount = this.ofS$.userAmmount()
       this.isCartOpen = this.loginService.cartMenu()
-      if(this.loginService.cartItem() > 0) {
+      if(this.loginService.cartItem() >= 0) {
         this.renderCart()
         this.loadCart()
         this.getTotalCartPrice()
@@ -43,9 +46,6 @@ export class CartComponent {
 
   }
 
-  ngOnInit() {
-    this.renderCart()
-  }
 
   loadCart() {
     this.isLoaded = false
@@ -64,6 +64,10 @@ export class CartComponent {
   }
 
   addTrade() {
+
+    if(!this.verifyPlayerAmount()) {
+      return
+    }
     
     for (const item of this.cart) {
       const tradeBody = {
@@ -85,5 +89,13 @@ export class CartComponent {
           }
         })
     }
+  }
+  
+  verifyPlayerAmount(): boolean {
+    return this.playerAmmount >= this.total
+  }
+
+  goToRoute(route: string) {
+    this.router.navigate(['/' + route])
   }
 }
