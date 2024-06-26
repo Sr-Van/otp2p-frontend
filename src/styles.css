@@ -117,6 +117,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: #fff !important;
 }
 
+.snack_warning > div {
+    background-color: #0876cf !important;
+}
+
 .snack .mdc-button__label {
     color: #fff !important;
 }

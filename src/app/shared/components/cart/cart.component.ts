@@ -67,17 +67,16 @@ export class CartComponent {
   }
 
   addTrade(pass: string) {
-    console.log('addTrade method called')
 
     if(!this.verifyPlayerAmount()) {
-      console.log('Player amount is not sufficient')
       return
     }
     
-    // TODO: trocar para metodos separados que enviam para um endpoint quando for apenas um ou para um endpoint quando for muitos
-    
+    if(this.cart.length > 0) {
+      this.utS$.openSnack('Por estar no beta, talvez precisa fazer mais de um trade para mais de um item.', 'warning')
+    }
+
     for (const item of this.cart) {
-      console.log('Processing item:', item)
       const tradeBody = {
         itemId: item.itemId,
         player: item.player,
@@ -92,13 +91,11 @@ export class CartComponent {
         switchMap(() => this.tradeService.addTrade(tradeBody))
       ).subscribe({
         next: (data) => {
-          console.log('Trade added successfully:', data.msg)
+          this.utS$.openSnack(data.msg, 'success')
         }, error: (err) => {
-          console.log('Error adding trade:', err)
+          this.utS$.openSnack(err.error.msg, 'fail')
         }, complete: () => {
-          console.log('Trade addition process completed')
           this.ofS$.updateAmmount()
-          this.loginService.removeItem(item)
           this.loadCart()
           this.router.navigate(['/trades'])
         }
