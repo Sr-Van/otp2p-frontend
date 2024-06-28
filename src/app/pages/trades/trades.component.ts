@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject } from '@angular/core';
+import { AfterViewInit, Component, HostListener, inject } from '@angular/core';
 import { LoginService } from '../../shared/services/login.service';
 import { OfferService } from '../../shared/services/offer.service';
 import { Subscription } from 'rxjs';
@@ -27,6 +27,7 @@ export class TradesComponent implements AfterViewInit {
   isLoaded: boolean = false
   isLoadedFilter: boolean = false
   filterType: string
+  itemToDelete: string
   getplayerTradesSubscription: Subscription
   playerSales: Trade[] = []
   playerBuys: Trade[] = []
@@ -81,6 +82,33 @@ export class TradesComponent implements AfterViewInit {
       this.isLoadedFilter = true
       
     }, 500);
+  }
+
+  public openModal(id: string): void {
+    const dialog = document.querySelector('dialog') as HTMLDialogElement;
+    dialog.showModal();
+
+    console.log(id)
+    this.itemToDelete = id
+  }
+  public cancelTrade(senha: string, id: string): void {
+    console.log(senha, id)
+
+    const reqBody = {
+      player: this.loginService.playerName,
+      itemId: id,
+      password: senha
+    }
+
+    console.log(reqBody)
+  }
+
+  @HostListener('click', ['$event'])
+  public onClick(event: any): void {
+    const dialog = document.querySelector('dialog') as HTMLDialogElement
+    if(dialog.hasAttribute('open') && event.target.tagName === 'DIALOG') {
+      dialog.close()
+    }
   }
 
 }

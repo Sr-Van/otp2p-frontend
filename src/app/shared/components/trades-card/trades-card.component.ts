@@ -1,5 +1,5 @@
 import { CurrencyPipe, DatePipe } from '@angular/common';
-import { Component, Input, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { HeaderPipe } from '../../pipes/header.pipe';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
@@ -7,11 +7,7 @@ import { UtilService } from '../../services/util.service';
 import { TradeService } from '../../services/trade.service';
 import { LoginService } from '../../services/login.service';
 
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition
-} from '@angular/material/snack-bar';
+
 import { Subscription } from 'rxjs';
 
 
@@ -40,10 +36,10 @@ export class TradesCardComponent {
   utilService = inject(UtilService)
   tradeService = inject(TradeService)
   loginService = inject(LoginService)
-  snack = inject(MatSnackBar)
 
   @Input('item') item: ItemTrading
   @Input('type') type: string
+  @Output() cancelPopup = new EventEmitter(); 
 
   progressBarWidth: number = 0
   progressColor: string = ""
@@ -63,9 +59,6 @@ export class TradesCardComponent {
       received: "Seu item foi vendido, parabéns!"
     }
   }
-
-  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   ngOnInit() {
 
@@ -106,7 +99,7 @@ export class TradesCardComponent {
 
     this.sendedSubscription = this.tradeService.confirmSended(body).subscribe({
       next: (data) => {
-        this.openSnack(data.msg, 'success')
+        this.utilService.openSnack(data.msg, 'success')
         setTimeout(() => {
           window.location.reload()
         }, 400);
@@ -126,7 +119,7 @@ export class TradesCardComponent {
 
     this.receivedSubscription = this.tradeService.confirmReceived(body).subscribe({
       next: (data) => {
-        this.openSnack(data.msg, 'success')
+        this.utilService.openSnack(data.msg, 'success')
         setTimeout(() => {
           window.location.reload()
         }, 400);
@@ -137,13 +130,5 @@ export class TradesCardComponent {
     
   }
 
-  openSnack(msg: string, type: string) {
-    this.snack.open(msg, 'OK', {
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition : this.verticalPosition,
-      panelClass: ['snack', `snack_${type}`],
-      duration: 3000
-    })
-  }
 
 }

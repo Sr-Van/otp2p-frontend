@@ -18,7 +18,7 @@
                 <ul>
                     @for(item of playerBuys.reverse().slice(0, 20); track $index) {
                         <li>
-                            <app-trades-card [item]="item" type="buy"></app-trades-card>
+                            <app-trades-card (cancelPopup)="openModal($event)" [item]="item" type="buy"></app-trades-card>
                         </li>
                     }
         
@@ -36,7 +36,7 @@
                 <ul>
                     @for(item of playerSales.reverse().slice(0, 20); track $index) {
                         <li>
-                            <app-trades-card [item]="item" type="sale"></app-trades-card>
+                            <app-trades-card (cancelPopup)="openModal($event)" [item]="item" type="sale"></app-trades-card>
                         </li>
                     }
         
@@ -52,6 +52,27 @@
 
     </div>
 
+    <dialog #myDialog class="rounded_small box_shadow poppins-regular">
+
+        <section>
+            <div>
+                <h2>Tem certeza que deseja cancelar esta trade?</h2>
+                <p>Esta ação não podera ser desfeita.</p>
+            </div>
+    
+            <div class="pass_form">
+                <label for="password">Sua senha: </label>
+                <input type="password" #password class="transition_all">
+            </div>
+    
+            <div class="buttons">
+                <button (click)="cancelTrade(password.value, itemToDelete)" class="box_shadow transition_all poppins-light">Confirmar</button>
+                <button (click)="myDialog.close()" class="box_shadow transition_all poppins-light">Cancelar</button>
+            </div>
+            <small>OBS: apenas itens com situação "ordered" podem ser cancelados.</small>
+        </section>
+
+    </dialog>
 }
 @else {
     <app-loading-spinner></app-loading-spinner>
