@@ -36,4 +36,12 @@ export class TradeService {
   confirmReceived(body: Confirmation) :Observable<any> {
     return this.http.put<any>(this.apiUrl + "trade/confirm/buyer", body)
   }
+
+  public cancelTradeBuyer(body: any): Observable<any> {
+    return this.http.put<any>(this.apiUrl + "trade/cancel/buyer", body)
+  }
+
+  public cancelTradeSeller(body: any): Observable<any> {
+    return this.http.put<any>(this.apiUrl + "trade/cancel/trade", body)
+  }
 }

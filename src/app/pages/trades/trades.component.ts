@@ -6,6 +6,7 @@ import { Trade } from '../../shared/interfaces/arrays';
 import { TradesCardComponent } from '../../shared/components/trades-card/trades-card.component';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 import { UtilService } from '../../shared/services/util.service';
+import { TradeService } from '../../shared/services/trade.service';
 
 @Component({
   selector: 'app-trades',
@@ -21,6 +22,7 @@ export class TradesComponent implements AfterViewInit {
 
   loginService = inject(LoginService)
   offerService = inject(OfferService)
+  tS$ = inject(TradeService)
   $uS = inject(UtilService)
 
   player: string
@@ -88,11 +90,9 @@ export class TradesComponent implements AfterViewInit {
     const dialog = document.querySelector('dialog') as HTMLDialogElement;
     dialog.showModal();
 
-    console.log(id)
     this.itemToDelete = id
   }
   public cancelTrade(senha: string, id: string): void {
-    console.log(senha, id)
 
     const reqBody = {
       player: this.loginService.playerName,
@@ -100,7 +100,12 @@ export class TradesComponent implements AfterViewInit {
       password: senha
     }
 
-    console.log(reqBody)
+    if(this.verifyItemIsSale(id)) {
+      this.cancelTradeSeller(reqBody);
+      return
+    }
+    this.cancelTradeBuyer(reqBody);
+
   }
 
   @HostListener('click', ['$event'])
@@ -109,6 +114,42 @@ export class TradesComponent implements AfterViewInit {
     if(dialog.hasAttribute('open') && event.target.tagName === 'DIALOG') {
       dialog.close()
     }
+  }
+
+  private verifyItemIsSale(id: any): boolean {
+    return this.playerSales.filter((i: any) => i.itemId === id).length > 0
+  }
+
+  private cancelTradeBuyer(body: any): void {
+
+    const dialog = document.querySelector('dialog') as HTMLDialogElement;
+    dialog.close();
+
+    this.tS$.cancelTradeBuyer(body).subscribe({
+      next: (data) => {
+        this.$uS.openSnack(data.msg, 'success')
+        setTimeout(() => {
+          window.location.reload()
+        }, 400);
+      }, error: (err) => {
+        this.$uS.openSnack(err.error.msg, 'fail')
+        throw new Error(err)
+      }
+    })
+  }
+
+  private cancelTradeSeller(body: any): void {
+    this.tS$.cancelTradeSeller(body).subscribe({
+      next: (data) => {
+        this.$uS.openSnack(data.msg, 'success')
+        setTimeout(() => {
+          window.location.reload()
+        }, 400);
+      }, error: (err) => {
+        this.$uS.openSnack(err.error.msg, 'fail')
+        throw new Error(err)
+      }
+    })
   }
 
 }
