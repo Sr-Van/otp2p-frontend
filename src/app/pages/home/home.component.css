@@ -150,17 +150,16 @@ mat-paginator {
     font-style: normal;
 }
 
-@media(min-width: 325px) {
-    .list {justify-content: space-between;}
-}
 
 @media(min-width: 425px) {
     .server_list {
-        width: 350px; 
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 0;
         place-items: center;
+    }
+    .itens_shop .list:has(app-card) {
+        flex-direction: row;
     }
     .server_list li, .type_list li {
         width: 100%;
@@ -173,13 +172,12 @@ mat-paginator {
 }
 
 @media (min-width: 768px) {
-    .list { width: 550px;}
     .server_list, .type_list {
         display: flex;
     }
+    .server_list {width: 100%;}
     .itens_shop .list:has(app-card) {
         flex-direction: row;
-        justify-content: space-between;
     }
     .type_list li { width: 100%;}
 
@@ -213,7 +211,6 @@ mat-paginator {
 
 @media(min-width: 1024px) {
     .list {
-        width: 850px;
         flex-wrap: nowrap;
     }
     .list li:first-child {
@@ -228,15 +225,7 @@ mat-paginator {
         border-bottom-left-radius: 0px;
     }
     .list li { width: 100%;}
-    .itens_shop .list:has(app-card){
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-    }
 }
 
 @media(min-width: 1440px) {
-    .list { width: 1050px;}
-    .itens_shop .list:has(app-card) {
-        grid-template-columns: repeat(5, 1fr);
-    }
 }

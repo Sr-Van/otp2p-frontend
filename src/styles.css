@@ -135,18 +135,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 @media(min-width: 425px) {
-    .container { width: 350px;}
+    .container { width: 410px;}
 }
 
 @media(min-width: 768px) {
-    .container { width: 550px;}
+    .container { width: 620px;}
 }
 
 @media(min-width: 1024px) {
-    .container { width: 850px;}
+    .container { width: 830px;}
 }
 
 @media(min-width: 1440px) {
-    .container { width: 1050px;}
+    .container { width: 1250px;}
 }
 

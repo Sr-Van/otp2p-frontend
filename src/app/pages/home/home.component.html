@@ -73,13 +73,13 @@
                 }
             </ul>
 
-            @if(filteredSales.length > 10) {
+            @if(filteredSales.length > 30) {
                 
                 <div class="paginator container">
     
                     <mat-paginator
                         #paginator
-                        pageSize="10"
+                        pageSize="30"
                         [length]="filteredSales.length"
                         [pageIndex]="currentPage"
                         (page)="handlePagation($event)"></mat-paginator>
