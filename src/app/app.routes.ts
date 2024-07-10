@@ -55,5 +55,11 @@ export const routes: Routes = [
         path: 'confirm/acc/verification/:email/:token',
         loadComponent: () => import('./pages/email-verification/email-verification.component')
         .then(c => c.EmailVerificationComponent)
+    },
+    {
+        path: 'feedback',
+        loadComponent: () => import('./pages/feedback/feedback.component')
+        .then(c => c.FeedbackComponent),
+        canActivate: [AuthGuard]
     }
 ];
