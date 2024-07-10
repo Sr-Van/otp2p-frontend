@@ -1,1 +1,13 @@
-<p>feedback works!</p>
+<section class="container page_padding poppins-regular">
+    <h1>Feedback</h1>
+
+    <form [formGroup]="feedbackForm">
+        <label for="name">Nick:</label>
+        <input type="text" id="name" formControlName="name" readonly>
+        <label for="message">Sugestão:</label>
+        <textarea id="message" formControlName="message"></textarea>
+        <button class="transition_all" (click)="sendFeedback()">Enviar</button>
+    </form>
+
+    <small>Obrigado por nos ajudar, iremos considerar o seu feedback e tentar melhorar!</small>
+</section>
