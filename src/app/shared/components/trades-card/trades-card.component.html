@@ -19,16 +19,18 @@
 
             @if(type === "buy") {
                 
-                <div class="player" matTooltip="Você (vendedor)">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-    
-                <div class="trade_player" [matTooltip]="item.trade_player + ' (comprador)'"
+            
+                <div class="trade_player" [matTooltip]="item.trade_player + ' (vendedor)'"
                     matTooltip="Ir para o perfil do comprador"
                     (click)="goToPlayerProfile(item.trade_player)"
                     style="cursor: pointer;">
                     <i class="fa-solid fa-user"></i>
                 </div>
+
+                <div class="player" matTooltip="Você (comprador)">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+    
         
             } @else {
 
