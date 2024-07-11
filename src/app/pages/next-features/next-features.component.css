@@ -1,0 +1,21 @@
+section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+    align-items: flex-start;
+    min-height: 100dvh;
+}
+
+ul {
+   list-style: none;
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+   margin-bottom: 40px; 
+}
+
+ul li h4 {
+    color: var(--terciary-color);
+    font-size: 20px;
+}
