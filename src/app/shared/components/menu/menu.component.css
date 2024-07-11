@@ -74,11 +74,11 @@
     color: #421ea4;
 }
 
-.menu li .fa-right-from-bracket, .menu li:nth-child(8) p {
+.menu li .fa-right-from-bracket, .menu li:last-child p {
     color: #d20e0e;
 }
 
-.menu .feedback {
+.menu .feedback, .menu .donate {
     position: relative;
 
     & .beta-tag {

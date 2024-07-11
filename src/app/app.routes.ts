@@ -61,5 +61,10 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/feedback/feedback.component')
         .then(c => c.FeedbackComponent),
         canActivate: [AuthGuard]
+    },
+    {
+        path: 'donate',
+        loadComponent: () => import('./pages/donate/donate.component')
+        .then(c => c.DonateComponent)
     }
 ];
