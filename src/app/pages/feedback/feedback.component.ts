@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginService } from '../../shared/services/login.service';
 import { UtilService } from '../../shared/services/util.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-feedback',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterModule],
   templateUrl: './feedback.component.html',
   styleUrl: './feedback.component.css'
 })

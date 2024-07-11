@@ -66,5 +66,10 @@ export const routes: Routes = [
         path: 'donate',
         loadComponent: () => import('./pages/donate/donate.component')
         .then(c => c.DonateComponent)
+    },
+    {
+        path:'next-features',
+        loadComponent: () => import('./pages/next-features/next-features.component')
+        .then(c => c.NextFeaturesComponent)
     }
 ];
