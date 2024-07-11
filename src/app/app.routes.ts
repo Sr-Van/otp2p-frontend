@@ -71,5 +71,10 @@ export const routes: Routes = [
         path:'next-features',
         loadComponent: () => import('./pages/next-features/next-features.component')
         .then(c => c.NextFeaturesComponent)
+    },
+    {
+        path: 'how-it-works',
+        loadComponent: () => import('./pages/how-works/how-works.component')
+        .then(c => c.HowWorksComponent)
     }
 ];

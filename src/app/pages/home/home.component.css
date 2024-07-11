@@ -128,6 +128,19 @@ main {
     cursor: pointer;
 }
 
+.banner_how {
+    width: 100%;
+    height: 80px;
+    > a {
+        display: flex;
+        background-color: #454545;
+        color: #fff;
+        padding: 10px;
+        width: 100%;
+        height: 100%;
+    }
+}
+
 .hidden {
     height: 0px;
     opacity: 0;
