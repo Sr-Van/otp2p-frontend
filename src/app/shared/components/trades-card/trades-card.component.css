@@ -100,6 +100,11 @@
     text-transform: uppercase;
 }
 
+.card .trade_infos > p {
+    font-size: 12px;
+    padding: 6px;
+}
+
 .card .trade_infos span:nth-child(1) {
     font-size: 12px;
     border-radius: var(--border-radius-medium);
