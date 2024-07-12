@@ -7,3 +7,7 @@
 @if(!userConsent) {
     <app-cookie-consent></app-cookie-consent>
 }
+
+@if(showWarning) {
+    <Warning />
+}
