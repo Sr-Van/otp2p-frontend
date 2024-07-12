@@ -1,7 +1,7 @@
-@if(isMenuOpen){
+<div class="overlay transition_all">
+    @if(isMenuOpen) {
 
-    <div class="overlay transition_all">
-        <ul class="menu rounded_small" [@enterAnim] [hidden]="!isMenuOpen">
+        <ul class="menu rounded_small" [@enterAnim]>
             <li (click)="goToRoute('profile')">
                 <i class="fa-solid fa-user"></i>
                 <p>Perfil</p>
@@ -41,7 +41,6 @@
                 <p>Sair</p>
             </li>
         </ul>
+    }
 
-    </div>
-
-}
+</div>

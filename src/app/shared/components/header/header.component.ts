@@ -37,8 +37,9 @@ import { OfferService } from '../../services/offer.service';
             <div class="logged" (click)="toggleMenu()">
               <i class="fa-solid fa-user"></i>
             </div>
-
-            <app-menu></app-menu>
+            @if(isMenuOpen) {
+              <app-menu></app-menu>
+            }
           }
           @else {
             <div class="login">
@@ -149,6 +150,14 @@ export class HeaderComponent {
     effect(() => {
       this.userLogged = this.loginService.userIsLoggedIn()
       this.userAmount = this.offerService.userAmmount()
+
+      if(!this.utilService.menu()) {
+        setTimeout(() => {
+          this.isMenuOpen = this.utilService.menu()
+        }, 300);
+      } else {
+        this.isMenuOpen = this.utilService.menu();
+      }
     })
   }
 

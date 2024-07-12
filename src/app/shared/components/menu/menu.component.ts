@@ -48,13 +48,7 @@ export class MenuComponent {
 
   constructor() {
     effect(() => {
-      if(!this.utilService.menu()) {
-        setTimeout(() => {
-          this.isMenuOpen = this.utilService.menu()
-        }, 200);
-      } else {
-        this.isMenuOpen = this.utilService.menu()
-      }
+      this.isMenuOpen = this.utilService.menu()
     })
   }
   ngOnInit() {
