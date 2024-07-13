@@ -19,6 +19,7 @@ export class UtilService {
   
   menu = signal<boolean>(false)
   isOffersUpdated = signal<boolean>(false)
+  showWarning = signal<boolean>(false)
 
   snackBar = inject(MatSnackBar)
   horizontalPosition: MatSnackBarHorizontalPosition = 'right'
