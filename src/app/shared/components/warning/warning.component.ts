@@ -48,6 +48,17 @@ export class WarningComponent {
     }
   }
 
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    console.log(event.target)
+    const el = event.target as HTMLElement;
+    console.log(el);
+    if(el.tagName === 'WARNING') {
+      console.log('warning')
+      this.closeWarning()
+    }
+  }
+
   private closeWarning(): void {
     if(this.isOpen) {
       this.isOpen = false

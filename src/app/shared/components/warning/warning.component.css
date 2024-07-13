@@ -15,14 +15,34 @@
 }
 
 section {
-    width: 100%;
-    min-width: 250px;
-    max-width: 500px;
+    
+    width: clamp(250px, 90%, 500px);
 
     padding: 10px;
 
     display: flex;
     flex-direction: column;
     gap: 10px;
-    background-color: #232323;
+    background-color: #27262e;
+}
+
+section h2 {
+    color: var(--primary-color);
+}
+
+section p {
+    color: #b6b6b6;
+    margin-bottom: 5px;
+}
+
+section small {
+    color: #989797;
+}
+
+img {
+    margin: 0 auto;
+    width: 30%;
+    height: 100%;
+
+    object-fit: cover;
 }
