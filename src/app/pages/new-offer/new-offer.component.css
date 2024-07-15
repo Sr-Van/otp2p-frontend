@@ -40,3 +40,14 @@ button {
 button:hover {
     background-color: var(--terciary-color);
 }
+
+input.ng-touched.ng-invalid, 
+textarea.ng-touched.ng-invalid, 
+select.ng-touched.ng-invalid {
+    box-shadow: 0 0 1px 1px rgb(255, 0, 0, 0.5);
+}
+
+button.isInvalid {
+    background-color: rgb(209, 37, 37, 0.3);
+    cursor: not-allowed;
+}

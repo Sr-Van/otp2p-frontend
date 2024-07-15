@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import {
   MatSnackBar,
@@ -26,6 +26,7 @@ export class NewOfferComponent {
 
   offerService = inject(OfferService)
   loginService = inject(LoginService)
+  private formBuilder = inject(FormBuilder);
   $uS = inject(UtilService)
   snack = inject(MatSnackBar)
 
@@ -64,13 +65,12 @@ export class NewOfferComponent {
 
     }) 
 
-
-    this.form = new FormGroup({
-      header: new FormControl,
-      description: new FormControl,
-      type: new FormControl,
-      price: new FormControl,
-      mundo: new FormControl
+    this.form = this.formBuilder.group({
+      header: ['', [Validators.required]],
+      description: ['', [Validators.required, Validators.maxLength(200)]],
+      type: ['', [Validators.required]],
+      price: ['', [Validators.required]],
+      mundo: ['', [Validators.required]]
     })
 
     this.subsOffers = this.offerService.getPlayerOffers(this.player).subscribe(data => {
@@ -90,6 +90,9 @@ export class NewOfferComponent {
   }
 
   sendForm(form: any) {
+
+    if(!this.form.valid) return
+
     let newForm = form.value
     newForm.itemId = this.randomId()
 
