@@ -119,6 +119,49 @@
     z-index: 10;
 }
 
+.loading_cont {
+    > * {
+        color: transparent !important;
+        text-shadow: none !important;
+        background: #3c3c3c;
+        animation: 1.2s shine linear infinite, 1200ms blink linear infinite;
+
+        background: linear-gradient(110deg, #3c3c3c 8%, #575757 20%, #3c3c3c 33%);
+        background-size: 200% 600%;
+    }
+
+    & button, i, .card_infos div > *, .card_infos span {
+        text-shadow: none !important;
+        background-color: transparent !important;
+        color: transparent !important;
+    }
+
+    & img {
+        opacity: 0;
+    }
+    
+}
+
+@keyframes shine {
+    to {
+      background-position-x: -200%;
+    }
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
 @media(min-width: 425px) {
     .card {
         width: 200px;

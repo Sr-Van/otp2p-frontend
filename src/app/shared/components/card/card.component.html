@@ -1,4 +1,4 @@
-<div class="card rounded_medium" (click)="goToItem($event)">
+<div [class.loading_cont]="loadCont" class="card rounded_medium" (click)="goToItem($event)">
     @if(card.playerType === "revendedor"){
 
         <div

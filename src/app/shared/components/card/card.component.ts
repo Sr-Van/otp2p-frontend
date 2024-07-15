@@ -32,6 +32,7 @@ export class CardComponent implements OnInit{
   tooltip: string
   color: string
   isOnCart: boolean = false
+  public loadCont: boolean = true;
 
   cartItemSubscription: Subscription
 
@@ -52,6 +53,10 @@ export class CardComponent implements OnInit{
     this.color = `var(--${this.card.badge})`
 
     this.isOnCart = this.utilService.verifyItemOnCart(this.card)
+
+    setTimeout(() => {
+      this.loadCont = false;
+    }, 2500);
   }
 
   goToItem(event: any) {
