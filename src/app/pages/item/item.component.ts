@@ -44,6 +44,7 @@ export class ItemComponent implements AfterViewInit {
   item: any
   isLoad: boolean = false
   isOnCart: boolean = false
+  public loadCont: boolean = true;
 
   //type this arrays
   anuncios: Anuncio[] = []
@@ -59,6 +60,10 @@ export class ItemComponent implements AfterViewInit {
     effect(() => {
       this.isOnCart = this.$uS.verifyItemOnCart(this.item)
     })
+
+    setTimeout(() => {
+      this.loadCont = false;
+    }, 2300);
   }
 
   ngAfterViewInit() {

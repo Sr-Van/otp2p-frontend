@@ -80,6 +80,13 @@ ul > span {
     background-color: #e02b2b !important;
 }
 
+.loading_cont {
+    & button, i {
+        background: var(--skeleton-color) !important;
+        color: transparent !important;
+    }
+}
+
 @media(min-width: 1024px) {
     .item {
         flex-direction: row;

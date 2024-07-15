@@ -11,7 +11,7 @@ import { UtilService } from '../../services/util.service';
     DatePipe
   ],
   template: `
-  <div class="card box_shadow rounded_medium">
+  <div class="card box_shadow rounded_medium" [class.loading_cont]="loadCont">
     <span class="title_card">{{ card.header | header: card.type}}</span>
 
     <div class="infos_card">
@@ -62,6 +62,12 @@ import { UtilService } from '../../services/util.service';
       font-size: 12px;
   }
 
+  .loading_cont {
+    & ol li:nth-child(2) {
+      background-color: transparent !important;
+      color: transparent !important;
+    }
+  }
   .card ol li:nth-child(2) {
       position: absolute;
       right: 0;
@@ -86,7 +92,12 @@ export class InfocardComponent {
   @Input() card: any
   @Input() type: any
 
+  public loadCont: boolean = true;
+
   ngOnInit(){
+    setTimeout(() => {
+      this.loadCont = false;
+    }, 2300);
   }
 
   getCardColor(): string {

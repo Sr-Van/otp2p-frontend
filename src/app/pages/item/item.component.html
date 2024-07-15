@@ -1,11 +1,11 @@
 @if(isLoad) {
-    <div class="container transition_all page_padding poppins-regular">
+    <div class="container transition_all page_padding poppins-regular" > 
 
     @if(isLoad) {
 
         <h2>{{ item.header | header: item.type }}</h2>
         
-        <div class="item transition_all rounded_small">
+        <div class="item transition_all rounded_small" [class.loading_cont]="loadCont">
     
             <div class="img transition_all rounded_small">
                 <img [src]="source" [alt]="item.header">

@@ -6,6 +6,7 @@
     --primary-color: #5f0d76;
     --secondary-color: #8a2be2;
     --terciary-color: #9a27ba;
+    --skeleton-color: #3c3c3c;
     --bronze: rgb(137, 62, 53);
     --silver: rgb(91, 99, 111);
     --gold: rgb(255, 217, 0);
@@ -132,6 +133,44 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .mat-mdc-autocomplete-panel .mat-mdc-option {
     color: #fff !important;
+}
+
+.loading_cont {
+    > * {
+        color: transparent !important;
+        text-shadow: none !important;
+        background: #3c3c3c;
+        animation: 1.2s shine linear infinite, 1200ms blink linear infinite;
+
+        background: linear-gradient(110deg, #3c3c3c 8%, #575757 20%, #3c3c3c 33%);
+        background-size: 200% 600%;
+    }
+
+    & img {
+        visibility: hidden;
+        opacity: 0;
+    }
+    
+}
+
+@keyframes shine {
+    to {
+      background-position-x: -200%;
+    }
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .5;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 @media(min-width: 425px) {

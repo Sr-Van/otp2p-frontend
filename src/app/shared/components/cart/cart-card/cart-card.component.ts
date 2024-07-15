@@ -25,7 +25,11 @@ export class CartCardComponent {
 
   sourceImg: string = ''
   saleSubscription: Subscription
+  public loadCont: boolean = true;
   ngOnInit() {
+    setTimeout(() => {
+      this.loadCont = false;
+    }, 1000);
     this.sourceImg = this.utilService.getImgSource(this.item.type, this.item.header)
 
     this.saleSubscription = this.salesService.getAllSales().subscribe({
