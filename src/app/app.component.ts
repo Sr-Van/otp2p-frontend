@@ -47,6 +47,7 @@ export class AppComponent {
   userConsent: boolean = false
   canFooterShow: boolean = false
   public showWarning: boolean = true;
+  public loadAction: boolean = false;
 
   constructor() {
 
@@ -57,6 +58,14 @@ export class AppComponent {
         }, 200);
       } else {
         this.showWarning = this.utS$.showWarning()
+      }
+
+      if(!this.utS$.loadAction()) {
+        setTimeout(() => {
+          this.loadAction = this.utS$.loadAction();
+        }, 200);
+      } else {
+        this.loadAction = this.utS$.loadAction();
       }
     })
 

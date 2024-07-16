@@ -20,6 +20,7 @@ export class UtilService {
   menu = signal<boolean>(false)
   isOffersUpdated = signal<boolean>(false)
   showWarning = signal<boolean>(false)
+  public loadAction = signal<boolean>(false);
 
   snackBar = inject(MatSnackBar)
   horizontalPosition: MatSnackBarHorizontalPosition = 'right'
@@ -54,5 +55,13 @@ export class UtilService {
 
   setPageName(pageName: string) {
     this.title.setTitle(pageName)
+  }
+
+  public runActionLoading(time: number): void {
+    this.loadAction.set(true);
+
+    setTimeout(() => {
+      this.loadAction.set(false);
+    }, time);
   }
 }

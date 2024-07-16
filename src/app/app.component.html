@@ -11,5 +11,6 @@
 @if(showWarning) {
     <Warning />
 }
-
-<app-loading></app-loading>
+@if(loadAction) {
+    <app-loading></app-loading>
+}

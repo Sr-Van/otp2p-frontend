@@ -1,13 +1,17 @@
-import { Component } from '@angular/core';
+import { trigger, transition, style, animate } from '@angular/animations';
+import { Component, effect, inject } from '@angular/core';
+import { UtilService } from '../../services/util.service';
 
 @Component({
   selector: 'app-loading',
   standalone: true,
   imports: [],
   template: `
-  <div class="cont rounded_small box_shadow">
+  @if(isOpen) {
+  <div class="cont rounded_small box_shadow" [@loading]>
     <span class="loader"></span>
   </div>
+  } 
   `,
   styles: `
   :host {
@@ -92,8 +96,32 @@ import { Component } from '@angular/core';
   }
 }
   
-  `
+  `,
+  animations: [
+    trigger('loading', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'scale(.5)' }),
+        animate('0.2s ease', style({ opacity: 1, transform: 'scale(1.1)' })),
+      ]),
+      transition('* => open', [
+        style({ transform: 'scale(1)' }),
+      ]),
+      transition(':leave', [
+        animate('0.2s ease', style({ transform: 'scale(.8)', opacity: 0 })),
+      ]),
+    ]),
+  ],
 })
 export class LoadingComponent {
+
+  private ut$ = inject(UtilService);
+  public isOpen: boolean = false;
+
+  constructor() {
+
+    effect(() => {
+      this.isOpen = this.ut$.loadAction();
+    })
+  }
 
 }
