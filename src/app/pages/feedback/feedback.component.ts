@@ -29,5 +29,6 @@ export class FeedbackComponent {
   public sendFeedback() {
     //adicionar integraçao ao backend depois
     console.log(this.feedbackForm.value)
+    this.utS$.runActionLoading(2000);
   }
 }

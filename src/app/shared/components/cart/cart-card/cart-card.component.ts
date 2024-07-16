@@ -52,5 +52,6 @@ export class CartCardComponent {
   removeItem(item: Anuncio) {
     this.loginService.removeItem(item)
     this.loginService.updateCartItem()
+    this.utilService.runActionLoading(1800);
   }
 }

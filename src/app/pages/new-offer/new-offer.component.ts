@@ -98,6 +98,7 @@ export class NewOfferComponent {
 
     this.offerService.addOffer(this.player, newForm).subscribe(response => {
       this.openSnack(response.msg, 'success')
+      this.$uS.runActionLoading(2000);
     })
 
     this.form.reset()

@@ -81,9 +81,11 @@ export class CardComponent implements OnInit{
     if(this.isOnCart) {
       this.loginService.removeItem(this.card)
       this.loginService.updateCartItem()
+      this.utilService.runActionLoading(1000);
       return
     }
     this.loginService.addItem(this.card);
+    this.utilService.runActionLoading(1300);
     this.loginService.updateCartItem()
   }
 
@@ -107,6 +109,7 @@ export class CardComponent implements OnInit{
       next: () => {
         this.utilService.isOffersUpdated.update(bool => !bool)
         this.utilService.openSnack(`${this.card.header} removido dos seus anuncios`, 'success')
+        this.utilService.runActionLoading(1800);
       }, error: (err) => {
         console.log(err)
       }, complete: () => {

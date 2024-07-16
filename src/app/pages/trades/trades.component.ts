@@ -102,10 +102,11 @@ export class TradesComponent implements AfterViewInit {
 
     if(this.verifyItemIsSale(id)) {
       this.cancelTradeSeller(reqBody);
+      this.$uS.runActionLoading(2000);
       return
     }
     this.cancelTradeBuyer(reqBody);
-
+    this.$uS.runActionLoading(2000);
   }
 
   @HostListener('click', ['$event'])

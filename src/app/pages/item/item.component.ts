@@ -124,12 +124,12 @@ export class ItemComponent implements AfterViewInit {
     if(this.isOnCart) {
       this.loginService.removeItem(this.item)
       this.loginService.updateCartItem()
-
+      this.$uS.runActionLoading(1000);
       return
     }
     this.loginService.addItem(this.item);
     this.loginService.updateCartItem()
-
+    this.$uS.runActionLoading(1000);
   }
 
   goToPlayer(player: string) {

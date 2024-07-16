@@ -60,6 +60,7 @@ export class CashoutComponent {
   }
 
   cashout() {
+    this.utService.runActionLoading(2000);
 
     this.ofService.removeAmmount(this.cashoutForm.value).subscribe({
       next: (data) => {

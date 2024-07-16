@@ -100,6 +100,7 @@ export class TradesCardComponent {
     this.sendedSubscription = this.tradeService.confirmSended(body).subscribe({
       next: (data) => {
         this.utilService.openSnack(data.msg, 'success')
+        this.utilService.runActionLoading(1200);
         setTimeout(() => {
           window.location.reload()
         }, 400);
@@ -120,6 +121,7 @@ export class TradesCardComponent {
     this.receivedSubscription = this.tradeService.confirmReceived(body).subscribe({
       next: (data) => {
         this.utilService.openSnack(data.msg, 'success')
+        this.utilService.runActionLoading(1200);
         setTimeout(() => {
           window.location.reload()
         }, 400);

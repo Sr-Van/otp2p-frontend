@@ -52,7 +52,7 @@ export class DepositComponent {
 
           this.openSnack(data.msg, 'success')
           this.offerService.updateAmmount()
-          
+          this.$uS.runActionLoading(2000);
         },
         error: ({error}) => {
           this.openSnack(error.msg, 'fail')

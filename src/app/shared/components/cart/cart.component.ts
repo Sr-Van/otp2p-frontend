@@ -92,6 +92,7 @@ export class CartComponent {
       ).subscribe({
         next: (data) => {
           this.utS$.openSnack(data.msg, 'success')
+          this.utS$.runActionLoading(2000);
         }, error: (err) => {
           this.utS$.openSnack(err.error.msg, 'fail')
         }, complete: () => {
