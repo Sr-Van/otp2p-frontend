@@ -171,6 +171,12 @@ h4 {
     background-color: #454545;
 }
 
+.loading_cont {
+    > div * {
+        color: transparent !important;
+    }
+}
+
 @media (min-width: 425px) {
     h1 {font-size: 25px;}
 }

@@ -32,12 +32,16 @@ export class ProfileComponent {
   player: string
   playerInfo: Register
   isContentLoaded: boolean = false
+  public loadCon: boolean = true;
   actualFilter: string = filtrosProfile[0]
   emailVisible: boolean = false
   allTrades: Trade[] = []
 
   ngOnInit() {
 
+    setTimeout(() => {
+      this.loadCon = false;
+    }, 2100);
     
     this.player = this.loginService.playerName
     this.utSerivce.setPageName(`${this.player} - OTP2P`)

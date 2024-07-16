@@ -1,6 +1,6 @@
 @if(isContentLoaded) {
 
-    <div class="container page_padding poppins-regular">
+    <div class="container page_padding poppins-regular" [class.loading_cont]="loadCon">
         <div class="player rounded_medium box_shadow">
             <div class="header">
                 <div class="left">
@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <div class="infos rounded_medium box_shadow">
+        <div class="infos rounded_medium box_shadow" [class.loading_cont]="loadCon">
             <div class="filter_info">
                 <ul>
                     <li class="rounded_small" (click)="changeFilter($event, 0)">
