@@ -10,6 +10,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { CartComponent } from './shared/components/cart/cart.component';
 import { WarningComponent } from './shared/components/warning/warning.component';
 import { UtilService } from './shared/services/util.service';
+import { LoadingComponent } from './shared/components/loading/loading.component';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,8 @@ import { UtilService } from './shared/services/util.service';
     CookieConsentComponent,
     FooterComponent,
     CartComponent,
-    WarningComponent
+    WarningComponent,
+    LoadingComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
