@@ -1,7 +1,7 @@
+<div class="overlay transition_all poppins-regular">
 @if(isCartOpen) {
 
-    <div class="overlay transition_all poppins-regular">
-        <div class="cart rounded_small shadow">
+        <div class="cart rounded_small shadow" [@enterAnim]>
 
             @if(!isLoaded && cart.length > 0) {
                 <app-loading-spinner></app-loading-spinner>
@@ -53,6 +53,6 @@
             </div>
         </div>
 
-    </div>
-}
+    }
+</div>
 

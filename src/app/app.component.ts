@@ -48,6 +48,7 @@ export class AppComponent {
   canFooterShow: boolean = false
   public showWarning: boolean = true;
   public loadAction: boolean = false;
+  public showCart: boolean = false;
 
   constructor() {
 
@@ -67,6 +68,15 @@ export class AppComponent {
       } else {
         this.loadAction = this.utS$.loadAction();
       }
+
+      if(!this.loginService.cartMenu()) {
+        setTimeout(() => {
+          this.showCart = this.loginService.cartMenu();
+        }, 600);
+      } else {
+        this.showCart = this.loginService.cartMenu();
+      }
+      
     })
 
     setTimeout(() => {

@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { OfferService } from '../../services/offer.service';
 import { UtilService } from '../../services/util.service';
 import { filter, switchMap } from 'rxjs';
+import { trigger, transition, animate, style } from '@angular/animations';
 
 
 @Component({
@@ -16,7 +17,19 @@ import { filter, switchMap } from 'rxjs';
   standalone: true,
   imports: [CartCardComponent, CurrencyPipe, LoadingSpinnerComponent],
   templateUrl: './cart.component.html',
-  styleUrl: './cart.component.css'
+  styleUrl: './cart.component.css',
+  animations: [
+    trigger('enterAnim', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(-10px)' }),
+        animate('200ms ease', style({ opacity: 1, transform: 'translateY(0)' }))
+      ]),
+      transition(':leave', [
+        style({ opacity: 1 }),
+        animate('100ms ease', style({ opacity: 0, transform: 'translateY(-10px)' }))
+      ])
+    ])
+  ]
 })
 export class CartComponent {
 
@@ -39,11 +52,19 @@ export class CartComponent {
 
     effect(() => {
       this.playerAmmount = this.ofS$.userAmmount()
-      this.isCartOpen = this.loginService.cartMenu()
+      
       if(this.loginService.cartItem() >= 0) {
         this.renderCart()
         this.loadCart()
         this.getTotalCartPrice()
+      }
+
+      if(!this.loginService.cartMenu()) {
+        setTimeout(() => {
+          this.isCartOpen = this.loginService.cartMenu();
+        }, 300);
+      } else {
+        this.isCartOpen = this.loginService.cartMenu()
       }
     })
 

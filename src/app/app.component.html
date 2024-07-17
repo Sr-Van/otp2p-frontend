@@ -3,7 +3,9 @@
 @if(canFooterShow) {
     <app-footer></app-footer>
 }
-<app-cart></app-cart>
+@if(showCart) {
+    <app-cart></app-cart>
+}
 @if(!userConsent) {
     <app-cookie-consent></app-cookie-consent>
 }
