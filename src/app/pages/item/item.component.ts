@@ -120,13 +120,14 @@ export class ItemComponent implements AfterViewInit {
   }
 
   addToCart() {
-    
     if(this.isOnCart) {
       this.loginService.removeItem(this.item)
       this.loginService.updateCartItem()
       this.$uS.runActionLoading(1000);
+      this.isOnCart = false;
       return
     }
+    this.isOnCart = true;
     this.loginService.addItem(this.item);
     this.loginService.updateCartItem()
     this.$uS.runActionLoading(1000);
