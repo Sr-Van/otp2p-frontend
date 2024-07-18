@@ -38,6 +38,20 @@ export class AppComponent {
     }
   }
 
+  @HostListener('window:click', ['$event'])
+  onClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+
+    if(target.classList.contains('overlay') && this.utS$.menu()) {
+      this.utS$.menu.set(false);
+      return
+    } else if (target.classList.contains('overlay') && this.loginService.cartMenu()) {
+      this.loginService.cartMenu.set(false);
+      return
+    }
+    
+  }
+
   cookieService = inject(CookieService)
   loginService = inject(LoginService)
   private utS$ = inject(UtilService);
