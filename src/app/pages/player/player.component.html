@@ -30,7 +30,7 @@
                     )
             </small>
             <ul class="rounded_small">
-                @for(av of avaliacao.reverse().slice(0, 7); track $index) {
+                @for(av of avaliacao; track $index) {
                     <li>
                         
                         <app-rating-card [item]="av"></app-rating-card>
@@ -48,7 +48,7 @@
                 }}
                     )</small>
             <ul class="rounded_small">
-                @for(vd of vendas.reverse().slice(0, 7); track $index) {
+                @for(vd of vendas; track $index) {
                     <li>
                         <app-infocard [card]="vd"></app-infocard>
                     </li>
@@ -65,7 +65,7 @@
                 }}
                     )</small>
             <ul class="rounded_small">
-                @for(cp of compras.reverse().slice(0, 7); track $index) {
+                @for(cp of compras; track $index) {
                     <li>
                         <app-infocard [card]="cp" [type]="'compra'"></app-infocard>
                     </li>
@@ -82,7 +82,7 @@
                 }}
                     )</small>
             <ul class="rounded_small">
-                @for(an of anuncios.reverse().slice(0, 7); track $index) {
+                @for(an of anuncios; track $index) {
                     <li>
                         <app-card [card]="an"></app-card>
                     </li>

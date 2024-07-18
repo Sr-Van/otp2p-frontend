@@ -1,7 +1,8 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, OnChanges, inject } from '@angular/core';
 import { HeaderPipe } from '../../pipes/header.pipe';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { UtilService } from '../../services/util.service';
+import { Trade } from '../../interfaces/arrays';
 
 @Component({
   selector: 'app-infocard',
@@ -17,12 +18,12 @@ import { UtilService } from '../../services/util.service';
     <div class="infos_card">
         <ol>
             <li>
-              <img [src]="getImgSource()" [alt]="card.header" alt="">
+              <img [src]="imgSrc" [alt]="card.header" [alt]="card.header">
             </li>
             <li [style]="
             {
               backgroundColor: card.mundo,
-              color: getCardColor()
+              color: cardColor
             }">{{ card.mundo }}</li>
             <li>{{ card.price | currency: 'BRL' }}</li>
             @if(type === "compra") {
@@ -85,19 +86,28 @@ import { UtilService } from '../../services/util.service';
     aspect-ratio: 1/1;}
   `
 })
-export class InfocardComponent {
+export class InfocardComponent implements OnChanges {
 
   utilService = inject(UtilService)
 
-  @Input() card: any
+  @Input() card: Trade
   @Input() type: any
-
+  public cardColor: string
+  public imgSrc: string
   public loadCont: boolean = true;
 
   ngOnInit(){
     setTimeout(() => {
       this.loadCont = false;
     }, 2300);
+
+    this.cardColor = this.getCardColor();
+    this.imgSrc = this.getImgSource();
+  }
+
+  public ngOnChanges(): void {
+    this.cardColor = this.getCardColor();
+    this.imgSrc = this.getImgSource();
   }
 
   getCardColor(): string {

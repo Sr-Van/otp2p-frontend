@@ -51,7 +51,7 @@ export class TradesComponent implements AfterViewInit {
         this.playerSales = data.vendas
 
         this.playerBuys = data.compras
-
+        this.sliceArr();
         this.isLoaded = true
 
 
@@ -86,6 +86,19 @@ export class TradesComponent implements AfterViewInit {
     }, 500);
   }
 
+  private sliceArr(): void {
+
+    this.playerBuys = this.playerBuys.slice(0, 10);
+    this.playerSales = this.playerSales.slice(0, 10);
+
+    this.reverseArr();
+  }
+
+  private reverseArr(): void {
+
+    this.playerBuys.reverse();
+    this.playerSales.reverse();
+  }
   public openModal(id: string): void {
     const dialog = document.querySelector('dialog') as HTMLDialogElement;
     dialog.showModal();

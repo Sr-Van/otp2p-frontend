@@ -23,10 +23,6 @@
 }
 
 
-.player_lists {
-    overflow: auto;
-}
-
 .player_lists ul {
     background-color: #5656569c;
     width: 100%;

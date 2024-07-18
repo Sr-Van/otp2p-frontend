@@ -60,6 +60,7 @@ export class PlayerComponent {
       this.compras = data.compras.filter((anuncio: any) => anuncio.situation === 'received')
       this.avaliacao = data.avaliacao
 
+      this.sliceArr();
       this.playerItem = data
       this.isLoaded = true
 
@@ -91,5 +92,21 @@ export class PlayerComponent {
         }
       }
     )
+  }
+
+  private sliceArr() : void {
+
+    this.anuncios = this.anuncios.slice(0, 10);
+    this.compras = this.compras.slice(0, 10);
+    this.vendas = this.vendas.slice(0, 10);
+
+    this.reverseArr();
+  }
+
+  private reverseArr() : void {
+
+    this.anuncios.reverse();
+    this.compras.reverse();
+    this.vendas.reverse();
   }
 }
