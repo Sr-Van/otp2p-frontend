@@ -117,4 +117,14 @@ export class LoginService {
   updateCartItem() {
     this.cartItem.update(value => value + 1)
   }
+
+  public sendFeedback(message: string, name: string) {
+
+    const obj = {
+      name,
+      message
+    }
+
+    return this.http.post<any>(`${this.apiUrl}send/feedback`, obj)
+  }
 }

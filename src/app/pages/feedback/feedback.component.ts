@@ -27,8 +27,21 @@ export class FeedbackComponent {
   }
 
   public sendFeedback() {
-    //adicionar integraçao ao backend depois
-    console.log(this.feedbackForm.value)
+
     this.utS$.runActionLoading(2000);
+    const { name, message } = this.feedbackForm.value;
+
+    if(this.feedbackForm.valid) {
+      this.feedbackForm.reset();
+      this.login$.sendFeedback(message, name).subscribe({
+        next: (data) => {
+          this.utS$.openSnack(data.msg, 'success');
+        },
+        error: ({error}) => {
+          this.utS$.openSnack(error.msg, 'fail');
+        }
+      })
+    }
+
   }
 }
