@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { LoginService } from '../../shared/services/login.service';
 import { Register } from '../../shared/interfaces/register';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
-import { Anuncio, Trade } from '../../shared/interfaces/arrays';
+import {  Trade } from '../../shared/interfaces/arrays';
 import { CurrencyPipe } from '@angular/common';
 import { TradeListComponent } from './trade-list.component';
 import { UtilService } from '../../shared/services/util.service';

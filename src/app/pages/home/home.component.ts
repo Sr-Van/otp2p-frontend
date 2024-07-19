@@ -1,4 +1,4 @@
-import { resolve } from 'node:path';
+
 import { Component, inject, ViewChild } from '@angular/core';
 
 import { SalesService } from '../../shared/services/sales.service';
@@ -7,8 +7,7 @@ import { LoginService } from '../../shared/services/login.service';
 import { Anuncio } from '../../shared/interfaces/arrays';
 
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { merge, of } from 'rxjs';
-import { startWith, switchMap } from 'rxjs/operators';
+
 import { Subscription } from 'rxjs';
 
 import { CardComponent } from '../../shared/components/card/card.component';
