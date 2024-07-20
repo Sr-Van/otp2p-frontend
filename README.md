@@ -1,27 +1,76 @@
-# FrontendP2P
+<h1 align="center" style="font-weight: bold;">OTP2P MarketPlace P2P 💻</h1>
+<p align="center">
+    <img src="./src/assets/img/OTP2PLOGOgengar.png" alt="LOGO" width="400px">
+</p>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.2.
+<p align="center">
+    <a href="#stack">Stack</a> • 
+    <a href="#pages">Pages</a> • 
+    <a href="#started">Getting started</a> • 
+    <a href="#layout">Layout</a> • 
+</p>
 
-## Development server
+<p align="center">
+    <b>A Marketplace P2P made to players of an poketibia have another option, better and secure to trade and find items. </b>
+</p>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+<h2 id="stack">💻 Technologies</h2>
 
-## Code scaffolding
+- Angular 17
+- TypeScript
+- RxJS
+- HTML5
+- CSS3
+- Angular Material
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+<h2 id="pages">📟 Pages</h2>
 
-## Build
+- Home
+- Profile
+- Cashout
+- Deposit
+- Donate (beta only)
+- email verification (redirected by link sent to user)
+- FAQ
+- Feedback (beta only)
+- How it works (beta only)
+- Item
+- Login
+- New offer
+- Next features (beta only)
+- Not logged
+- Player
+- Trades
+- Your offers
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+<h2 id="started">🧩 Getting Started</h2>
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+<h3>Prerequisites</h3>
 
-## Running end-to-end tests
+- [Angular-cli](https://github.com/angular/angular-cli)
+- [Git](https://git-scm.com)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+<h3>Cloning</h3>
 
-## Further help
+Clone this repository:
+```
+git clone https://github.com/Sr-Van/otp2p-frontend.git
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+<h3>Runing project localy</h3>
+
+Open the terminal on its folder and run:
+
+```
+ng serve
+```
+
+You can find the local version in `http://localhost:4200/`
+
+
+<h2 id="layout"> 🎨 Layout</h2>
+
+<p align="center">
+    <img src="./src//assets/img/layout.png" width="600">
+</p>
