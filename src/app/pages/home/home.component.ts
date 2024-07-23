@@ -36,6 +36,7 @@ export class HomeComponent {
   
   subs: Subscription
   isload: boolean = false
+  public isFiltersOpen: boolean = false;
   player: string
   currentPage: number = 0
 
@@ -123,6 +124,10 @@ export class HomeComponent {
     actualBtn?.removeAttribute('using-filter-serv')
     target.setAttribute('using-filter-serv', '')
 
+  }
+
+  public showFilters() {
+    this.isFiltersOpen = !this.isFiltersOpen;
   }
 
   handlePagation(event: PageEvent) {

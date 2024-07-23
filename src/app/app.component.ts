@@ -111,7 +111,7 @@ export class AppComponent {
 
   private getWarningCookie(): void {
     const isWarning = this.cookieService.get('warning');
-    console.log(isWarning, ' iswarning value')
+    
 
     if(!isWarning) {
       this.utS$.showWarning.update(() => true);
