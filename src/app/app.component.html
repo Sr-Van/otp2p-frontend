@@ -1,18 +1,13 @@
 <app-header></app-header>
 <router-outlet></router-outlet>
 @if(canFooterShow) {
-    <app-footer></app-footer>
-}
-@if(showCart) {
-    <app-cart></app-cart>
-}
-@if(!userConsent) {
-    <app-cookie-consent></app-cookie-consent>
-}
-
-@if(showWarning) {
-    <Warning />
-}
-@if(loadAction) {
-    <app-loading></app-loading>
+<app-footer></app-footer>
+} @if(showCart) {
+<app-cart></app-cart>
+} @if(!userConsent && hasVariablesLoaded) {
+<app-cookie-consent></app-cookie-consent>
+} @if(showWarning && hasVariablesLoaded) {
+<Warning />
+} @if(loadAction) {
+<app-loading></app-loading>
 }

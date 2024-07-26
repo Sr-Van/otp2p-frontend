@@ -15,54 +15,53 @@ import { trigger, style, transition, animate } from '@angular/animations';
         animate('200ms ease', style({ opacity: 1, transform: 'scale(1.1)' })),
       ]),
       transition('* => open', [
-        animate('200ms ease', style({  transform: 'scale(1)' })),
+        animate('200ms ease', style({ transform: 'scale(1)' })),
       ]),
       transition(':leave', [
         animate('200ms ease', style({ opacity: 0, transform: 'scale(.6)' })),
       ]),
     ]),
-  ]
+  ],
 })
 export class WarningComponent {
-
   private utS$ = inject(UtilService);
 
   public isOpen: boolean = false;
 
   constructor() {
     effect(() => {
-      if(!this.utS$.showWarning()) {
+      if (!this.utS$.showWarning()) {
         setTimeout(() => {
-          this.isOpen = this.utS$.showWarning()          
-        }, 200)
+          this.isOpen = this.utS$.showWarning();
+        }, 200);
       } else {
-        this.isOpen = this.utS$.showWarning()
+        this.isOpen = this.utS$.showWarning();
       }
-    })
+    });
   }
 
   @HostListener('document:keyup', ['$event'])
   onKeyUp(event: KeyboardEvent) {
-    if(event.key === 'Escape') {
-      this.closeWarning()
+    if (event.key === 'Escape') {
+      this.closeWarning();
     }
   }
 
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent) {
-    console.log(event.target)
+    console.log(event.target);
     const el = event.target as HTMLElement;
     console.log(el);
-    if(el.tagName === 'WARNING') {
-      console.log('warning')
-      this.closeWarning()
+    if (el.tagName === 'WARNING') {
+      console.log('warning');
+      this.closeWarning();
     }
   }
 
   private closeWarning(): void {
-    if(this.isOpen) {
-      this.isOpen = false
-      this.utS$.showWarning.update(bool => !bool)
+    if (this.isOpen) {
+      this.isOpen = false;
+      this.utS$.showWarning.update((bool) => !bool);
     }
   }
 }

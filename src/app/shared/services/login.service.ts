@@ -15,7 +15,7 @@ export class LoginService {
   document = inject(DOCUMENT)
 
   userIsLoggedIn = signal<boolean>(false)
-  userConsent = signal<boolean>(false)
+  userConsent = signal<boolean>(true)
   cartMenu = signal<boolean>(false)
   cartItem = signal<number>(0)
 
